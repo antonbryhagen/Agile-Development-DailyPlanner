@@ -84,10 +84,10 @@ The example program can be started like this.
 
 ```
 # Execute the main program
-python guess/main.py
+python planner/main.py
 ```
 
-All code is stored below the directory `guess/`.
+All code is stored below the directory `planner/`.
 
 
 
@@ -104,7 +104,7 @@ make pylint
 make lint
 ```
 
-You might need to update the Makefile if you change the name of the source directory currently named `guess/`.
+You might need to update the Makefile if you change the name of the source directory currently named `planner/`.
 
 Read more on:
 
