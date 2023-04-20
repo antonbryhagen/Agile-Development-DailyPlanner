@@ -62,7 +62,7 @@ clean-all: clean clean-doc
 #
 pylint:
 	@$(call MESSAGE,$@)
-	-cd guess && $(PYTHON) -m pylint *.py
+	-cd planner && $(PYTHON) -m pylint *.py
 
 flake8:
 	@$(call MESSAGE,$@)
@@ -76,7 +76,7 @@ lint: flake8 pylint
 #
 black:
 	@$(call MESSAGE,$@)
-	 $(PYTHON) -m black guess/ test/
+	 $(PYTHON) -m black planner/ test/
 
 codestyle: black
 
@@ -104,17 +104,17 @@ test: lint coverage
 pydoc:
 	@$(call MESSAGE,$@)
 	install -d doc/pydoc
-	$(PYTHON) -m pydoc -w guess/*.py
+	$(PYTHON) -m pydoc -w planner/*.py
 	mv *.html doc/pydoc
 
 pdoc:
 	@$(call MESSAGE,$@)
-	pdoc --force --html --output-dir doc/pdoc guess/*.py
+	pdoc --force --html --output-dir doc/pdoc planner/*.py
 
 pyreverse:
 	@$(call MESSAGE,$@)
 	install -d doc/pyreverse
-	pyreverse guess/*.py
+	pyreverse planner/*.py
 	dot -Tpng classes.dot -o doc/pyreverse/classes.png
 	dot -Tpng packages.dot -o doc/pyreverse/packages.png
 	rm -f classes.dot packages.dot
@@ -128,23 +128,23 @@ doc: pdoc pyreverse #pydoc sphinx
 #
 radon-cc:
 	@$(call MESSAGE,$@)
-	radon cc --show-complexity --average guess
+	radon cc --show-complexity --average planner
 
 radon-mi:
 	@$(call MESSAGE,$@)
-	radon mi --show guess
+	radon mi --show planner
 
 radon-raw:
 	@$(call MESSAGE,$@)
-	radon raw guess
+	radon raw planner
 
 radon-hal:
 	@$(call MESSAGE,$@)
-	radon hal guess
+	radon hal planner
 
 cohesion:
 	@$(call MESSAGE,$@)
-	cohesion --directory guess
+	cohesion --directory planner
 
 metrics: radon-cc radon-mi radon-raw radon-hal cohesion
 
@@ -155,4 +155,4 @@ metrics: radon-cc radon-mi radon-raw radon-hal cohesion
 #
 bandit:
 	@$(call MESSAGE,$@)
-	bandit --recursive guess
+	bandit --recursive planner
