@@ -4,5 +4,5 @@ __pycache__
 htmlcov/
 *.pyc
 dice/doc
-guess/doc
+planner/doc
 build/
