@@ -1,4 +1,4 @@
-Python development project template
+DailyPlanner
 ==========================
 
 [![Pipeline status](https://gitlab.com/mikael-roos/python-template/badges/main/pipeline.svg)](https://gitlab.com/mikael-roos/python-template/-/pipelines)
