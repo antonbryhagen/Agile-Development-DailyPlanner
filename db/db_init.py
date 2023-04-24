@@ -9,9 +9,9 @@ os_password = os.environ['MYSQL_PASSWORD']
 
 # Connect to the MySQL server
 db = mysql.connector.connect(
-  host="localhost",
-  user=os_username,
-  password=os_password
+  host = "localhost",
+  user = os_username,
+  password = os_password
 )
 
 # Create a new database called DailyPlanner
@@ -20,10 +20,10 @@ cursor.execute("CREATE DATABASE IF NOT EXISTS DailyPlanner")
 
 # Connect to the DailyPlanner database
 db = mysql.connector.connect(
-  host="localhost",
-  user=os_username,
-  password=os_password,
-  database="DailyPlanner"
+  host = "localhost",
+  user = os_username,
+  password = os_password,
+  database = "DailyPlanner"
 )
 
 # Create a table called users with columns for username, name, and password
