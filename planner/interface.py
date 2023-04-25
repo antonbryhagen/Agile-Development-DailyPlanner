@@ -27,8 +27,13 @@ class Interface:
         header = tk.Label(text="Register new user")
         header.pack()
         self.input_menu()
+        label_name = tk.Label(text='Name:')
+        label_name.pack()
+        name = tk.Entry(width=50)
+        name.pack()
         register = tk.Button(text="Register")
         register.pack()
+
 
     def input_menu(self):
         self.greeting.destroy()
@@ -42,6 +47,7 @@ class Interface:
         label_password.pack()
         password = tk.Entry(width=50)
         password.pack()
+
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
