@@ -2,8 +2,8 @@
 
 ## Install MySQL:
 
-1. Download and install MySQL from [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/).
-2. Follow the installation instructions based on your operating system.
+1. Download and install MySQL Installer from [https://dev.mysql.com/downloads/](https://dev.mysql.com/downloads/).
+3. Follow the installation instructions based on your operating system.
 
 ## Set Local Variables:
 
