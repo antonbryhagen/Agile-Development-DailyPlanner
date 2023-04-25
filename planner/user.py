@@ -6,7 +6,7 @@ class User:
         self.name = name
         self.password = self.hash_password(password)
     
-    def hash_password(password):
+    def hash_password(self, password):
         password = password.encode('utf-8')
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password, salt)

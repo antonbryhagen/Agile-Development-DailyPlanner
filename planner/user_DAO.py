@@ -1,7 +1,7 @@
 import mysql.connector
 import os
 import bcrypt
-import user
+
 
 class user_DAO:
     """Class for accessing user database."""
@@ -43,10 +43,10 @@ class user_DAO:
         self.connect()
         cursor = self.connection.cursor()
         get_user_query = "SELECT * FROM users WHERE username = %s"
-        cursor.execute(get_user_query, username)
+        cursor.execute(get_user_query, (username,))
         user_data = cursor.fetchone()
         hashed_password = user_data[2]
-        if bcrypt.checkpw(password, hashed_password):
+        if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
             print("Valid login information")
             return user_data[0], user_data[1]
         else:
