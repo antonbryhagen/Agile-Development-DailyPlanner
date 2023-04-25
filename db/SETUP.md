@@ -3,7 +3,10 @@
 ## Install MySQL:
 
 1. Download and install MySQL Installer from [https://dev.mysql.com/downloads/](https://dev.mysql.com/downloads/).
-3. Follow the installation instructions based on your operating system.
+2. Follow the installation instructions based on your operating system.
+3. In MySQL Workbench, open the localhost instance
+4. From the instance menu to the left, click Startup/Shutdown and start MySQL Server
+
 
 ## Set Local Variables:
 
