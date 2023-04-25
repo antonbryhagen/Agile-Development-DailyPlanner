@@ -38,7 +38,6 @@ class Interface:
         self.register.pack()
         self.register.bind("<Button>", lambda event: self.get_register_data(event, "register"))
 
-
     def input_menu(self):
         self.greeting.destroy()
         self.button1.destroy()
@@ -53,7 +52,6 @@ class Interface:
         self.password.pack()
 
     def get_register_data(self, event, action_type):
-        
         user_username = self.username.get()
         user_password = self.password.get()
         if action_type == "register":
@@ -63,6 +61,11 @@ class Interface:
             
         elif action_type == "login":
             self.user_DAO_handler.get_user_by_username(user_username, user_password)
+        self.destroy_window()
+    
+    def destroy_window(self):
+        self.window.destroy()
+        self.display_menu()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
