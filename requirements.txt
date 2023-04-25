@@ -21,3 +21,6 @@ coverage
 
 # Database
 mysql-connector-python
+
+# Password hashing
+bcrypt
