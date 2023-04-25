@@ -58,14 +58,22 @@ class Interface:
             user_name = self.name.get()
             self.user_object = user.User(user_username, user_name, user_password)
             self.user_DAO_handler.create_user(self.user_object)
+            self.destroy_window()
             
         elif action_type == "login":
             self.user_DAO_handler.get_user_by_username(user_username, user_password)
-        self.destroy_window()
     
     def destroy_window(self):
         self.window.destroy()
         self.display_menu()
+    
+    def welcome(self, event):
+        self.window.destroy()
+        welcome_window = tk.Tk()
+        name = self.name.get()
+        welcome_text = tk.Label(text="Welcome: " + name)
+        welcome_text.pack()
+        welcome_window.mainloop()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
