@@ -12,8 +12,8 @@
 
 1. Create a virtual environment and activate it using Git Bash in the project directory.
 2. Set the local variables for the MySQL username and password using the following commands:
-    - On Windows: `set MYSQL_USER=username` and `set MYSQL_PASSWORD=password`
-    - On Mac/Linux: `export MYSQL_USER=username` and `export MYSQL_PASSWORD=password`
+    - On Windows: `set MYSQL_USER='username'` and `set MYSQL_PASSWORD='password'`
+    - On Mac/Linux: `export MYSQL_USER='username'` and `export MYSQL_PASSWORD='password'`
 
 ## Enable PowerShell Scripts to Run:
 
