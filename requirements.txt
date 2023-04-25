@@ -18,3 +18,9 @@ sphinx-rtd-theme # for ReadTheDocs local build
 
 # Unit test and coverage
 coverage
+
+# Database
+mysql-connector-python
+
+# Password hashing
+bcrypt
