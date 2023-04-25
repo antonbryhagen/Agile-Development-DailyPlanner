@@ -48,7 +48,7 @@ class user_DAO:
         hashed_password = user_data[2]
         if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
             print("Valid login information")
-            return user_data[0], user_data[1]
+            return [user_data[0], user_data[1]]
         else:
             print("Invalid login information")
             return False
