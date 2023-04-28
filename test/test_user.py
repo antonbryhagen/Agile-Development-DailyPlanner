@@ -1,5 +1,7 @@
+"""Testing user."""
 import unittest
 from planner.user import User
+
 
 class TestUser(unittest.TestCase):
     """Testing class for user."""

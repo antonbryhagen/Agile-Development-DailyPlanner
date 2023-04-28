@@ -3,8 +3,8 @@ import os
 
 # Get variables from OS
 
-os_username = os.environ['MYSQL_USER']
-os_password = os.environ['MYSQL_PASSWORD']
+os_username = os.environ.get('MYSQL_USER')
+os_password = os.environ.get('MYSQL_PASSWORD')
 
 
 # Connect to the MySQL server
