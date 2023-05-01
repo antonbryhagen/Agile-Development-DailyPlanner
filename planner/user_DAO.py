@@ -54,3 +54,12 @@ class user_DAO:
             return False
 
         
+    def create_activity(self, activity):
+        """Create new activity in database using activity object."""
+        self.connect()
+        cursor = self.connection.cursor()
+        create_activity_query = ("INSERT INTO activities (Activity, Time, username) VALUES(%i, %s, %i)")
+        create_activity_values = (activity.Activity, activity.Time, activity.username)
+        cursor.execute(create_activity_query, create_activity_values)
+        self.close()
+        cursor.close()

@@ -1,6 +1,7 @@
 import tkinter as tk
 import user
 import user_DAO
+import Activities
 
 
 class Interface:
@@ -114,3 +115,11 @@ class Interface:
         self.button5.pack()
         self.register.bind("<Button>", lambda event: self.get_register_data(event, "Add activitiy"))
 
+
+    def get_activity_data(self, event, action_type):
+        activities_activity = self.activity.get()
+        activities_time = self.time.get()
+        if action_type == "Add activity":
+            self.activities_object = Activities.Activities(self, self.username.get(), activities_time)
+            self.user_DAO_handler.create_activity(self.user_object)
+            self.destroy_window()
