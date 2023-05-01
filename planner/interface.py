@@ -110,4 +110,7 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-        self.register.bind("<Button>", lambda event: self.get_register_data(event, "register"))
+        self.button5 = tk.Button(text="Add activities")
+        self.button5.pack()
+        self.register.bind("<Button>", lambda event: self.get_register_data(event, "Add activitiy"))
+
