@@ -29,4 +29,4 @@ db = mysql.connector.connect(
 # Create a table called users with columns for username, name, and password
 cursor = db.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS users (username VARCHAR(255) PRIMARY KEY, name VARCHAR(255), password VARCHAR(255))")
-cursor.execute("CREATE TABLE IF NOT EXISTS activities (idActivity INT PRIMARY KEY NOT NULL AUTO_INCREMENT, Activity VARCHAR(255), Time INT")
+cursor.execute("CREATE TABLE IF NOT EXISTS activities (idActivity INT PRIMARY KEY NOT NULL AUTO_INCREMENT, Activity VARCHAR(255), Time INT)")
