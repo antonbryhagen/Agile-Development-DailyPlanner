@@ -102,9 +102,7 @@ class Interface:
 
 
     def input_activity(self):
-        #self.greeting.destroy()
-        #self.button3.destroy()
-        #self.button4.destroy()
+        self.button4.destroy()
         label_activity = tk.Label(text='Name of activity:')
         label_activity.pack()
         self.activity = tk.Entry(width=50)
