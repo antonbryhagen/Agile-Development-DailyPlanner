@@ -83,3 +83,35 @@ class Interface:
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
         self.window.mainloop()
+
+    def add_activities_menu(self):
+        header = tk.Label(text="Add activities")
+        header.pack()
+        label_activity = tk.Label(text='Activity:')
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        self.add_activity = tk.Button(text="Add activity")
+        self.add_activity.pack()
+        self.add_activity.bind("<Button>", self.add_activity_handler)
+
+    def add_activity_handler(self, event):
+        activity = self.activity.get()
+        # Save the activity to the database or do something else with it
+        self.activity.delete(0, tk.END)
+
+    def destroy_window(self):
+        self.window.destroy()
+        self.display_menu()
+    
+    def welcome(self, name):
+        self.window.destroy()
+        welcome_window = tk.Tk()
+        welcome_text = tk.Label(text="Welcome: "+name)
+        welcome_text.pack()
+        welcome_window.mainloop()
+
+    def bind_buttons(self):
+        self.button1.bind("<Button>", self.log_in_menu)
+        self.button2.bind("<Button>", self.register_user_menu)
+        self.window.mainloop()
