@@ -113,7 +113,7 @@ class Interface:
         self.time.pack()
         self.button5 = tk.Button(text="Add activities")
         self.button5.pack()
-        self.register.bind("<Button>", lambda event: self.get_register_data(event, "Add activitiy"))
+        self.register.bind("<Button>", lambda event: self.get_activity_data(event, "Add activitiy"))
 
 
     def get_activity_data(self, event, action_type):
