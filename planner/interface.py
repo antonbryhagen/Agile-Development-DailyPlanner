@@ -78,6 +78,7 @@ class Interface:
         welcome_text = tk.Label(text="Welcome: "+name)
         welcome_text.pack()
         self.button3 = tk.Button(text="Add activities")
+        self.input_activity()
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
