@@ -59,18 +59,18 @@ class Interface:
             self.user_object = user.User(user_username, user_name, user_password)
             self.user_DAO_handler.create_user(self.user_object)
             self.destroy_window()
-            
+
         elif action_type == "login":
             result = self.user_DAO_handler.get_user_by_username(user_username, user_password)
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
                 self.welcome(self.user_object.name)
-        
+
 
     def destroy_window(self):
         self.window.destroy()
         self.display_menu()
-    
+
     def welcome(self, name):
         self.window.destroy()
         welcome_window = tk.Tk()
@@ -102,7 +102,6 @@ class Interface:
 
 
     def input_activity(self):
-        self.button4.destroy()
         label_activity = tk.Label(text='Name of activity:')
         label_activity.pack()
         self.activity = tk.Entry(width=50)
@@ -111,9 +110,4 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-
-
-    def add_activity_handler(self, event):
-        activity = self.activity.get()
-        # Save the activity to the database or do something else with it
-        self.activity.delete(0, tk.END)
+        self.register.bind("<Button>", lambda event: self.get_register_data(event, "register"))
