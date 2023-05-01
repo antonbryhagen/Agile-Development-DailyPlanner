@@ -100,19 +100,3 @@ class Interface:
         activity = self.activity.get()
         # Save the activity to the database or do something else with it
         self.activity.delete(0, tk.END)
-
-    def destroy_window(self):
-        self.window.destroy()
-        self.display_menu()
-    
-    def welcome(self, name):
-        self.window.destroy()
-        welcome_window = tk.Tk()
-        welcome_text = tk.Label(text="Welcome: "+name)
-        welcome_text.pack()
-        welcome_window.mainloop()
-
-    def bind_buttons(self):
-        self.button1.bind("<Button>", self.log_in_menu)
-        self.button2.bind("<Button>", self.register_user_menu)
-        self.window.mainloop()
