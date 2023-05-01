@@ -113,8 +113,7 @@ class Interface:
         self.time.pack()
         self.button5 = tk.Button(text="Add activities")
         self.button5.pack()
-        self.register.bind("<Button>", lambda event: self.get_activity_data(event, "Add activities"))
-
+        self.register.bind("<Button>", lambda event: self.get_activity_data(event, "Add activitiy"))
 
     def get_activity_data(self, event, action_type):
         activities_activity = self.activity.get()
@@ -123,4 +122,4 @@ class Interface:
             self.activities_object = Activities.Activities(self, self.username.get(), activities_time)
             self.user_DAO_handler.create_activity_data(self.activities_object)
             self.destroy_window()
-            
+    
