@@ -77,6 +77,7 @@ class Interface:
         #name = self.name.get()
         welcome_text = tk.Label(text="Welcome: "+name)
         welcome_text.pack()
+        self.button3 = tk.Button(text="Add activites")
         welcome_window.mainloop()
 
     def bind_buttons(self):

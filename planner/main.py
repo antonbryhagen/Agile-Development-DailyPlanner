@@ -13,7 +13,6 @@ def main():
     """Execute the main program."""
     ui = interface.Interface()
     ui.display_menu()
-    ui.add_activities_menu()
 
 
 if __name__ == "__main__":
