@@ -59,27 +59,58 @@ class Interface:
             self.user_object = user.User(user_username, user_name, user_password)
             self.user_DAO_handler.create_user(self.user_object)
             self.destroy_window()
-            
+
         elif action_type == "login":
             result = self.user_DAO_handler.get_user_by_username(user_username, user_password)
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
                 self.welcome(self.user_object.name)
-        
+
 
     def destroy_window(self):
         self.window.destroy()
         self.display_menu()
-    
+
     def welcome(self, name):
         self.window.destroy()
         welcome_window = tk.Tk()
         #name = self.name.get()
         welcome_text = tk.Label(text="Welcome: "+name)
         welcome_text.pack()
+        self.button3 = tk.Button(text="Add activities")
+        self.input_activity()
+        self.button3.pack()
+        self.button4 = tk.Button(text="Remove activities")
+        self.button4.pack()
         welcome_window.mainloop()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
         self.window.mainloop()
+
+    def add_activities_menu(self):
+        header = tk.Label(text="Add activities")
+        header.pack()
+        label_activity = tk.Label(text='Activity:')
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        self.add_activity = tk.Button(text="Add activity")
+        self.add_activity.pack()
+        self.add_activity.bind("<Button>", self.add_activity_handler)
+
+
+    def input_activity(self):
+        label_activity = tk.Label(text='Name of activity:')
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        label_time = tk.Label(text='Hours of work:')
+        label_time.pack()
+        self.time = tk.Entry(width=50)
+        self.time.pack()
+        self.button5 = tk.Button(text="Add activities")
+        self.button5.pack()
+        self.register.bind("<Button>", lambda event: self.get_register_data(event, "Add activitiy"))
+
