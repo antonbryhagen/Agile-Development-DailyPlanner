@@ -53,4 +53,14 @@ class user_DAO:
             print("Invalid login information")
             return False
 
+
+    def create_activity(self, activities):
+        """Create new Activity in database using Activity object."""
+        self.connect()
+        cursor = self.connection.cursor()
+        create_activity_query = ("INSERT INTO Activity (idActivity, Activity, Time) VALUES(%i, %s, %i)")
+        create_activity_values = (activities.idActivity, activities.Activity, activities.Time)
+        cursor.execute(create_activity_query, create_activity_values)
+        self.close()
+        cursor.close()
         
