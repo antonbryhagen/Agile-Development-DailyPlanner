@@ -123,3 +123,4 @@ class Interface:
             self.activities_object = Activities.Activities(self, self.username.get(), activities_time)
             self.user_DAO_handler.create_activity_data(self.activities_object)
             self.destroy_window()
+            
