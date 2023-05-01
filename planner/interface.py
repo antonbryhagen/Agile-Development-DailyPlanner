@@ -99,6 +99,21 @@ class Interface:
         self.add_activity.pack()
         self.add_activity.bind("<Button>", self.add_activity_handler)
 
+
+    def input_activity(self):
+        self.greeting.destroy()
+        self.button3.destroy()
+        self.button4.destroy()
+        label_activity = tk.Label(text='Name of activity:')
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        label_time = tk.Label(text='Hours of work:')
+        label_time.pack()
+        self.time = tk.Entry(width=50)
+        self.time.pack()
+
+
     def add_activity_handler(self, event):
         activity = self.activity.get()
         # Save the activity to the database or do something else with it
