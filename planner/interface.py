@@ -120,5 +120,5 @@ class Interface:
         activities_time = self.time.get()
         if action_type == "Add activities":
             self.activities_object = Activities.Activities(self, activities_activity, activities_time)
-            self.user_DAO_handler.create_activity_data(self.activities_object)
+            self.user_DAO_handler.create_activity(self.activities_object)
             self.destroy_window()
