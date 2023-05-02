@@ -1,6 +1,6 @@
 import tkinter as tk
-import user
-import user_DAO
+from planner import user
+from planner import user_DAO
 
 
 class Interface:
