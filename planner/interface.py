@@ -93,7 +93,7 @@ class Interface:
     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button5.bind("<Button>", self.get_activity_data)
-        self.button6.bind("<Button>", self.get_activity_data_delete)
+        self.button4.bind("<Button>", self.get_activity_data_delete)
         self.window.mainloop()
 
     #def add_activities_menu(self):
@@ -144,7 +144,7 @@ class Interface:
         label_activity.pack()
         self.activity = tk.Entry(width=50)
         self.activity.pack()
-        self.button6 = tk.Button(text="Delete")
-        self.button6.pack()
-        self.button6.bind("<Button>", lambda event: self.get_activity_data_delete(event, "Delete"))
+        self.button4 = tk.Button(text="Delete")
+        self.button4.pack()
+        self.button4.bind("<Button>", lambda event: self.get_activity_data_delete(event, "Delete"))
         self.bind_buttons2()
