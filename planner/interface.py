@@ -80,7 +80,6 @@ class Interface:
         welcome_text.pack()
         self.button3 = tk.Button(text="Add activities")
         self.button3.pack()
-        self.input_activity()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
         self.bind_buttons()
