@@ -105,7 +105,7 @@ class Interface:
         #self.window.mainloop()
 
 
-    def input_activity(self):
+    def input_activity(self, event):
         label_activity = tk.Label(text='Name of activity:')
         label_activity.pack()
         self.activity = tk.Entry(width=50)
