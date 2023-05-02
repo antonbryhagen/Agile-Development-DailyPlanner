@@ -88,6 +88,8 @@ class Interface:
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
+        self.button3.bind("<Button>", self.input_activity)
+        self.button4.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
 
     #def add_activities_menu(self):
@@ -112,9 +114,9 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-        self.button5 = tk.Button(text="Add activity")
-        self.button5.pack()
-        self.register.bind("<Button>", self.get_activity_data)
+        self.button4 = tk.Button(text="Add activity")
+        self.button4.pack()
+        #self.register.bind("<Button>", self.get_activity_data)
 
     def get_activity_data(self, event, action_type):
         activities_activity = self.activity.get()
