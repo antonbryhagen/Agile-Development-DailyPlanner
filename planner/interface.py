@@ -125,7 +125,7 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-        clicked = StringVar()
+        clicked = StringVar(label_prio)
         label_prio = tk.Label(text='Priority:')
         label_prio.pack()
         optionList = ["Very important", "Important", "Not so important"]
