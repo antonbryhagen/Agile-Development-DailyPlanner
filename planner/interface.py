@@ -131,7 +131,8 @@ class Interface:
         optionList = ["Very important", "Important", "Not so important"]
         clicked.set(optionList[0])
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
-        self.PRIO = clicked.get()
+        clickedOption = clicked.get()
+        self.PRIO = clickedOption
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
