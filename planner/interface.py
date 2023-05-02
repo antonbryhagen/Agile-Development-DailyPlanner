@@ -86,7 +86,6 @@ class Interface:
         clicked = StringVar()
         option_list = ["Log out", "Schedule", "Back"]
         clicked.set(option_list[0])
-        root = tk.Tk()
         drop = OptionMenu(welcome_window, clicked, *option_list).pack()
         drop()
         chooceOption = clicked.get()
