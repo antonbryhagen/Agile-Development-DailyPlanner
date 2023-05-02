@@ -83,6 +83,13 @@ class Interface:
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
+        clicked = StringVar()
+        option_list = ["Log out", "Schedule", "Back"]
+        clicked.set(option_list[0])
+        root = tk.Tk()
+        drop = OptionMenu(welcome_window, clicked, *option_list).pack()
+        drop()
+        chooceOption = clicked.get()
         self.bind_buttons2()
         welcome_window.mainloop()
 
@@ -125,13 +132,6 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-        clicked = StringVar()
-        option_list = ["Very important", "Important", "Not so important", "meh"]
-        clicked.set(option_list[0])
-        root = tk.Tk()
-        drop = OptionMenu(root, clicked, *option_list).pack()
-        drop()
-        chooceOption = clicked.get()
         self.time = tk.Entry(width=50)
         self.time.pack()
         self.button5 = tk.Button(text="Confirm")
