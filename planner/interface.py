@@ -118,7 +118,6 @@ class Interface:
     def get_activity_data(self, event, action_type):
         activities_activity = self.activity.get()
         activities_time = self.time.get()
-        if action_type == "Add activities":
-            self.activities_object = Activities.Activities(self, activities_activity, activities_time)
-            self.user_DAO_handler.create_activity(self.activities_object)
-            self.destroy_window()
+        self.activities_object = Activities.Activities(self, activities_activity, activities_time)
+        self.user_DAO_handler.create_activity(self.activities_object)
+        self.destroy_window()
