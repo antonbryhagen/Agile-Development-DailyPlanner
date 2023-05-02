@@ -124,6 +124,12 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
+        clicked = tk.StringVar()
+        option_list = ["Very important" , "Important", "Not so important", "meh"]
+        clicked.set(option_list[0])
+        drop = tk.OptionMenu(tk, clicked, *option_list).pack()
+        self.time = tk.Entry(width=50)
+        self.time.pack()
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
