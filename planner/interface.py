@@ -128,7 +128,7 @@ class Interface:
         clicked = StringVar()
         option_list = ["Very important", "Important", "Not so important", "meh"]
         clicked.set(option_list[0])
-        root = tk()
+        root = tk.Tk()
         drop = OptionMenu(root, clicked, *option_list).pack()
         chooceOption = clicked.get()
         self.time = tk.Entry(width=50)
