@@ -83,12 +83,6 @@ class Interface:
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
-        clicked = StringVar()
-        option_list = ["Schedule", "Log out", "Back"]
-        clicked.set(option_list[0])
-        drop = OptionMenu(welcome_window, clicked, *option_list).pack()
-        drop()
-        #chooceOption = clicked.get()
         self.bind_buttons2()
         welcome_window.mainloop()
 
