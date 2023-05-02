@@ -88,8 +88,6 @@ class Interface:
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
-        self.button3.bind("<Button>", self.input_activity)
-        self.button5.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
 
     def bind_buttons2(self):
