@@ -107,7 +107,7 @@ class Interface:
         #self.add_activity.bind("<Button>", self.get_activity_data)
         #self.window.mainloop()
 
-    def get_activity_data(self, event, action_type):
+    def get_activity_data(self, event):
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.activities_object = Activities.Activities(activities_activity, activities_time)
