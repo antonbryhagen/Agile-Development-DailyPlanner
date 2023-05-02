@@ -92,7 +92,7 @@ class Interface:
         self.button5.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
 
-     def bind_buttons2(self):
+    def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button5.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
