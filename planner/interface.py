@@ -126,9 +126,7 @@ class Interface:
         self.time = tk.Entry(width=50)
         self.time.pack()
         clicked = StringVar()
-        label_prio = tk.Label(text='Priority:')
-        optionList = ["Option 1", "Option 2", "Option 3"]
-        label_prio.pack()
+        optionList = ["Very important", "Important", "Not so important"]
         clicked.set(optionList[0])
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
         chosenOption = clicked.get()
