@@ -129,6 +129,7 @@ class Interface:
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
         self.bind_buttons2()
+        self.destroy_window() 
         
             
     def get_activity_data_delete(self, event):
