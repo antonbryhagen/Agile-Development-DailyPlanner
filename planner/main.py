@@ -6,7 +6,7 @@ Run the app.
 
 """
 
-import interface
+from planner import interface
 
 
 def main():
