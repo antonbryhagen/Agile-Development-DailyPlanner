@@ -104,6 +104,13 @@ class Interface:
         #self.add_activity.bind("<Button>", self.get_activity_data)
         #self.window.mainloop()
 
+    def get_activity_data(self, event, action_type):
+        activities_activity = self.activity.get()
+        activities_time = self.time.get()
+        self.activities_object = Activities.Activities(activities_activity, activities_time)
+        self.user_DAO_handler.create_activity(self.activities_object)
+        self.destroy_window()
+
 
     def input_activity(self, event):
         label_activity = tk.Label(text='Name of activity:')
@@ -118,10 +125,3 @@ class Interface:
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
         self.bind_buttons()
-
-    def get_activity_data(self, event, action_type):
-        activities_activity = self.activity.get()
-        activities_time = self.time.get()
-        self.activities_object = Activities.Activities(self, activities_activity, activities_time)
-        self.user_DAO_handler.create_activity(self.activities_object)
-        self.destroy_window()
