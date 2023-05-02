@@ -113,7 +113,6 @@ class Interface:
         activities_time = self.time.get()
         self.activities_object = Activities.Activities(activities_activity, activities_time, self.user_object.name)
         self.user_DAO_handler.create_activity(self.activities_object)
-        self.destroy_window()
 
 
     def input_activity(self, event):
