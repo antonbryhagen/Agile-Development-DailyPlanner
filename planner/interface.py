@@ -130,6 +130,7 @@ class Interface:
         clicked.set(option_list[0])
         root = tk.Tk()
         drop = OptionMenu(root, clicked, *option_list).pack()
+        drop()
         chooceOption = clicked.get()
         self.time = tk.Entry(width=50)
         self.time.pack()
