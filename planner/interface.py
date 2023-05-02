@@ -2,6 +2,7 @@ import tkinter as tk
 import user
 import user_DAO
 import Activities
+from tkinter import *
 
 
 class Interface:
@@ -124,10 +125,11 @@ class Interface:
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
-        clicked = tk.StringVar()
-        option_list = ["Very important" , "Important", "Not so important", "meh"]
+        clicked = StringVar()
+        option_list = ["Very important", "Important", "Not so important", "meh"]
         clicked.set(option_list[0])
-        drop = tk.OptionMenu(tk, clicked, *option_list).pack()
+        root = tk()
+        drop = OptionMenu(root, clicked, *option_list).pack()
         chooceOption = clicked.get()
         self.time = tk.Entry(width=50)
         self.time.pack()
