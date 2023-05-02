@@ -131,7 +131,7 @@ class Interface:
         optionList = ["Very important", "Important", "Not so important"]
         clicked.set(optionList[0])
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
-        self.PRIO = clicked.get()
+        self.PRIO = drop.get()
         self.time = tk.Entry(width=50)
         self.time.pack()
         self.button5 = tk.Button(text="Confirm")
