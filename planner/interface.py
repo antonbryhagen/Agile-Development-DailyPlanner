@@ -99,21 +99,22 @@ class Interface:
         self.activity.pack()
         self.add_activity = tk.Button(text="Add activity")
         self.add_activity.pack()
-        self.add_activity.bind("<Button>", self.add_activity_handler)
+        self.add_activity.bind("<Button>", self.get_activity_data)
+        self.window.mainloop()
 
 
-    def input_activity(self):
-        label_activity = tk.Label(text='Name of activity:')
-        label_activity.pack()
-        self.activity = tk.Entry(width=50)
-        self.activity.pack()
-        label_time = tk.Label(text='Hours of work:')
-        label_time.pack()
-        self.time = tk.Entry(width=50)
-        self.time.pack()
-        self.button5 = tk.Button(text="Add activity")
-        self.button5.pack()
-        self.register.bind("<Button-1>", lambda event: self.get_activity_data(event, "Add activity"))
+    #def input_activity(self):
+        #label_activity = tk.Label(text='Name of activity:')
+        #label_activity.pack()
+        #self.activity = tk.Entry(width=50)
+        #self.activity.pack()
+        #label_time = tk.Label(text='Hours of work:')
+        #label_time.pack()
+        #self.time = tk.Entry(width=50)
+        #self.time.pack()
+        #self.button5 = tk.Button(text="Add activity")
+        #self.button5.pack()
+        #self.register.bind("<Button-1>", lambda event: self.get_activity_data(event, "Add activity"))
 
     def get_activity_data(self, event, action_type):
         activities_activity = self.activity.get()
