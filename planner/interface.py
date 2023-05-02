@@ -112,7 +112,7 @@ class Interface:
     def get_activity_data(self, event):
         activities_activity = self.activity.get()
         activities_time = self.time.get()
-        self.activities_object = Activities.Activities(activities_activity, activities_time, self.user_object.name)
+        self.activities_object = Activities.Activities(activities_activity, self.PRIO, activities_time, self.user_object.name)
         self.user_DAO_handler.create_activity(self.activities_object)
 
 
@@ -131,7 +131,7 @@ class Interface:
         optionList = ["Very important", "Important", "Not so important"]
         clicked.set(optionList[0])
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
-        chosenOption = clicked.get()
+        self.PRIO = clicked.get()
         self.time = tk.Entry(width=50)
         self.time.pack()
         self.button5 = tk.Button(text="Confirm")
