@@ -116,30 +116,62 @@ class Interface:
         self.user_DAO_handler.create_activity(self.activities_object)
 
 
+    # def input_activity(self, event):
+    #     label_activity = tk.Label(text='Name of activity:')
+    #     label_activity.pack()
+    #     self.activity = tk.Entry(width=50)
+    #     self.activity.pack()
+    #     label_time = tk.Label(text='Hours of work:')
+    #     label_time.pack()
+    #     self.time = tk.Entry(width=50)
+    #     self.time.pack()
+    #     label_prio = tk.Label(text='Priority:')
+    #     label_prio.pack()
+    #     clicked = StringVar(label_prio)
+    #     optionList = ["Very important", "Important", "Not so important"]
+    #     clicked.set(optionList[0])
+    #     drop = OptionMenu(label_prio, clicked, *optionList).pack()
+    #     clickedOption = clicked.get()
+    #     self.PRIO = clickedOption
+    #     self.button5 = tk.Button(text="Confirm")
+    #     self.button5.pack()
+    #     self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
+    #     self.bind_buttons2()
+    #     label_prio.mainloop()
+    #     self.destroy_window() 
+        
+        
     def input_activity(self, event):
+        # Create a StringVar on the root window to store the selected option
+        self.clicked = tk.StringVar(self.window)
+        self.clicked.set("Very important")
+
         label_activity = tk.Label(text='Name of activity:')
         label_activity.pack()
         self.activity = tk.Entry(width=50)
         self.activity.pack()
+
         label_time = tk.Label(text='Hours of work:')
         label_time.pack()
         self.time = tk.Entry(width=50)
         self.time.pack()
+
         label_prio = tk.Label(text='Priority:')
         label_prio.pack()
-        clicked = StringVar(label_prio)
         optionList = ["Very important", "Important", "Not so important"]
-        clicked.set(optionList[0])
-        drop = OptionMenu(label_prio, clicked, *optionList).pack()
-        clickedOption = clicked.get()
-        self.PRIO = clickedOption
+        drop = tk.OptionMenu(self.window, self.clicked, *optionList)
+        drop.pack()
+
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
+
         self.bind_buttons2()
-        label_prio.mainloop()
-        self.destroy_window() 
-        
+
+        self.window.mainloop()
+
+        # Call destroy_window() after the mainloop has finished
+        self.destroy_window()
             
     def get_activity_data_delete(self, event):
         activities_activity = self.activity.get()
