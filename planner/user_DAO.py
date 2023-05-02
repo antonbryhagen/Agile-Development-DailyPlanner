@@ -63,3 +63,14 @@ class user_DAO:
         cursor.execute(create_activity_query, create_activity_values)
         self.close()
         cursor.close()
+        
+        
+    def delete_activity(self, activity):
+        """Delete activity in database using activity object."""
+        self.connect()
+        cursor = self.connection.cursor()
+        create_activity_query = ("DELETE activities (Activity, Time, username) VALUES(%s, %s, %s)")
+        create_activity_values = (activity.Activity, activity.Time, activity.username)
+        cursor.execute(create_activity_query, create_activity_values)
+        self.close()
+        cursor.close()

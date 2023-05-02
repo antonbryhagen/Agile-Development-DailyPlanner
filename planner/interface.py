@@ -128,3 +128,22 @@ class Interface:
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
         self.bind_buttons2()
+        
+            
+    def get_activity_data_delete(self, event):
+        activities_activity = self.activity.get()
+        activities_time = self.time.get()
+        self.activities_object = Activities.Activities(activities_activity, activities_time, self.user_object.name)
+        self.user_DAO_handler.delete_activity(self.activities_object)
+        self.destroy_window()        
+
+
+    def input_activity_delete(self, event):
+        label_activity = tk.Label(text='Name of activity:')
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        self.button6 = tk.Button(text="Delete")
+        self.button6.pack()
+        self.button6.bind("<Button>", lambda event: self.get_activity_data_delete(event, "Delete"))
+        self.bind_buttons2()
