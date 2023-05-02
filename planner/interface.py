@@ -82,12 +82,17 @@ class Interface:
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
-        self.bind_buttons()
+        self.bind_buttons2()
         welcome_window.mainloop()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
+        self.button3.bind("<Button>", self.input_activity)
+        self.button5.bind("<Button>", self.get_activity_data)
+        self.window.mainloop()
+
+     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button5.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
@@ -124,4 +129,4 @@ class Interface:
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
-        self.bind_buttons()
+        self.bind_buttons2()
