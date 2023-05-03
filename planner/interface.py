@@ -84,6 +84,8 @@ class Interface:
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
         self.bind_buttons2()
+        self.button3.destroy()
+        self.button4.destroy()
         welcome_window.mainloop()
 
     def bind_buttons(self):
