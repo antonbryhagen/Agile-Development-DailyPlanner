@@ -158,7 +158,7 @@ class Interface:
         self.activity.pack()
         self.button6 = tk.Button(text="Delete")
         self.button6.pack()
-        self.button6.bind("<Button>", lambda event: self.get_activity_data_delete(event, "Delete"))
+        self.button6.bind("<Button>", lambda event: self.get_activity_data_delete("Delete"))
         self.bind_buttons2()
         label_activity.mainloop()
         self.destroy_window() 
