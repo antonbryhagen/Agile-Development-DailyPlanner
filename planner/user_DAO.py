@@ -69,8 +69,8 @@ class user_DAO:
         """Delete activity in database using activity object."""
         self.connect()
         cursor = self.connection.cursor()
-        activity = activity.Activity
-        create_activity_query = (f"DELETE FROM activities WHERE activity = {activity} LIMIT 1;" + "VALUES(%s)")
+        activity = activity
+        create_activity_query = ("DELETE FROM activities WHERE activity = %s LIMIT 1;  VALUES(%s)")
         create_activity_values = (activity)
         cursor.execute(create_activity_query, create_activity_values)
         self.close()
