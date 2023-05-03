@@ -59,27 +59,27 @@ class user_DAO:
     def create_activity(self, activity):
         """Create new activity in database using activity object."""
         self.connect()
-        cursor = self.connection.cursor()
+        self.cursor = self.connection.cursor()
         create_activity_query = "INSERT INTO activities (Activity, PRIO, Time, username) VALUES(%s, %s, %s, %s)"
-        create_activity_values = (
+        self.create_activity_values = (
             activity.Activity,
             activity.PRIO,
             activity.Time,
             activity.username,
         )
-        cursor.execute(create_activity_query, create_activity_values)
+        self.cursor.execute(create_activity_query, self.create_activity_values)
         self.close()
-        cursor.close()
+        self.cursor.close()
 
     def delete_activity(self, activity):
         """Delete activity in database using activity object."""
         self.connect()
-        cursor = self.connection.cursor()
-        activity = activity.Activity
-        list = []
-        list.append(activity)
-        create_activity_query = "DELETE FROM activities WHERE Activity = %s  LIMIT 1;"
-        create_activity_values = list
-        cursor.execute(create_activity_query, create_activity_values)
+        self.cursor = self.connection.cursor()
+        self.activity = activity.Activity
+        self.list = []
+        self.list.append(self.activity)
+        delete_activity_query = "DELETE FROM activities WHERE Activity = %s  LIMIT 1;"
+        delete_activity_values = self.list
+        self.cursor.execute(delete_activity_query, delete_activity_values)
         self.close()
-        cursor.close()
+        self.cursor.close()
