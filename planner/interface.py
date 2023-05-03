@@ -146,7 +146,7 @@ class Interface:
 
     def get_activity_data_delete(self, event):
         activities_activity_delete = self.activity.get()
-        self.activities_object = Activities.Activities(activities_activity_delete, self.PRIO, self.user_object.name)
+        self.activities_object = Activities.Activities(activities_activity_delete, "test", "test1", self.user_object.name)
         self.user_DAO_handler.delete_activity(self.activities_object)    
 
 
