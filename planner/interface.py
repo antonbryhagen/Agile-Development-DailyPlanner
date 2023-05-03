@@ -132,7 +132,7 @@ class Interface:
         # clicked.set(optionList[0])
         clicked = StringVar(optionList)
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
-        # clickedOption = clicked.get()
+        clickedOption = clicked.get()
         self.PRIO = clickedOption
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
