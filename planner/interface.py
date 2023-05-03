@@ -129,10 +129,10 @@ class Interface:
         label_prio.pack()
         clicked = StringVar(label_prio)
         optionList = ["Very important", "Important", "Not so important"]
-        clicked.set(optionList[0] or optionList[1] or optionList[2])
+        clicked.set(optionList[0])
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
         clickedOption = clicked.get()
-        self.PRIO = clickedOption
+        self.PRIO = clickedOption[0:2]
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
@@ -141,39 +141,6 @@ class Interface:
         self.destroy_window() 
         
     
-        
-    # def input_activity(self, event):
-    #     # Create a StringVar on the root window to store the selected option
-    #     self.clicked = tk.StringVar(self.window)
-    #     self.clicked.set("Very important")
-
-    #     label_activity = tk.Label(text='Name of activity:')
-    #     label_activity.pack()
-    #     self.activity = tk.Entry(width=50)
-    #     self.activity.pack()
-
-    #     label_time = tk.Label(text='Hours of work:')
-    #     label_time.pack()
-    #     self.time = tk.Entry(width=50)
-    #     self.time.pack()
-
-    #     label_prio = tk.Label(text='Priority:')
-    #     label_prio.pack()
-    #     optionList = ["Very important", "Important", "Not so important"]
-    #     drop = tk.OptionMenu(self.window, self.clicked, *optionList)
-    #     drop.pack()
-
-    #     self.button5 = tk.Button(text="Confirm")
-    #     self.button5.pack()
-    #     self.button5.bind("<Button>", lambda event: self.get_activity_data(event, "Confirm"))
-
-    #     self.bind_buttons2()
-
-    #     self.window.mainloop()
-
-    #     # Call destroy_window() after the mainloop has finished
-    #     self.destroy_window()
-            
     def get_activity_data_delete(self, event):
         activities_activity = self.activity.get()
         activities_time = self.time.get()
