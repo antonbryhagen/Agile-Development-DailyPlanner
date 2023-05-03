@@ -145,9 +145,9 @@ class Interface:
     
 
     def get_activity_data_delete(self, event):
-        activities_activity = self.activity.get()
-        activities_time = self.time.get()
-        self.activities_object = Activities.Activities(activities_activity, activities_time, self.user_object.name)
+        activities_activity_delete = self.activity.get()
+        activities_time_delete = self.time.get()
+        self.activities_object = Activities.Activities(activities_activity_delete, activities_time_delete, self.user_object.name)
         self.user_DAO_handler.delete_activity(self.activities_object)    
 
 
