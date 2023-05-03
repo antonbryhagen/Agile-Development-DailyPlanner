@@ -2,9 +2,10 @@ import unittest
 from planner.user_DAO import user_DAO
 from planner.user import User
 
+
 class Test_user_DAO(unittest.TestCase):
     """Testing class for user_DAO"""
-    
+
     def test_init(self):
         """Init user_DAO test."""
         test_user_DAO = user_DAO()
@@ -14,7 +15,6 @@ class Test_user_DAO(unittest.TestCase):
         res = [host, database, connection]
         exp = ["localhost", "DailyPlanner", None]
         self.assertEqual(res, exp)
-        
 
     def test_connect(self):
         """Testing if connected to database."""
@@ -41,7 +41,7 @@ class Test_user_DAO(unittest.TestCase):
             res = test_user_DAO.get_user_by_username("Test", "123")
             test_user_DAO.connect()
             cursor = test_user_DAO.connection.cursor()
-            delete_user_query = ("DELETE FROM users WHERE username = %s")
+            delete_user_query = "DELETE FROM users WHERE username = %s"
             delete_user_values = ("Test",)
             cursor.execute(delete_user_query, delete_user_values)
             test_user_DAO.close()
@@ -54,12 +54,10 @@ class Test_user_DAO(unittest.TestCase):
             exp = "Test"
             self.assertEqual(res[0], exp)
 
-
-
     def test_get_user_by_username(self):
         """Testing get_user_by_username method."""
         test_user_DAO = user_DAO()
-        try: 
+        try:
             user = test_user_DAO.get_user_by_username("Test", "123")
         except Exception:
             test_user = User("Test", "Test", "123")
@@ -69,5 +67,6 @@ class Test_user_DAO(unittest.TestCase):
             exp = "Test"
             self.assertEqual(res[0], exp)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
