@@ -129,7 +129,7 @@ class Interface:
         label_prio.pack()
         clicked = StringVar(label_prio)
         optionList = ["Very important", "Important", "Not so important"]
-        clicked.set(optionList[0:2])
+        clicked.set(optionList)
         drop = OptionMenu(label_prio, clicked, *optionList).pack()
         clickedOption = clicked.get()
         self.PRIO = clickedOption
