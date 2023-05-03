@@ -68,3 +68,6 @@ class Test_user_DAO(unittest.TestCase):
             res = test_user_DAO.get_user_by_username("Test", "123")
             exp = "Test"
             self.assertEqual(res[0], exp)
+
+if __name__ == '__main__':
+    unittest.main()

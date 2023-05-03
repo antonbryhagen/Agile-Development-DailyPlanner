@@ -1,8 +1,9 @@
 import tkinter as tk
-import user
-import user_DAO
+from planner import user
+from planner import user_DAO
 import Activities
 from tkinter import *
+
 
 
 class Interface:
@@ -21,19 +22,19 @@ class Interface:
         self.bind_buttons()
 
     def log_in_menu(self, event):
-        header = tk.Label(text="Log in")
-        header.pack()
+        self.header = tk.Label(text="Log in")
+        self.header.pack()
         self.input_menu()
         self.log_in = tk.Button(text="Log In")
         self.log_in.pack()
         self.log_in.bind("<Button>", lambda event: self.get_register_data(event, "login"))
 
     def register_user_menu(self, event):
-        header = tk.Label(text="Register new user")
-        header.pack()
+        self.header = tk.Label(text="Register new user")
+        self.header.pack()
         self.input_menu()
-        label_name = tk.Label(text='Name:')
-        label_name.pack()
+        self.label_name = tk.Label(text='Name:')
+        self.label_name.pack()
         self.name = tk.Entry(width=50)
         self.name.pack()
         self.register = tk.Button(text="Register")
@@ -44,26 +45,26 @@ class Interface:
         self.greeting.destroy()
         self.button1.destroy()
         self.button2.destroy()
-        label_username = tk.Label(text='Username:')
-        label_username.pack()
+        self.label_username = tk.Label(text='Username:')
+        self.label_username.pack()
         self.username = tk.Entry(width=50)
         self.username.pack()
-        label_password = tk.Label(text='Password:')
-        label_password.pack()
+        self.label_password = tk.Label(text='Password:')
+        self.label_password.pack()
         self.password = tk.Entry(width=50)
         self.password.pack()
 
     def get_register_data(self, event, action_type):
-        user_username = self.username.get()
-        user_password = self.password.get()
+        self.user_username = self.username.get()
+        self.user_password = self.password.get()
         if action_type == "register":
-            user_name = self.name.get()
-            self.user_object = user.User(user_username, user_name, user_password)
+            self.user_name = self.name.get()
+            self.user_object = user.User(self.user_username, self.user_name, self.user_password)
             self.user_DAO_handler.create_user(self.user_object)
             self.destroy_window()
 
         elif action_type == "login":
-            result = self.user_DAO_handler.get_user_by_username(user_username, user_password)
+            result = self.user_DAO_handler.get_user_by_username(self.user_username, self.user_password)
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
                 self.welcome(self.user_object.name)
@@ -75,10 +76,11 @@ class Interface:
 
     def welcome(self, name):
         self.window.destroy()
-        welcome_window = tk.Tk()
+        self.welcome_window = tk.Tk()
         #name = self.name.get()
-        welcome_text = tk.Label(text="Welcome: "+name)
-        welcome_text.pack()
+
+        self.welcome_text = tk.Label(text="Welcome: "+name)
+        self.welcome_text.pack()
         self.button3 = tk.Button(text="Add activities")
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
@@ -86,7 +88,7 @@ class Interface:
         self.bind_buttons2()
         self.button3.destroy()
         self.button4.destroy()
-        welcome_window.mainloop()
+        self.welcome_window.mainloop()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)

@@ -18,6 +18,7 @@ sphinx-rtd-theme # for ReadTheDocs local build
 
 # Unit test and coverage
 coverage
+pyautogui
 
 # Database
 mysql-connector-python
