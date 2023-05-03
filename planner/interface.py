@@ -159,3 +159,5 @@ class Interface:
         self.button4.pack()
         self.button4.bind("<Button>", lambda event: self.get_activity_data_delete(event, "Delete"))
         self.bind_buttons2()
+        label_activity.mainloop()
+        self.destroy_window() 
