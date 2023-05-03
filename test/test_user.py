@@ -19,5 +19,6 @@ class TestUser(unittest.TestCase):
         exp = "password"
         self.assertNotEqual(res, exp)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

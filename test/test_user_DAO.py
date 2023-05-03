@@ -1,10 +1,13 @@
 import unittest
+from unittest.mock import MagicMock, patch
 from planner.user_DAO import user_DAO
 from planner.user import User
+from planner.Activities import Activities
+
 
 class Test_user_DAO(unittest.TestCase):
     """Testing class for user_DAO"""
-    
+
     def test_init(self):
         """Init user_DAO test."""
         test_user_DAO = user_DAO()
@@ -14,7 +17,6 @@ class Test_user_DAO(unittest.TestCase):
         res = [host, database, connection]
         exp = ["localhost", "DailyPlanner", None]
         self.assertEqual(res, exp)
-        
 
     def test_connect(self):
         """Testing if connected to database."""
@@ -41,7 +43,7 @@ class Test_user_DAO(unittest.TestCase):
             res = test_user_DAO.get_user_by_username("Test", "123")
             test_user_DAO.connect()
             cursor = test_user_DAO.connection.cursor()
-            delete_user_query = ("DELETE FROM users WHERE username = %s")
+            delete_user_query = "DELETE FROM users WHERE username = %s"
             delete_user_values = ("Test",)
             cursor.execute(delete_user_query, delete_user_values)
             test_user_DAO.close()
@@ -54,12 +56,10 @@ class Test_user_DAO(unittest.TestCase):
             exp = "Test"
             self.assertEqual(res[0], exp)
 
-
-
     def test_get_user_by_username(self):
         """Testing get_user_by_username method."""
         test_user_DAO = user_DAO()
-        try: 
+        try:
             user = test_user_DAO.get_user_by_username("Test", "123")
         except Exception:
             test_user = User("Test", "Test", "123")
@@ -68,6 +68,31 @@ class Test_user_DAO(unittest.TestCase):
             res = test_user_DAO.get_user_by_username("Test", "123")
             exp = "Test"
             self.assertEqual(res[0], exp)
+      
+    def test_create_activity(self):
+        """Test create_activity method."""
+        mock_cursor = MagicMock()
+        mock_cursor.execute.return_value = "execute"
+        self.test_user_DAO = user_DAO()
+        self.test_user_DAO.cursor = mock_cursor
+        test_activity = Activities("Test activity", "Important", "2", "Test")
+        self.test_user_DAO.create_activity(test_activity)
+        self.assertEqual(("Test activity", "Important", "2", "Test",), self.test_user_DAO.create_activity_values)
+        self.assertEqual(mock_cursor.execute(), "execute")
+        mock_cursor.execute.assert_called_once()
+    
+    def test_delete_activity(self):
+        "Test delete_activity method."
+        mock_cursor = MagicMock()
+        mock_cursor.execute.return_value = "execute"
+        self.test_user_DAO = user_DAO()
+        self.test_user_DAO.cursor = mock_cursor
+        test_activity = Activities("Test activity", "Important", "2", "Test")
+        self.test_user_DAO.delete_activity(test_activity)
+        self.assertEqual(self.test_user_DAO.list, ["Test activity"])
+        self.assertEqual(mock_cursor.execute(), "execute")
+        mock_cursor.execute.assert_called_once()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
