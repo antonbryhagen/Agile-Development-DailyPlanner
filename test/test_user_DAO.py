@@ -75,9 +75,9 @@ class Test_user_DAO(unittest.TestCase):
         mock_cursor.execute.return_value = "execute"
         self.test_user_DAO = user_DAO()
         self.test_user_DAO.cursor = mock_cursor
-        test_activity = Activities("Test activity", "Important", "2", "Test")
+        test_activity = Activities("TestActivity", "Important", "2", "Test")
         self.test_user_DAO.create_activity(test_activity)
-        self.assertEqual(("Test activity", "Important", "2", "Test",), self.test_user_DAO.create_activity_values)
+        self.assertEqual(("TestActivity", "Important", "2", "Test",), self.test_user_DAO.create_activity_values)
         self.assertEqual(mock_cursor.execute(), "execute")
         mock_cursor.execute.assert_called_once()
     
@@ -87,9 +87,9 @@ class Test_user_DAO(unittest.TestCase):
         mock_cursor.execute.return_value = "execute"
         self.test_user_DAO = user_DAO()
         self.test_user_DAO.cursor = mock_cursor
-        test_activity = Activities("Test activity", "Important", "2", "Test")
+        test_activity = Activities("TestActivity", "Important", "2", "Test")
         self.test_user_DAO.delete_activity(test_activity)
-        self.assertEqual(self.test_user_DAO.list, ["Test activity"])
+        self.assertEqual(self.test_user_DAO.list, ["TestActivity"])
         self.assertEqual(mock_cursor.execute(), "execute")
         mock_cursor.execute.assert_called_once()
 
