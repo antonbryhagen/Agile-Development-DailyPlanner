@@ -94,7 +94,7 @@ class Interface:
     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button5.bind("<Button>", self.get_activity_data)
-        self.button4.bind("<Button>", self.get_activity_data_delete)
+        self.button4.bind("<Button>", self.input_activity_delete)
         self.window.mainloop()
 
     #def add_activities_menu(self):
