@@ -72,7 +72,7 @@ class user_DAO:
         activity = activity.Activity
         list = []
         list.append(activity)
-        create_activity_query = (f"DELETE FROM activities WHERE activity = {activity} LIMIT 1;"+" VALUES(%s)")
+        create_activity_query = (f"DELETE FROM activities WHERE activity = {list} LIMIT 1;"+" VALUES(%s)")
         create_activity_values = (list)
         cursor.execute(create_activity_query, create_activity_values)
         self.close()
