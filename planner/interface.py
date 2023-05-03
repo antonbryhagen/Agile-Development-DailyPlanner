@@ -146,8 +146,7 @@ class Interface:
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.activities_object = Activities.Activities(activities_activity, activities_time, self.user_object.name)
-        self.user_DAO_handler.delete_activity(self.activities_object)
-        self.destroy_window()        
+        self.user_DAO_handler.delete_activity(self.activities_object)    
 
 
     def input_activity_delete(self, event):
