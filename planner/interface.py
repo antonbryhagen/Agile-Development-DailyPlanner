@@ -19,8 +19,8 @@ class Interface:
         self.bind_buttons()
 
     def log_in_menu(self, event):
-        header = tk.Label(text="Log in")
-        header.pack()
+        self.header = tk.Label(text="Log in")
+        self.header.pack()
         self.input_menu()
         self.log_in = tk.Button(text="Log In")
         self.log_in.pack()
