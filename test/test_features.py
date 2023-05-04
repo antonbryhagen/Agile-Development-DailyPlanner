@@ -15,6 +15,8 @@ class TestMain(unittest.TestCase):
         """Test for creating a user and use it to login."""
         
         # Create user object as if using register form
+        # TODO Check if the following user exists, if it does, delete it
+        # before creating a new 
         self.user_username = "TestFeatureUser"
         self.user_name = "FeatureUser"
         self.user_password = "FeaturePass"
