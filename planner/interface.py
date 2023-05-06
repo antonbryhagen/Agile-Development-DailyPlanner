@@ -91,8 +91,6 @@ class Interface:
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
         self.bind_buttons2()
-        self.button3.destroy()
-        self.button4.destroy()
         self.welcome_window.mainloop()
 
     def bind_buttons(self):
@@ -103,7 +101,6 @@ class Interface:
     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button4.bind("<Button>", self.input_activity_delete)
-        self.button5.bind("<Button>", self.get_activity_data)
         self.window.mainloop()
 
     # def add_activities_menu(self):
@@ -145,12 +142,9 @@ class Interface:
         self.PRIO = clickedOption
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
-        self.button5.bind(
-            "<Button>", lambda event: self.get_activity_data(event, "Confirm")
-        )
+        self.button5.bind("<Button>", self.get_activity_data)
         self.bind_buttons2()
         label_prio.mainloop()
-        self.destroy_window()
 
     def get_activity_data_delete(self, event):
         activities_activity_delete = self.activity.get()
@@ -171,4 +165,3 @@ class Interface:
         )
         self.bind_buttons2()
         label_activity.mainloop()
-        self.destroy_window()
