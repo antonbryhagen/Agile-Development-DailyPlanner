@@ -73,6 +73,7 @@ class Interface:
             )
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
+                self.window.destroy()
                 self.welcome(self.user_object.name)
 
     def destroy_window(self):
@@ -80,7 +81,7 @@ class Interface:
         self.display_menu()
 
     def welcome(self, name):
-        self.window.destroy()
+        
         self.welcome_window = tk.Tk()
         # name = self.name.get()
 
@@ -122,8 +123,12 @@ class Interface:
             activities_activity, self.PRIO, activities_time, self.user_object.name
         )
         self.user_DAO_handler.create_activity(self.activities_object)
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
 
     def input_activity(self, event):
+        self.button3.destroy()
+        self.button4.destroy()
         label_activity = tk.Label(text="Name of activity:")
         label_activity.pack()
         self.activity = tk.Entry(width=50)
@@ -143,7 +148,6 @@ class Interface:
         self.button5 = tk.Button(text="Confirm")
         self.button5.pack()
         self.button5.bind("<Button>", self.get_activity_data)
-        self.bind_buttons2()
         label_prio.mainloop()
 
     def get_activity_data_delete(self, event):
@@ -152,8 +156,12 @@ class Interface:
             activities_activity_delete, "test", "test1", "test3"
         )
         self.user_DAO_handler.delete_activity(activities_object)
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
 
     def input_activity_delete(self, event):
+        self.button3.destroy()
+        self.button4.destroy()
         label_activity = tk.Label(text="Name of activity:")
         label_activity.pack()
         self.activity = tk.Entry(width=50)
@@ -163,5 +171,4 @@ class Interface:
         self.button6.bind(
             "<Button>", lambda event: self.get_activity_data_delete("Delete")
         )
-        self.bind_buttons2()
         label_activity.mainloop()
