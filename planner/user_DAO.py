@@ -70,6 +70,18 @@ class user_DAO:
         self.cursor.execute(create_activity_query, self.create_activity_values)
         self.close()
         self.cursor.close()
+    
+    def get_activities(self, user):
+        """Get all activities stored for a specific user."""
+        self.connect()
+        cursor = self.connection.cursor()
+        get_activities_query = "SELECT Activity, PRIO, Time FROM activities where username = %s"
+        get_activities_values = (user.username,)
+        cursor.execute(get_activities_query, get_activities_values)
+        actvities_data = cursor.fetchall()
+        self.close()
+        cursor.close()
+        return actvities_data
 
     def delete_activity(self, activity):
         """Delete activity in database using activity object."""
