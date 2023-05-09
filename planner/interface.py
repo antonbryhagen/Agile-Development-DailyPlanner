@@ -120,7 +120,7 @@ class Interface:
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.activities_object = Activities.Activities(
-            activities_activity, self.PRIO, activities_time, self.user_object.name
+            activities_activity, self.PRIO, activities_time, self.user_object.username
         )
         self.user_DAO_handler.create_activity(self.activities_object)
         self.welcome_window.destroy()
