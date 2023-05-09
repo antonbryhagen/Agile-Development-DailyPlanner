@@ -2,12 +2,15 @@ import tkinter as tk
 from planner import user
 from planner import user_DAO
 from planner import Activities
+from planner import schedule_DAO
+from planner import schedule
 from tkinter import *
 
 
 class Interface:
     def __init__(self):
         self.user_DAO_handler = user_DAO.user_DAO()
+        self.schedule_handler = schedule_DAO.Schedule_DAO()
 
     def display_menu(self):
         self.window = tk.Tk()
@@ -73,6 +76,8 @@ class Interface:
             )
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
+                self.schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), 8)
+                self.schedule.generate_schedule()
                 self.window.destroy()
                 self.welcome(self.user_object.name)
 
