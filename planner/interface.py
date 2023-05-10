@@ -14,6 +14,7 @@ class Interface:
 
     def display_menu(self):
         self.window = tk.Tk()
+        self.window.geometry("250x250")
         self.greeting = tk.Label(text="Hello")
         self.greeting.pack()
         self.button1 = tk.Button(text="Log in")
@@ -76,8 +77,6 @@ class Interface:
             )
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
-                self.schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), 8)
-                self.schedule.generate_schedule()
                 self.window.destroy()
                 self.welcome(self.user_object.name)
 
@@ -88,14 +87,15 @@ class Interface:
     def welcome(self, name):
         
         self.welcome_window = tk.Tk()
-        # name = self.name.get()
-
+        self.welcome_window.geometry("250x250")
         self.welcome_text = tk.Label(text="Welcome: " + name)
         self.welcome_text.pack()
         self.button3 = tk.Button(text="Add activities")
         self.button3.pack()
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
+        self.view_schedule_button = tk.Button(text="View schedule")
+        self.view_schedule_button.pack()
         self.bind_buttons2()
         self.welcome_window.mainloop()
 
@@ -107,6 +107,7 @@ class Interface:
     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button4.bind("<Button>", self.input_activity_delete)
+        self.view_schedule_button.bind("<Button>", self.schedule)
         self.window.mainloop()
 
     # def add_activities_menu(self):
@@ -177,3 +178,46 @@ class Interface:
             "<Button>", lambda event: self.get_activity_data_delete("Delete")
         )
         label_activity.mainloop()
+    
+    def schedule(self, event):
+        self.welcome_window.destroy()
+        self.schedule_window = tk.Tk(className="Schedule")
+        self.schedule_window.geometry("1000x500")
+        # TODO
+        # Add GUI option for wake hours
+        back_button = tk.Button(text="Back")
+        back_button.pack()
+        back_button.bind("<Button>", self.go_back_schedule)
+        wake_hours = 8
+        user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
+        user_schedule.generate_schedule()
+        week_days = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ]
+        week_labels = []
+        activity_labels = []
+        for day_index in range(0, 7): 
+            week_labels.append(tk.Label(text=week_days[day_index], font='bold'))
+            week_labels[day_index].place(relx=0.15*day_index, rely=0.05, anchor='nw')
+            # week_labels[day_index].pack(padx=0.15*day_index, pady=0.05)
+            gray_background = False
+            for activity in user_schedule.days[week_days[day_index]]:
+                activity_labels.append(tk.Label(text=activity[0]))
+                activity_labels[-1].place(relx=0.15*day_index, rely=0.15*activity[2], anchor='nw', width=150, height=50)
+                if gray_background:
+                    #activity_labels[-1].config(bg="gray51", fg="white")
+                    gray_background = False
+                elif not gray_background:
+                    gray_background = True
+
+        self.schedule_window.mainloop()
+
+    def go_back_schedule(self, event):
+        self.schedule_window.destroy()
+        self.welcome(self.user_object.name)
