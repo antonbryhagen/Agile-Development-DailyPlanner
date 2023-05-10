@@ -158,6 +158,119 @@ class TestInterface(unittest.TestCase):
         self.interface.destroy_window()
         mock_window.destroy.assert_called_once()
         mock_display_menu.assert_called_once()
+    
+    def test_bind_buttons2(self,):
+        test_object = interface.Interface()
+        mock_button = MagicMock()
+        mock_button.bind.return_value = 'return'
+        test_object.button3 = mock_button
+        test_object.button4 = mock_button
+        mock_self = MagicMock()
+        interface.Interface.bind_buttons2(mock_self)
+        self.assertEqual(test_object.button3.bind.return_value, 'return')
+        self.assertEqual(test_object.button4.bind.return_value, 'return')
+
+
+    @patch("planner.interface.Interface.bind_buttons2")
+    def test_welcome(self, mock_buttons):
+        name = "test"
+        mock_bind_buttons2 = MagicMock()
+        mock_buttons.return_value = mock_bind_buttons2
+        self.interface.welcome(name)
+        mock_buttons.assert_called_once()
+        self.interface.welcome_window.destroy()
+
+    @patch("planner.interface.Interface.welcome")
+    def test_get_activity_data(self, mock_welcome):
+        # create mock objects
+        mock_welcome_method = MagicMock()
+        mock_welcome.return_value = mock_welcome_method
+        event = MagicMock()
+        mock_activities = MagicMock()
+        mock_activities.get.return_value = "Activity 1"
+        mock_time = MagicMock()
+        mock_time.get.return_value = "2"
+        mock_PRIO = MagicMock()
+        mock_PRIO.get.return_value = "Very important"
+        mock_user = MagicMock()
+        mock_user.get.return_value = "test"
+        mock_activities_object = MagicMock()
+        mock_user_DAO_handler = MagicMock()
+        mock_welcome_window = MagicMock()
+
+        # create test_object
+        test_object = interface.Interface()
+        test_object.activity = mock_activities
+        test_object.time = mock_time
+        test_object.PRIO = mock_PRIO
+        test_object.user_object = mock_user
+        test_object.activities_object = mock_activities_object
+        test_object.user_DAO_handler = mock_user_DAO_handler
+        test_object.welcome_window = mock_welcome_window
+
+        test_object.get_activity_data(event)
+
+        # assert that the correct calls were made
+        mock_activities.get.assert_called_once()
+        mock_time.get.assert_called_once()
+        mock_welcome_window.destroy.assert_called_once()
+        test_object.welcome.assert_called_once_with(test_object.user_object.name)
+
+    @patch('tkinter.Label')
+    @patch('tkinter.Button')
+    @patch('tkinter.Entry')
+    @patch("planner.interface.Interface.get_activity_data")
+    def test_input_activity(self, mock_get_activity_data, mock_entry, mock_button, mock_label):
+        mock_event = MagicMock()
+        mock_button3 = MagicMock()
+        mock_button4 = MagicMock()
+        mock_get_data = MagicMock()
+        mock_get_activity_data = mock_get_data
+        test_object = interface.Interface()
+        test_object.button3 = mock_button3
+        test_object.button4 = mock_button4
+        test_object.get_activity_data = mock_get_activity_data
+        test_object.input_activity(mock_event)
+        mock_button.assert_called_once()
+        mock_entry.assert_any_call(width=50)
+        mock_entry.return_value.pack.assert_any_call()
+        mock_label.assert_called_with(text='Priority:')
+
+    @patch('planner.interface.Interface.welcome')
+    def test_get_activity_data_delete(self, mock_welcome):
+        mock_activity = MagicMock()
+        mock_activity.get.return_value = 'test'
+        mock_dao_handler = MagicMock()
+        mock_window = MagicMock()
+        mock_welcome_method = MagicMock()
+        mock_welcome.return_value = mock_welcome_method
+        mock_event = MagicMock()
+        mock_user = MagicMock()
+        mock_name = 'name'
+        test_object = interface.Interface()
+        test_object.activity = mock_activity
+        test_object.user_DAO_handler = mock_dao_handler
+        test_object.welcome_window = mock_window
+        test_object.user_object = mock_user
+        test_object.user_object.name = mock_name
+        test_object.get_activity_data_delete(mock_event)
+        mock_activity.get.assert_called_once()
+        mock_window.destroy.assert_called_once()
+        test_object.welcome.assert_called_once_with(test_object.user_object.name)
+
+    @patch('tkinter.Label')
+    @patch('tkinter.Entry')
+    @patch('tkinter.Button')
+    def test_input_activity_delete(self, mock_button, mock_entry, mock_label):
+        mock_buttons = MagicMock()
+        mock_event = MagicMock()
+        test_object = interface.Interface()
+        test_object.button3 = mock_buttons
+        test_object.button4 = mock_buttons
+        test_object.input_activity_delete(mock_event)
+        mock_button.assert_called_with(text='Delete')
+        mock_entry.assert_called_with(width=50)
+        mock_label.assert_called_with(text='Name of activity:')
 
     def tearDown(self):
         self.interface = None
