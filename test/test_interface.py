@@ -204,6 +204,28 @@ class TestInterface(unittest.TestCase):
         mock_welcome_window.destroy.assert_called_once()
         test_object.welcome.assert_called_once_with(test_object.user_object.name)
 
+    @patch('tkinter.Label')
+    @patch('tkinter.Button')
+    @patch('tkinter.Entry')
+    @patch("planner.interface.Interface.get_activity_data")
+    def test_input_activity(self, mock_get_activity_data, mock_entry, mock_button, mock_label):
+        mock_event = MagicMock()
+        mock_button3 = MagicMock()
+        mock_button4 = MagicMock()
+        mock_get_data = MagicMock()
+        mock_get_activity_data = mock_get_data
+        test_object = interface.Interface()
+        test_object.button3 = mock_button3
+        test_object.button4 = mock_button4
+        test_object.get_activity_data = mock_get_activity_data
+        test_object.input_activity(mock_event)
+        mock_button.assert_called_once()
+        mock_entry.assert_any_call(width=50)
+        mock_entry.return_value.pack.assert_any_call()
+        mock_label.asser_called_with(text='Name of activity:')
+        mock_label.asser_called_with(text='Hours of work:')
+        mock_label.asser_called_with(text='Priority:')
+
     def tearDown(self):
         self.interface = None
 
