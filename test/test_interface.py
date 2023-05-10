@@ -158,6 +158,51 @@ class TestInterface(unittest.TestCase):
         self.interface.destroy_window()
         mock_window.destroy.assert_called_once()
         mock_display_menu.assert_called_once()
+    
+    @patch("planner.interface.Interface.bind_buttons2")
+    def test_welcome(self, mock_buttons):
+        name = "test"
+        mock_bind_buttons2 = MagicMock()
+        mock_buttons.return_value = mock_bind_buttons2
+        self.interface.welcome(name)
+        mock_buttons.assert_called_once()
+        self.interface.welcome_window.destroy()
+
+    @patch("planner.interface.Interface.welcome")
+    def test_get_activity_data(self, mock_welcome):
+        # create mock objects
+        mock_welcome_method = MagicMock()
+        mock_welcome.return_value = mock_welcome_method
+        event = MagicMock()
+        mock_activities = MagicMock()
+        mock_activities.get.return_value = "Activity 1"
+        mock_time = MagicMock()
+        mock_time.get.return_value = "2"
+        mock_PRIO = MagicMock()
+        mock_PRIO.get.return_value = "Very important"
+        mock_user = MagicMock()
+        mock_user.get.return_value = "test"
+        mock_activities_object = MagicMock()
+        mock_user_DAO_handler = MagicMock()
+        mock_welcome_window = MagicMock()
+
+        # create test_object
+        test_object = interface.Interface()
+        test_object.activity = mock_activities
+        test_object.time = mock_time
+        test_object.PRIO = mock_PRIO
+        test_object.user_object = mock_user
+        test_object.activities_object = mock_activities_object
+        test_object.user_DAO_handler = mock_user_DAO_handler
+        test_object.welcome_window = mock_welcome_window
+
+        test_object.get_activity_data(event)
+
+        # assert that the correct calls were made
+        mock_activities.get.assert_called_once()
+        mock_time.get.assert_called_once()
+        mock_welcome_window.destroy.assert_called_once()
+        test_object.welcome.assert_called_once_with(test_object.user_object.name)
 
     def tearDown(self):
         self.interface = None

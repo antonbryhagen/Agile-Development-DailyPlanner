@@ -73,7 +73,11 @@ class Interface:
             )
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
-                self.window.destroy()
+                try:
+                    if self.window.state() == 'normal':
+                        self.window.destroy()
+                except:
+                    print("Tested")
                 self.welcome(self.user_object.name)
 
     def destroy_window(self):
@@ -92,7 +96,6 @@ class Interface:
         self.button4 = tk.Button(text="Remove activities")
         self.button4.pack()
         self.bind_buttons2()
-        self.welcome_window.mainloop()
 
     def bind_buttons(self):
         self.button1.bind("<Button>", self.log_in_menu)
