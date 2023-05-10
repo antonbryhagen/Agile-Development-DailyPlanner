@@ -234,9 +234,7 @@ class TestInterface(unittest.TestCase):
         mock_button.assert_called_once()
         mock_entry.assert_any_call(width=50)
         mock_entry.return_value.pack.assert_any_call()
-        mock_label.asser_called_with(text='Name of activity:')
-        mock_label.asser_called_with(text='Hours of work:')
-        mock_label.asser_called_with(text='Priority:')
+        mock_label.assert_called_with(text='Priority:')
 
     @patch('planner.interface.Interface.welcome')
     def test_get_activity_data_delete(self, mock_welcome):
@@ -260,6 +258,19 @@ class TestInterface(unittest.TestCase):
         mock_window.destroy.assert_called_once()
         test_object.welcome.assert_called_once_with(test_object.user_object.name)
 
+    @patch('tkinter.Label')
+    @patch('tkinter.Entry')
+    @patch('tkinter.Button')
+    def test_input_activity_delete(self, mock_button, mock_entry, mock_label):
+        mock_buttons = MagicMock()
+        mock_event = MagicMock()
+        test_object = interface.Interface()
+        test_object.button3 = mock_buttons
+        test_object.button4 = mock_buttons
+        test_object.input_activity_delete(mock_event)
+        mock_button.assert_called_with(text='Delete')
+        mock_entry.assert_called_with(width=50)
+        mock_label.assert_called_with(text='Name of activity:')
 
     def tearDown(self):
         self.interface = None
