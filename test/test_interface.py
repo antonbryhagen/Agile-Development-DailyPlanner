@@ -159,6 +159,18 @@ class TestInterface(unittest.TestCase):
         mock_window.destroy.assert_called_once()
         mock_display_menu.assert_called_once()
     
+    def test_bind_buttons2(self,):
+        test_object = interface.Interface()
+        mock_button = MagicMock()
+        mock_button.bind.return_value = 'return'
+        test_object.button3 = mock_button
+        test_object.button4 = mock_button
+        mock_self = MagicMock()
+        interface.Interface.bind_buttons2(mock_self)
+        self.assertEqual(test_object.button3.bind.return_value, 'return')
+        self.assertEqual(test_object.button4.bind.return_value, 'return')
+
+
     @patch("planner.interface.Interface.bind_buttons2")
     def test_welcome(self, mock_buttons):
         name = "test"
