@@ -136,6 +136,7 @@ class Interface:
     def input_activity(self, event):
         self.button3.destroy()
         self.button4.destroy()
+        self.view_schedule_button.destroy()
         label_activity = tk.Label(text="Name of activity:")
         label_activity.pack()
         self.activity = tk.Entry(width=50)
@@ -169,6 +170,7 @@ class Interface:
     def input_activity_delete(self, event):
         self.button3.destroy()
         self.button4.destroy()
+        self.view_schedule_button.destroy()
         label_activity = tk.Label(text="Choose an activity to delete:")
         label_activity.pack()
         dropdown = tk.Label()
