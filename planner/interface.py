@@ -242,14 +242,14 @@ class Interface:
         activity_labels = []
         for day_index in range(0, 7): 
             week_labels.append(tk.Label(text=week_days[day_index], font='bold'))
-            week_labels[day_index].place(relx=0.15*day_index, rely=0.05, anchor='nw')
+            week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor='nw')
             gray_background = False
-            start_rely = 75/int(schedule_height) # 0.15 with height 500, good starting point in y direction
-            activity_width = 150 # width of activity in schedule in px
+            start_rely = 75/int(schedule_height) # 0.1 with height 500, good starting point in y direction
+            activity_width = 120 # width of activity in schedule in px
             activity_height = 25 # height of activity in schedule in px for one hour
             for activity in user_schedule.days[week_days[day_index]]:
                 activity_labels.append(tk.Label(text=activity[0]))
-                activity_labels[-1].place(relx=0.15*day_index, rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
+                activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
                 start_rely += activity_height*activity[2]/int(schedule_height)
                 if gray_background:
                     activity_labels[-1].config(bg="gray51", fg="white", borderwidth=1, relief="solid")
