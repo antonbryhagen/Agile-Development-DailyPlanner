@@ -1,4 +1,5 @@
 import tkinter as tk
+import re
 from planner import user
 from planner import user_DAO
 from planner import Activities
@@ -157,21 +158,33 @@ class Interface:
         label_prio.mainloop()
 
     def get_activity_data_delete(self, event):
-        activities_activity_delete = self.activity.get()
+        activities_activity_delete = self.clicked.get()
+        partitioned_string_activity = activities_activity_delete.partition(" ")
         activities_object = Activities.Activities(
-            activities_activity_delete, "test", "test1", "test3"
+            partitioned_string_activity[0], "test", "test1", "test3"
         )
-        self.user_DAO_handler.delete_activity(activities_object)
+        self.user_DAO_handler.delete_activity(activities_object, self.user_object)
         self.welcome_window.destroy()
         self.welcome(self.user_object.name)
 
     def input_activity_delete(self, event):
         self.button3.destroy()
         self.button4.destroy()
-        label_activity = tk.Label(text="Name of activity:")
+        label_activity = tk.Label(text="Choose an activity to delete:")
         label_activity.pack()
-        self.activity = tk.Entry(width=50)
-        self.activity.pack()
+        dropdown = tk.Label()
+        dropdown.pack()
+        activity_tuple_list = self.user_DAO_handler.get_activities(self.user_object)
+        activity_str_list = []
+        
+        for activity in activity_tuple_list:
+            activity_string = activity[0] + " | " + activity[1] + " | " + str(activity[2]) + "hour(s)"
+            activity_str_list.append(activity_string)
+
+        self.clicked = StringVar(dropdown)
+        self.clicked.set("Click to see your activities")
+        drop = OptionMenu(dropdown, self.clicked, *activity_str_list)
+        drop.pack()
         self.button6 = tk.Button(text="Delete")
         self.button6.pack()
         self.button6.bind(
