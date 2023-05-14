@@ -190,8 +190,8 @@ class TestInterface(unittest.TestCase):
         mock_activities.get.return_value = "Activity 1"
         mock_time = MagicMock()
         mock_time.get.return_value = "2"
-        mock_PRIO = MagicMock()
-        mock_PRIO.get.return_value = "Very important"
+        mock_clicked = MagicMock()
+        mock_clicked.get.return_value = "Vary important"
         mock_user = MagicMock()
         mock_user.get.return_value = "test"
         mock_activities_object = MagicMock()
@@ -202,7 +202,7 @@ class TestInterface(unittest.TestCase):
         test_object = interface.Interface()
         test_object.activity = mock_activities
         test_object.time = mock_time
-        test_object.PRIO = mock_PRIO
+        test_object.clicked = mock_clicked
         test_object.user_object = mock_user
         test_object.activities_object = mock_activities_object
         test_object.user_DAO_handler = mock_user_DAO_handler
