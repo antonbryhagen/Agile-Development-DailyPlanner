@@ -30,4 +30,4 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS users (username VARCHAR(255) PRIMARY KEY, name VARCHAR(255), password VARCHAR(255))")
 cursor.execute("CREATE TABLE IF NOT EXISTS activities (idActivity INT PRIMARY KEY NOT NULL AUTO_INCREMENT,PRIO VARCHAR(255), Activity VARCHAR(255), Time INT, username VARCHAR(255) REFERENCES users(username))")
-cursor.execute("CREATE TABLE IF NOT EXISTS schedules ()")
+cursor.execute("CREATE TABLE IF NOT EXISTS schedules (scheduleID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, username VARCHAR(255) REFERENCES users(username), idActivity INT REFERENCES activities(idActivity))")

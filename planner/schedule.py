@@ -26,6 +26,7 @@ class Schedule:
         }
     
     def sort_activities(self):
+        """Sort the activties depending on priority and shuffle the order within each priority."""
         sorted_activities = []
         
         importance_levels = {
@@ -41,12 +42,12 @@ class Schedule:
         random.shuffle(importance_levels["Not so important"])
         
         sorted_activities = importance_levels["Very important"] + importance_levels["Important"] + importance_levels["Not so important"]
-        return sorted_activities
+        self.activities = sorted_activities
 
 
-    def generate_schedule(self): # Activity, PRIO, Time
-        sorted_activities = self.sort_activities()
-        for activity in sorted_activities:
+    def generate_schedule(self): 
+        """Generate the schedule from sorted activties."""
+        for activity in self.activities:
             planned = False
             for day in self.days:
                 if not planned:
@@ -55,12 +56,10 @@ class Schedule:
                         self.time_per_day[day] -= activity[2]
                         planned = True
         planned_activites = 0
-        activites = len(sorted_activities)
+        activites = len(self.activities)
         for day in self.days:
             planned_activites += len(self.days[day])
         if planned_activites < activites:
             print("Some activities were not planned since there is not enough time for them.")
-        for x in self.days:
-            print(self.days[x])
 
     

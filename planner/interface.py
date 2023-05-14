@@ -180,16 +180,55 @@ class Interface:
         label_activity.mainloop()
     
     def schedule(self, event):
-        self.welcome_window.destroy()
+        #print(self.welcome_window.winfo_exists)
+        if (event is not True):
+            self.welcome_window.destroy()
         self.schedule_window = tk.Tk(className="Schedule")
-        self.schedule_window.geometry("1000x500")
+        schedule_width = "1000"
+        schedule_height = "500"
+        self.schedule_window.geometry(schedule_width+"x"+schedule_height)
         # TODO
         # Add GUI option for wake hours
         back_button = tk.Button(text="Back")
-        back_button.pack()
+        back_button.place(relx=0.95, rely=0, anchor='ne')
         back_button.bind("<Button>", self.go_back_schedule)
+        generate_schedule_button = tk.Button(text="Generate a new schedule")
+        generate_schedule_button.place(relx=0.9, rely=0, anchor='ne')
+        generate_schedule_button.bind("<Button>", self.generate_new_schedule)
         wake_hours = 8
         user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
+        stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
+        if stored_schedule == []:
+            user_schedule.sort_activities()
+            self.schedule_handler.create_schedule(user_schedule.activities, self.user_object.username)
+        else:
+            # Reset user_schedule dictionaries before loading stored schedule
+            user_schedule.time_per_day = {
+            "Monday" : user_schedule.wake_hours,
+            "Tuesday" : user_schedule.wake_hours,
+            "Wednesday" : user_schedule.wake_hours,
+            "Thursday" : user_schedule.wake_hours,
+            "Friday" : user_schedule.wake_hours,
+            "Saturday" : user_schedule.wake_hours,
+            "Sunday" : user_schedule.wake_hours
+            }
+            user_schedule.days = {
+            "Monday" : [],
+            "Tuesday" : [],
+            "Wednesday" : [],
+            "Thursday" : [],
+            "Friday" : [],
+            "Saturday" : [],
+            "Sunday" : []
+            }
+            sorted(stored_schedule, key=lambda scheduled_activity: scheduled_activity[2])
+            temp_activties = []
+            for scheduled_activity in stored_schedule:
+                for act in user_schedule.activities:
+                    if scheduled_activity[1] == act[3]:
+                        temp_activties.append(act)
+                        
+            user_schedule.activities = temp_activties
         user_schedule.generate_schedule()
         week_days = [
             "Monday",
@@ -205,15 +244,19 @@ class Interface:
         for day_index in range(0, 7): 
             week_labels.append(tk.Label(text=week_days[day_index], font='bold'))
             week_labels[day_index].place(relx=0.15*day_index, rely=0.05, anchor='nw')
-            # week_labels[day_index].pack(padx=0.15*day_index, pady=0.05)
             gray_background = False
+            start_rely = 75/int(schedule_height) # 0.15 with height 500, good starting point in y direction
+            activity_width = 150 # width of activity in schedule in px
+            activity_height = 25 # height of activity in schedule in px for one hour
             for activity in user_schedule.days[week_days[day_index]]:
                 activity_labels.append(tk.Label(text=activity[0]))
-                activity_labels[-1].place(relx=0.15*day_index, rely=0.15*activity[2], anchor='nw', width=150, height=50)
+                activity_labels[-1].place(relx=0.15*day_index, rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
+                start_rely += activity_height*activity[2]/int(schedule_height)
                 if gray_background:
-                    #activity_labels[-1].config(bg="gray51", fg="white")
+                    activity_labels[-1].config(bg="gray51", fg="white", borderwidth=1, relief="solid")
                     gray_background = False
                 elif not gray_background:
+                    activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
 
         self.schedule_window.mainloop()
@@ -221,3 +264,9 @@ class Interface:
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
         self.welcome(self.user_object.name)
+    
+    def generate_new_schedule(self, event):
+        self.schedule_window.destroy()
+        generate_schedule = True
+        self.schedule_handler.delete_schedule(self.user_object.username)
+        self.schedule(generate_schedule)
