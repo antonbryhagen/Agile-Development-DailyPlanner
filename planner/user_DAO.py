@@ -75,7 +75,7 @@ class user_DAO:
         """Get all activities stored for a specific user."""
         self.connect()
         cursor = self.connection.cursor()
-        get_activities_query = "SELECT Activity, PRIO, Time FROM activities where username = %s"
+        get_activities_query = "SELECT Activity, PRIO, Time, idActivity FROM activities where username = %s"
         get_activities_values = (user.username,)
         cursor.execute(get_activities_query, get_activities_values)
         actvities_data = cursor.fetchall()
