@@ -186,15 +186,17 @@ class Interface:
         schedule_width = "1000"
         schedule_height = "500"
         self.schedule_window.geometry(schedule_width+"x"+schedule_height)
-        # TODO
-        # Add GUI option for wake hours
         back_button = tk.Button(text="Back")
         back_button.place(relx=0.95, rely=0, anchor='ne')
         back_button.bind("<Button>", self.go_back_schedule)
         generate_schedule_button = tk.Button(text="Generate a new schedule")
         generate_schedule_button.place(relx=0.9, rely=0, anchor='ne')
         generate_schedule_button.bind("<Button>", self.generate_new_schedule)
-        wake_hours = 8
+        # TODO
+        # Add GUI option for wake hours
+        start_day_time = 8
+        end_day_time = 16
+        wake_hours = end_day_time - start_day_time
         user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
         if stored_schedule == []:
@@ -240,13 +242,22 @@ class Interface:
         ]
         week_labels = []
         activity_labels = []
+        hour_labels = []
+        hours_head = tk.Label(text="Time", font='bold')
+        hours_head.place(relx=0, rely=0.05)
+        for hour in range(0, wake_hours+1):
+            hour_labels.append(tk.Label(text=start_day_time+hour))
+            hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)), anchor='nw', width=120, height=40)
+            hour_labels[-1].config(borderwidth=1, relief="solid")
+        for label in hour_labels:
+            label.config(anchor='n')
         for day_index in range(0, 7): 
             week_labels.append(tk.Label(text=week_days[day_index], font='bold'))
             week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor='nw')
             gray_background = False
-            start_rely = 75/int(schedule_height) # 0.1 with height 500, good starting point in y direction
+            start_rely = 75/int(schedule_height) # 0.15 with height 500, good starting point in y direction
             activity_width = 120 # width of activity in schedule in px
-            activity_height = 25 # height of activity in schedule in px for one hour
+            activity_height = 40 # height of activity in schedule in px for one hour
             for activity in user_schedule.days[week_days[day_index]]:
                 activity_labels.append(tk.Label(text=activity[0]))
                 activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
