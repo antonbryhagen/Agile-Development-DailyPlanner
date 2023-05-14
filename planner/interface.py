@@ -77,7 +77,11 @@ class Interface:
             )
             if result != False:
                 self.user_object = user.User(result[0], result[1], "")
-                self.window.destroy()
+                try:
+                    if self.window.state() == 'normal':
+                        self.window.destroy()
+                except:
+                    print("Tested")
                 self.welcome(self.user_object.name)
 
     def destroy_window(self):
