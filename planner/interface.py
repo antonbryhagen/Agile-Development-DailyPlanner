@@ -180,7 +180,6 @@ class Interface:
         label_activity.mainloop()
     
     def schedule(self, event):
-        #print(self.welcome_window.winfo_exists)
         if (event is not True):
             self.welcome_window.destroy()
         self.schedule_window = tk.Tk(className="Schedule")
