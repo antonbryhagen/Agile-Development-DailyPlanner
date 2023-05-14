@@ -17,8 +17,8 @@ class TestSchedule(unittest.TestCase):
     def test_sort_activities(self):
         mock_activities = MagicMock()
         test_object = schedule.Schedule(mock_activities, '10')
-        sorted_activities = test_object.sort_activities()
-        self.assertIsInstance(sorted_activities, list)
+        test_object.sort_activities()
+        self.assertIsInstance(test_object.activities, list)
 
     @patch('planner.schedule.Schedule.sort_activities')
     def test_generate_schedule(self, mock_sort):
