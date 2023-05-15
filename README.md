@@ -86,6 +86,8 @@ The path used here is the path to the root project folder on your machine
 export PYTHONPATH="C:/ExampleUser/Development/Agile-Development-DailyPlanner"
 ```
 
+The application also needs a MySQL database in order to work. If it is your first time running the application, please checkout db/SETUP.md to install and setup the database correctly.
+
 The application can be started like this.
 
 ```
