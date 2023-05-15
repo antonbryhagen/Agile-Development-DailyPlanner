@@ -20,13 +20,13 @@ class TestMain(unittest.TestCase):
         
         self.user_DAO_handler = user_DAO.user_DAO()
         
-        self.user_object = MagicMock()
+        self.user_object = user.User('test', 'test', 'test')
         
         self.activities_object = Activities.Activities(
             'test', 'Very Important', '10', 'test'
         )
         self.user_DAO_handler.create_activity(self.activities_object)
-        self.user_DAO_handler.delete_activity(self.activities_object)
+        self.user_DAO_handler.delete_activity(self.activities_object, self.user_object)
 
         
         # Test log in using above user as if using login form
