@@ -118,7 +118,7 @@ Read more on:
 
 
 Before running tests, make sure you export your PYTHONPATH.
-The path is the to the root project folder on your machine
+The path used here is the path to the root project folder on your machine
 ```
 # Export PYTHONPATH (using example path)
 export PYTHONPATH="C:/ExampleUser/Development/Agile-Development-DailyPlanner"
