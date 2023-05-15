@@ -117,7 +117,7 @@ Read more on:
 ### Run the unittests
 
 
-Before running tests, make sure you export your PYTHONPATH
+Before running tests, make sure you export your PYTHONPATH.
 The path is the to the root project folder on your machine
 ```
 # Export PYTHONPATH (using example path)
