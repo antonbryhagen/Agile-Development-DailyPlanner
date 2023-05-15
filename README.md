@@ -5,7 +5,8 @@ DailyPlanner
 [![Documentation Status](https://readthedocs.org/projects/a-python-project-template-codestyle-and-linters-included/badge/?version=latest)](https://a-python-project-template-codestyle-and-linters-included.readthedocs.io/en/latest/?badge=latest)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-A template for a Python development project.
+DailyPlanner is an automatic scheduling application. Using user created activties the application creates a schedule based on the users
+needs. 
 
 [[_TOC_]]
 
@@ -80,7 +81,7 @@ Read more on [Python PIP](https://pypi.org/project/pip/).
 
 ### Run the code
 
-The example program can be started like this.
+The application can be started like this.
 
 ```
 # Execute the main program
@@ -115,6 +116,13 @@ Read more on:
 
 ### Run the unittests
 
+
+Before running tests, make sure you export your PYTHONPATH
+The path is the to the root project folder on your machine
+```
+# Export PYTHONPATH (using example path)
+export PYTHONPATH="C:/ExampleUser/Development/Agile-Development-DailyPlanner"
+```
 You can run the unittests like this. The testfiles are stored in the `test/` directory.
 
 ```
