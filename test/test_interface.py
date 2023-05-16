@@ -65,6 +65,9 @@ class TestInterface(unittest.TestCase):
             [
                 call.Label(text="Register new user"),
                 call.Label().pack(),
+                call.Button(text='Back'),
+                call.Button().pack(),
+                call.Button().bind("<Button>", self.interface.return_to_main_page),
                 call.Label(text="Name:"),
                 call.Label().pack(),
                 call.Entry(width=50),
@@ -233,7 +236,7 @@ class TestInterface(unittest.TestCase):
         test_object.view_schedule_button = mock_schedule_button
         test_object.get_activity_data = mock_get_activity_data
         test_object.input_activity(mock_event)
-        mock_button.assert_called_once()
+        mock_button.assert_any_call(text='Back')
         mock_entry.assert_any_call(width=50)
         mock_entry.return_value.pack.assert_any_call()
         mock_label.assert_called_with(text='Priority:')
