@@ -7,7 +7,6 @@ from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
 from win10toast import ToastNotifier
-import schedule
 
 
 class Interface:
@@ -147,9 +146,6 @@ class Interface:
         if activities_activity == '' or activities_time == '':
             self.empty_field = tk.Label(text="One or more field(s) are left empty")
             self.empty_field.pack()
-        elif " " in activities_activity:
-            self.empty_field = tk.Label(text="No space allowed")
-            self.empty_field.pack()
         else: 
             self.user_DAO_handler.create_activity(self.activities_object)
             self.welcome_window.destroy()
@@ -181,7 +177,7 @@ class Interface:
 
     def get_activity_data_delete(self, event):
         activities_activity_delete = self.clicked.get()
-        partitioned_string_activity = activities_activity_delete.partition(" ")
+        partitioned_string_activity = activities_activity_delete.partition(" |")
         activities_object = Activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
