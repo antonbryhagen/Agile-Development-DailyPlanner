@@ -27,6 +27,9 @@ class Interface:
     def log_in_menu(self, event):
         self.header = tk.Label(text="Log in")
         self.header.pack()
+        self.back_button = tk.Button(text='Back')
+        self.back_button.pack()
+        self.back_button.bind("<Button>", self.return_to_main_page)
         self.input_menu()
         self.log_in = tk.Button(text="Log In")
         self.log_in.pack()
@@ -37,6 +40,9 @@ class Interface:
     def register_user_menu(self, event):
         self.header = tk.Label(text="Register new user")
         self.header.pack()
+        self.back_button = tk.Button(text='Back')
+        self.back_button.pack()
+        self.back_button.bind("<Button>", self.return_to_main_page)
         self.input_menu()
         self.label_name = tk.Label(text="Name:")
         self.label_name.pack()
@@ -84,6 +90,11 @@ class Interface:
                 except:
                     print("Tested")
                 self.welcome(self.user_object.name)
+    
+    def return_to_main_page(self, event):
+        self.window.destroy()
+        self.display_menu()
+
 
     def destroy_window(self):
         self.window.destroy()
@@ -141,6 +152,9 @@ class Interface:
         self.button3.destroy()
         self.button4.destroy()
         self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text='Back')
+        self.return_button.pack()
+        self.return_button.bind("<Button>", self.return_to_welcome)
         label_activity = tk.Label(text="Name of activity:")
         label_activity.pack()
         self.activity = tk.Entry(width=50)
@@ -175,6 +189,9 @@ class Interface:
         self.button3.destroy()
         self.button4.destroy()
         self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text='Back')
+        self.return_button.pack()
+        self.return_button.bind("<Button>", self.return_to_welcome)
         label_activity = tk.Label(text="Choose an activity to delete:")
         label_activity.pack()
         dropdown = tk.Label()
@@ -196,6 +213,10 @@ class Interface:
             "<Button>", lambda event: self.get_activity_data_delete("Delete")
         )
         label_activity.mainloop()
+    
+    def return_to_welcome(self, event):
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
     
     def schedule(self, event):
         if (event is not True):
