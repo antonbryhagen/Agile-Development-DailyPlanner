@@ -61,5 +61,5 @@ class Schedule:
             planned_activites += len(self.days[day])
         if planned_activites < activites:
             print("Some activities were not planned since there is not enough time for them.")
-
-    
+                        
+            

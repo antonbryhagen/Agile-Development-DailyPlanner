@@ -6,6 +6,8 @@ from planner import Activities
 from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
+from win10toast import ToastNotifier
+import schedule
 
 
 class Interface:
@@ -69,8 +71,14 @@ class Interface:
             self.user_object = user.User(
                 self.user_username, self.user_name, self.user_password
             )
-            self.user_DAO_handler.create_user(self.user_object)
-            self.destroy_window()
+            if self.user_username == '' or self.user_password == '' or self.user_name == '':
+                self.empty_field = tk.Label(text="One or more field(s) are left empty")
+                self.empty_field.pack()
+            else:
+                self.user_DAO_handler.create_user(self.user_object)
+                self.destroy_window()
+
+
 
         elif action_type == "login":
             result = self.user_DAO_handler.get_user_by_username(
@@ -84,6 +92,9 @@ class Interface:
                 except:
                     print("Tested")
                 self.welcome(self.user_object.name)
+            else:
+                self.invalid_login = tk.Label(text="Invalid login information")
+                self.invalid_login.pack()
 
     def destroy_window(self):
         self.window.destroy()
@@ -133,9 +144,16 @@ class Interface:
         self.activities_object = Activities.Activities(
             activities_activity, self.PRIO, activities_time, self.user_object.username
         )
-        self.user_DAO_handler.create_activity(self.activities_object)
-        self.welcome_window.destroy()
-        self.welcome(self.user_object.name)
+        if activities_activity == '' or activities_time == '':
+            self.empty_field = tk.Label(text="One or more field(s) are left empty")
+            self.empty_field.pack()
+        elif " " in activities_activity:
+            self.empty_field = tk.Label(text="No space allowed")
+            self.empty_field.pack()
+        else: 
+            self.user_DAO_handler.create_activity(self.activities_object)
+            self.welcome_window.destroy()
+            self.welcome(self.user_object.name)
 
     def input_activity(self, event):
         self.button3.destroy()
@@ -288,6 +306,14 @@ class Interface:
                     gray_background = True
 
         self.schedule_window.mainloop()
+    
+    # def display_notification():
+    #     toaster = ToastNotifier()
+    #     toaster.show_toast("Notification", "Time for " + , duration=10)
+
+    # def check_schedule():
+    #     schedule.run_pending()
+    #     self.schedule_window.after(1000, check_schedule)
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
