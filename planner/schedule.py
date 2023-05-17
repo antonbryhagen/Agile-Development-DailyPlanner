@@ -45,8 +45,16 @@ class Schedule:
         self.activities = sorted_activities
 
 
-    def generate_schedule(self): 
+    def generate_schedule(self, start_time, lunchtime): 
         """Generate the schedule from sorted activties."""
+        planned_days = {
+            "Monday" : False,
+            "Tuesday" : False,
+            "Wednesday" : False,
+            "Thursday" : False,
+            "Friday" : False,
+            "Saturday" : False,
+            "Sunday" : False}
         for activity in self.activities:
             planned = False
             for day in self.days:
@@ -55,6 +63,10 @@ class Schedule:
                         self.days[day].append(activity)
                         self.time_per_day[day] -= activity[2]
                         planned = True
+                        if planned_days[day] == False and start_time + self.wake_hours - self.time_per_day[day] > 12:
+                            self.time_per_day[day] -= lunchtime
+                            self.days[day].append(('Lunch','Very important',lunchtime,'',)) 
+                            planned_days[day] = True
         planned_activites = 0
         activites = len(self.activities)
         for day in self.days:

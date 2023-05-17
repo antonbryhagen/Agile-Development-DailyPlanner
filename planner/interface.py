@@ -111,7 +111,7 @@ class Interface:
     def bind_buttons2(self):
         self.button3.bind("<Button>", self.input_activity)
         self.button4.bind("<Button>", self.input_activity_delete)
-        self.view_schedule_button.bind("<Button>", self.schedule)
+        self.view_schedule_button.bind("<Button>", self.schedule_options)
         self.window.mainloop()
 
     # def add_activities_menu(self):
@@ -197,9 +197,46 @@ class Interface:
         )
         label_activity.mainloop()
     
-    def schedule(self, event):
-        if (event is not True):
-            self.welcome_window.destroy()
+    def schedule_options(self, event):
+        self.welcome_window.destroy()
+        self.option_window = tk.Tk()
+        self.start_time_label = tk.Label(text='When to start the day:')
+        self.start_time_label.pack()
+        self.start_time = tk.Entry(width=50)
+        self.start_time.pack()
+        self.end_time_label = tk.Label(text='When to end the day:')
+        self.end_time_label.pack()
+        self.end_time = tk.Entry(width=50)
+        self.end_time.pack()
+        self.lunch_time_label = tk.Label(text='How long is lunch')
+        self.lunch_time_label.pack()
+        self.lunch_time = tk.Entry(width=50)
+        self.lunch_time.pack()
+        self.confirm_button = tk.Button(text='Confirm')
+        self.confirm_button.pack()
+        self.confirm_button.bind('<Button>', self.check_options)
+        self.option_window.mainloop()
+    
+    def check_options(self, event):
+        try:
+            self.start = self.start_time.get()
+            self.end = self.end_time.get()
+            self.lunch_hours = self.lunch_time.get()
+            if int(self.start) > int(self.end) or int(self.lunch_hours) < 0:
+                self.option_window.destroy()
+                self.welcome(self.user_object.name)
+            else:
+                self.option_window.destroy()
+                self.schedule()
+        except:
+            self.option_window.destroy()
+            self.welcome(self.user_object.name)
+    
+    def reset_schedule(self, event):
+        self.schedule_window.destroy()
+        self.schedule()
+    
+    def schedule(self):
         self.schedule_window = tk.Tk(className="Schedule")
         schedule_width = "1000"
         schedule_height = "500"
@@ -209,11 +246,11 @@ class Interface:
         back_button.bind("<Button>", self.go_back_schedule)
         generate_schedule_button = tk.Button(text="Generate a new schedule")
         generate_schedule_button.place(relx=0.9, rely=0, anchor='ne')
-        generate_schedule_button.bind("<Button>", self.generate_new_schedule)
+        generate_schedule_button.bind("<Button>", self.reset_schedule)
         # TODO
         # Add GUI option for wake hours
-        start_day_time = 8
-        end_day_time = 16
+        start_day_time = int(self.start)
+        end_day_time = int(self.end)
         wake_hours = end_day_time - start_day_time
         user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
@@ -248,7 +285,7 @@ class Interface:
                         temp_activties.append(act)
                         
             user_schedule.activities = temp_activties
-        user_schedule.generate_schedule()
+        user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
         week_days = [
             "Monday",
             "Tuesday",

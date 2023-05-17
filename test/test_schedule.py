@@ -25,7 +25,7 @@ class TestSchedule(unittest.TestCase):
         mock_sort.return_value = MagicMock()
         mock_activities = MagicMock()
         test_object = schedule.Schedule(mock_activities, '10')
-        test_object.generate_schedule()
+        test_object.generate_schedule(1, 1)
         self.assertIsInstance(test_object.days, dict)
 
 
