@@ -258,9 +258,7 @@ class Interface:
         self.welcome_window.destroy()
         self.welcome(self.user_object.name)
     
-    def schedule(self, event):
-        if (event is not True):
-            self.welcome_window.destroy()
+    def schedule(self):
         self.schedule_window = tk.Tk(className="Schedule")
         schedule_width = "1000"
         schedule_height = "500"
