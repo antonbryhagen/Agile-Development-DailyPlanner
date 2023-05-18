@@ -7,12 +7,14 @@ from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
 from win10toast import ToastNotifier
+from datetime import datetime, timedelta
 
 
 class Interface:
     def __init__(self):
         self.user_DAO_handler = user_DAO.user_DAO()
         self.schedule_handler = schedule_DAO.Schedule_DAO()
+        self.toaster = ToastNotifier()
 
     def display_menu(self):
         self.window = tk.Tk()
@@ -80,20 +82,21 @@ class Interface:
 
 
         elif action_type == "login":
-            result = self.user_DAO_handler.get_user_by_username(
-                self.user_username, self.user_password
-            )
-            if result != False:
-                self.user_object = user.User(result[0], result[1], "")
-                try:
-                    if self.window.state() == 'normal':
-                        self.window.destroy()
-                except:
-                    print("Tested")
-                self.welcome(self.user_object.name)
-            else:
+            if self.user_username == "" or self.user_password == "":
                 self.invalid_login = tk.Label(text="Invalid login information")
                 self.invalid_login.pack()
+            else:
+                self.result = self.user_DAO_handler.get_user_by_username(
+                    self.user_username, self.user_password
+            )
+                if self.result != False:
+                    self.user_object = user.User(self.result[0], self.result[1], "")
+                    try:
+                        if self.window.state() == 'normal':
+                            self.window.destroy()
+                    except:
+                        print("Tested")
+                    self.welcome(self.user_object.name)
 
     def destroy_window(self):
         self.window.destroy()
@@ -146,7 +149,7 @@ class Interface:
         if activities_activity == '' or activities_time == '':
             self.empty_field = tk.Label(text="One or more field(s) are left empty")
             self.empty_field.pack()
-        else: 
+        else:
             self.user_DAO_handler.create_activity(self.activities_object)
             self.welcome_window.destroy()
             self.welcome(self.user_object.name)
@@ -294,6 +297,7 @@ class Interface:
                 activity_labels.append(tk.Label(text=activity[0]))
                 activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
                 start_rely += activity_height*activity[2]/int(schedule_height)
+                self.schedule_notification(activity[2], activity[0])
                 if gray_background:
                     activity_labels[-1].config(bg="gray51", fg="white", borderwidth=1, relief="solid")
                     gray_background = False
@@ -303,13 +307,21 @@ class Interface:
 
         self.schedule_window.mainloop()
     
-    # def display_notification():
-    #     toaster = ToastNotifier()
-    #     toaster.show_toast("Notification", "Time for " + , duration=10)
+    def schedule_notification(self, activities_object_time, activities_object_activity):
+        if len(str(activities_object_time)) == 1:
+            activity_time = f"0{activities_object_time}, 00"
+        elif len(str(activities_object_time)) == 2:
+            activity_time = f"{activities_object_time}, 00"
+        notification_time = datetime.strptime(str(activity_time), "%-H:%M")
+        notification_time -= timedelta(minutes = 15)
+        current_date = datetime.now()
+        notification_datetime = datetime.combine(current_date.date(), notification_time.time())
+        if notification_datetime > current_date:
+            time_delta = notification_datetime - current_date
+            self.welcome_window.after(int(time_delta.total_seconds() * 1000), self.send_notification(activities_object_activity))
 
-    # def check_schedule():
-    #     schedule.run_pending()
-    #     self.schedule_window.after(1000, check_schedule)
+    def send_notification(self, activity):
+        self.toaster.show_toast(f"Reminder: {activity} scheduled in 15 minutes", duration = 10)
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
