@@ -324,14 +324,14 @@ class TestSchedule(unittest.TestCase):
                 # Implement the schedule method here or provide a mock implementation
         
         # Create an instance of the ScheduleClass
-        schedule_obj = ScheduleClass(mock_window, mock_schedule_handler, user_object)
+                schedule_obj = ScheduleClass(mock_window, mock_schedule_handler, user_object)
 
         # Call the generate_new_schedule method
-        schedule_obj.generate_new_schedule(event)
+                schedule_obj.generate_new_schedule(event)
 
         # Add assertions to check the expected behavior
-        self.assertTrue(mock_window.destroy_called)
-        self.assertTrue(mock_schedule_handler.delete_schedule_called)
+            self.assertTrue(mock_window.destroy_called)
+            self.assertTrue(mock_schedule_handler.delete_schedule_called)
         # Add more assertions as needed
 
 if __name__ == "__main__":
