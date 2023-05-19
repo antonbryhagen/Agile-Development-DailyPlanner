@@ -1,28 +1,19 @@
 Release history
 ========================
 
-Decide on a way how to handled your relaeases and version numbers. Document it here.
 
-For example like this...
-
-
-
-v2.0.0 (2022-02-05)
+v1.0.0 (TBD)
 ------------------------
 
-* Moved to a new location.
+* Release of DailyPlanner
+This release includes the following features:
 
+1. Log in and account creation:
+   - Easily create an account and securely log in to access your personalized DailyPlanner.
 
+2. Activity management:
+   - Add new activities to your planner to keep track of your tasks and commitments.
+   - Remove activities that are no longer relevant or completed.
 
-v1.1.0 (2021-02-12)
-------------------------
-
-* Enabling generating documentation from comments using pdoc and pydoc.
-* Enabling UML documentation using pyreverse.
-
-
-
-v1.0.0 (2021-02-12)
-------------------------
-
-* First release, extracted from course material and further developed.
+3. Schedule generation:
+   - Generate a personalized schedule based on the activities you have added to your planner. The schedule helps you plan your day efficiently and stay organized.

@@ -38,6 +38,8 @@ install:
 installed:
 	$(PYTHON) -m pip list
 
+pythonpath:
+	setx PYTHONPATH "$(pwd)"
 
 # ---------------------------------------------------------
 # Cleanup generated and installed files.

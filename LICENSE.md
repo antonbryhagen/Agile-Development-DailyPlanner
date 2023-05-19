@@ -1,8 +1,6 @@
-Decide on a license and put it here, for example a MIT license.
+MIT license
 
----
-
-Copyright YEAR XXX, XXX@mail.com
+Copyright (c) 2023, Anton Bryhagen(anton.bryhagen0175@stud.hkr.se), Gabriel Thiman(gabriel.thiman0007@stud.hkr.se), Olof Thornell(olof.thornell0010@stud.hkr.se), Filip Danielsson(filip.danielsson0007@stud.hkr.se), Alexander Pålsson(alexander.palsson0030@stud.hkr.se)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
