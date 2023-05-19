@@ -296,7 +296,7 @@ class TestInterface(unittest.TestCase):
         
 
     def test_reset_schedule(self,):
-        self.assertTrue(expr=True)
+        self.assertTrue(expr=0)
 
         
     
