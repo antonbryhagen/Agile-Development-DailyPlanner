@@ -25,6 +25,3 @@ mysql-connector-python
 
 # Password hashing
 bcrypt
-
-# Notifications
-win10toast

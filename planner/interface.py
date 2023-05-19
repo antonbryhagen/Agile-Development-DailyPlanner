@@ -6,7 +6,6 @@ from planner import Activities
 from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
-from win10toast import ToastNotifier
 from datetime import datetime, timedelta
 
 
@@ -14,7 +13,6 @@ class Interface:
     def __init__(self):
         self.user_DAO_handler = user_DAO.user_DAO()
         self.schedule_handler = schedule_DAO.Schedule_DAO()
-        self.toaster = ToastNotifier()
 
     def display_menu(self):
         self.window = tk.Tk()
@@ -79,12 +77,11 @@ class Interface:
                 self.user_DAO_handler.create_user(self.user_object)
                 self.destroy_window()
 
-
-
         elif action_type == "login":
             if self.user_username == "" or self.user_password == "":
                 self.invalid_login = tk.Label(text="Invalid login information")
                 self.invalid_login.pack()
+                self.window.after(5000, self.invalid_login.destroy)
             else:
                 self.result = self.user_DAO_handler.get_user_by_username(
                     self.user_username, self.user_password
@@ -97,7 +94,10 @@ class Interface:
                     except:
                         print("Tested")
                     self.welcome(self.user_object.name)
-
+                else:
+                    self.invalid_login = tk.Label(text="Invalid login information")
+                    self.invalid_login.pack()
+                    self.window.after(5000, self.invalid_login.destroy)
     def destroy_window(self):
         self.window.destroy()
         self.display_menu()
@@ -146,7 +146,7 @@ class Interface:
         self.activities_object = Activities.Activities(
             activities_activity, self.PRIO, activities_time, self.user_object.username
         )
-        if activities_activity == '' or activities_time == '':
+        if activities_activity == '' or activities_time == '' or not activities_time.isdigit():
             self.empty_field = tk.Label(text="One or more field(s) are left empty")
             self.empty_field.pack()
         else:
@@ -266,6 +266,10 @@ class Interface:
                         
             user_schedule.activities = temp_activties
         user_schedule.generate_schedule()
+        print(user_schedule.all_planned)
+        if not user_schedule.all_planned:
+            not_all_planned_label = tk.Label(text="Some activities were not planned, since there is not enough time!")
+            not_all_planned_label.pack()
         week_days = [
             "Monday",
             "Tuesday",
@@ -303,35 +307,9 @@ class Interface:
                 elif not gray_background:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
-        self.schedule_window.after(1000, lambda: self.schedule_notification(activity[0], activity[2]))
 
         self.schedule_window.mainloop()
     
-    def schedule_notification(self, activities_object_activity, activities_object_time):
-        activity_time = self.wake_hours + activities_object_time
-        activity_time_str = str(activity_time)
-        if len(activity_time_str) == 1:
-            activity_time_hour = f"0{activities_object_time}:00"
-        elif len(activity_time_str) == 2:
-            activity_time_hour = f"{activities_object_time}:00"
-        notification_time = datetime.strptime(activity_time_hour, "%H:%M")
-        self.current_date_time_str = str(datetime.today().time())
-        self.current_date_time_str_len = self.current_date_time_str[:5]
-        self.current_date_date = datetime.strptime(str(datetime.today().date()), "%Y-%m-%d")
-        self.current_date_time = datetime.strptime(self.current_date_time_str_len, "%H:%M")
-        self.notification_datetime_now = datetime.combine(self.current_date_date.date(), self.current_date_time.time())
-        self.notification_datetime_noti = datetime.combine(self.current_date_date.date(), notification_time.time())
-        self.time_delta = self.notification_datetime_noti - self.notification_datetime_now
-        self.schedule_window.after(1000, lambda: self.check_schedule(activities_object_activity, activities_object_time))
-        
-    def check_schedule(self, activities_object_activity, activities_object_time):
-        if self.time_delta.total_seconds() <= 900 and self.time_delta.total_seconds() >= 892:
-            self.schedule_window.after(int(self.time_delta.total_seconds() * 1000), self.send_notification(activities_object_activity, activities_object_time))
-        self.schedule_window.after(1000, lambda: self.schedule_notification(activities_object_activity, activities_object_time))
-
-    def send_notification(self, activities_object_activity, activities_object_time):
-        self.toaster.show_toast(f"Reminder: {activities_object_activity} scheduled in 15 minutes", duration = 10)
-        self.schedule_window.after(60000, lambda: self.schedule_notification(activities_object_activity, activities_object_time))
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
