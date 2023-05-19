@@ -298,20 +298,20 @@ class TestInterface(unittest.TestCase):
     def test_schedule_options(self):
         welcome_window = MagicMock()
         tk = MagicMock()
-        schedule_options(welcome_window, tk, "mock_event")
+        # schedule_options(welcome_window, tk, "mock_event")
         welcome_window.destroy.assert_called_once()
         tk.Tk.assert_called_once()
         tk.Label.assert_called_with(tk.Tk(), text='When to start the day:')
         tk.Entry.assert_called_with(tk.Tk(), width=50)
         tk.Button.assert_called_with(tk.Tk(), text='Confirm')
 
-def schedule_options(welcome_window, tk, event):
-    welcome_window.destroy()
-    option_window = tk.Tk()
-    tk.Label(option_window, text='When to start the day:')
-    tk.Entry(option_window, width=50)
-    tk.Button(option_window, text='Confirm')
-    option_window.mainloop()
+    def schedule_options(welcome_window, tk, event):
+        welcome_window.destroy()
+        option_window = tk.Tk()
+        tk.Label(option_window, text='When to start the day:')
+        tk.Entry(option_window, width=50)
+        tk.Button(option_window, text='Confirm')
+        option_window.mainloop()
     
 if __name__ == "__main__":
     unittest.main()
