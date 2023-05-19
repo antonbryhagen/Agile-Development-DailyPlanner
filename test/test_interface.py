@@ -293,7 +293,8 @@ class TestInterface(unittest.TestCase):
 
     def tearDown(self):
         self.interface = None
-    @patch("planner.interface.Interface.schedule_options")
+        
+
     def test_schedule_options(self):
         welcome_window = MagicMock()
         tk = MagicMock()
