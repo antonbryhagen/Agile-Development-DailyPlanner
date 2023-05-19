@@ -295,23 +295,19 @@ class TestInterface(unittest.TestCase):
         self.interface = None
         
 
-    def test_schedule_options(self):
-        welcome_window = MagicMock()
-        tk = MagicMock()
-        # schedule_options(welcome_window, tk, "mock_event")
-        welcome_window.destroy.assert_called_once()
-        tk.Tk.assert_called_once()
-        tk.Label.assert_called_with(tk.Tk(), text='When to start the day:')
-        tk.Entry.assert_called_with(tk.Tk(), width=50)
-        tk.Button.assert_called_with(tk.Tk(), text='Confirm')
+    def test_go_back_schedule(event):
+        schedule_window = MagicMock()
+        welcome = MagicMock()
 
-    def schedule_options(welcome_window, tk, event):
-        welcome_window.destroy()
-        option_window = tk.Tk()
-        tk.Label(option_window, text='When to start the day:')
-        tk.Entry(option_window, width=50)
-        tk.Button(option_window, text='Confirm')
-        option_window.mainloop()
+        schedule_window.destroy.return_value = None
+        user_object = MagicMock(name="John Doe")
+        welcome.return_value = None
+
+        go_back_schedule(schedule_window, welcome, user_object)
+
+        schedule_window.destroy.assert_called_once()
+        welcome.assert_called_once_with("John Doe")
+    
     
 if __name__ == "__main__":
     unittest.main()
