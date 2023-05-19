@@ -29,5 +29,11 @@ class TestSchedule(unittest.TestCase):
         self.assertIsInstance(test_object.days, dict)
 
 
+    def test_generate_schedule_with_lunch(self):
+        self.schedule_generator.generate_schedule(7, 1)
+        self.assertIn(('Lunch', 'Very important', 1, ''), self.schedule_generator.days['Monday'])
+        self.assertNotIn(('Lunch', 'Very important', 1, ''), self.schedule_generator.days['Tuesday'])
+        # ... assert other days and activities
+
 if __name__ == "__main__":
     unittest.main()
