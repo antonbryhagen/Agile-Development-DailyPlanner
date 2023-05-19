@@ -27,5 +27,8 @@ class TestSchedule_DAO(unittest.TestCase):
         mock_schedule = MagicMock()
 
 
+    def test_shuffle(self):
+        mock_shuffle_schedule = MagicMock()
+
 if __name__ == "__main__":
     unittest.main()
