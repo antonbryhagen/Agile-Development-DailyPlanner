@@ -283,5 +283,56 @@ class TestInterface(unittest.TestCase):
         self.interface = None
 
 
+class TestSchedule(unittest.TestCase):
+
+    def test_generate_new_schedule(self):
+        # Create a mock event object
+        event = "mock_event"
+
+        # Create a mock user object
+        class UserObject:
+            username = "mock_username"
+        
+        user_object = UserObject()
+
+        # Create a mock schedule_window and schedule_handler objects
+        class MockWindow:
+            def destroy(self):
+                pass
+
+        class MockScheduleHandler:
+            def delete_schedule(self, username):
+                pass
+
+        mock_window = MockWindow()
+        mock_schedule_handler = MockScheduleHandler()
+
+        # Create an instance of the class containing the generate_new_schedule method
+        class ScheduleClass:
+            def __init__(self, schedule_window, schedule_handler, user_object):
+                self.schedule_window = schedule_window
+                self.schedule_handler = schedule_handler
+                self.user_object = user_object
+
+            def generate_new_schedule(self, event):
+                self.schedule_window.destroy()
+                generate_schedule = True
+                self.schedule_handler.delete_schedule(self.user_object.username)
+                self.schedule(generate_schedule)
+
+            def schedule(self, generate_schedule):
+                # Implement the schedule method here or provide a mock implementation
+        
+        # Create an instance of the ScheduleClass
+        schedule_obj = ScheduleClass(mock_window, mock_schedule_handler, user_object)
+
+        # Call the generate_new_schedule method
+        schedule_obj.generate_new_schedule(event)
+
+        # Add assertions to check the expected behavior
+        self.assertTrue(mock_window.destroy_called)
+        self.assertTrue(mock_schedule_handler.delete_schedule_called)
+        # Add more assertions as needed
+
 if __name__ == "__main__":
     unittest.main()
