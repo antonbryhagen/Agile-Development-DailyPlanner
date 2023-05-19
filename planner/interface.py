@@ -1,4 +1,5 @@
 import tkinter as tk
+import win10toast
 import re
 from planner import user
 from planner import user_DAO
@@ -269,28 +270,26 @@ class Interface:
         generate_schedule_button = tk.Button(text="Generate a new schedule")
         generate_schedule_button.place(relx=0.9, rely=0, anchor='ne')
         generate_schedule_button.bind("<Button>", self.reset_schedule)
-        # TODO
-        # Add GUI option for wake hours
         start_day_time = int(self.start)
         end_day_time = int(self.end)
         wake_hours = end_day_time - start_day_time
-        user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
+        self.user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
         if stored_schedule == []:
-            user_schedule.sort_activities()
-            self.schedule_handler.create_schedule(user_schedule.activities, self.user_object.username)
+            self.user_schedule.sort_activities()
+            self.schedule_handler.create_schedule(self.user_schedule.activities, self.user_object.username)
         else:
             # Reset user_schedule dictionaries before loading stored schedule
-            user_schedule.time_per_day = {
-            "Monday" : user_schedule.wake_hours,
-            "Tuesday" : user_schedule.wake_hours,
-            "Wednesday" : user_schedule.wake_hours,
-            "Thursday" : user_schedule.wake_hours,
-            "Friday" : user_schedule.wake_hours,
-            "Saturday" : user_schedule.wake_hours,
-            "Sunday" : user_schedule.wake_hours
+            self.user_schedule.time_per_day = {
+            "Monday" : self.user_schedule.wake_hours,
+            "Tuesday" : self.user_schedule.wake_hours,
+            "Wednesday" : self.user_schedule.wake_hours,
+            "Thursday" : self.user_schedule.wake_hours,
+            "Friday" : self.user_schedule.wake_hours,
+            "Saturday" : self.user_schedule.wake_hours,
+            "Sunday" : self.user_schedule.wake_hours
             }
-            user_schedule.days = {
+            self.user_schedule.days = {
             "Monday" : [],
             "Tuesday" : [],
             "Wednesday" : [],
@@ -302,13 +301,13 @@ class Interface:
             sorted(stored_schedule, key=lambda scheduled_activity: scheduled_activity[2])
             temp_activties = []
             for scheduled_activity in stored_schedule:
-                for act in user_schedule.activities:
+                for act in self.user_schedule.activities:
                     if scheduled_activity[1] == act[3]:
                         temp_activties.append(act)
                         
-            user_schedule.activities = temp_activties
-        user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
-        week_days = [
+            self.user_schedule.activities = temp_activties
+        self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
+        self.week_days = [
             "Monday",
             "Tuesday",
             "Wednesday",
@@ -329,13 +328,13 @@ class Interface:
         for label in hour_labels:
             label.config(anchor='n')
         for day_index in range(0, 7): 
-            week_labels.append(tk.Label(text=week_days[day_index], font='bold'))
+            week_labels.append(tk.Label(text=self.week_days[day_index], font='bold'))
             week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor='nw')
             gray_background = False
             start_rely = 75/int(schedule_height) # 0.15 with height 500, good starting point in y direction
             activity_width = 120 # width of activity in schedule in px
             activity_height = 40 # height of activity in schedule in px for one hour
-            for activity in user_schedule.days[week_days[day_index]]:
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
                 activity_labels.append(tk.Label(text=activity[0]))
                 activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
                 start_rely += activity_height*activity[2]/int(schedule_height)
@@ -345,8 +344,26 @@ class Interface:
                 elif not gray_background:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
-
+        self.calculate_activity_times(start_day_time, end_day_time)
         self.schedule_window.mainloop()
+    
+    def calculate_activity_times(self, start_day_time, end_day_time):
+        self.activity_times = {
+            "Monday" : [],
+            "Tuesday" : [],
+            "Wednesday" : [],
+            "Thursday" : [],
+            "Friday" : [],
+            "Saturday" : [],
+            "Sunday" : []
+            }
+        for day_index in range(0,7):
+            time_since_day_start = 0
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
+                time_hour = start_day_time + time_since_day_start
+                time_since_day_start += activity[2]
+                self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+":00")
+        
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
