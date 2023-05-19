@@ -231,8 +231,8 @@ class Interface:
         # Add GUI option for wake hours
         start_day_time = 8
         end_day_time = 16
-        wake_hours = end_day_time - start_day_time
-        user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
+        self.wake_hours = end_day_time - start_day_time
+        user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), self.wake_hours)
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
         if stored_schedule == []:
             user_schedule.sort_activities()
@@ -280,7 +280,7 @@ class Interface:
         hour_labels = []
         hours_head = tk.Label(text="Time", font='bold')
         hours_head.place(relx=0, rely=0.05)
-        for hour in range(0, wake_hours+1):
+        for hour in range(0, self.wake_hours+1):
             hour_labels.append(tk.Label(text=start_day_time+hour))
             hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)), anchor='nw', width=120, height=40)
             hour_labels[-1].config(borderwidth=1, relief="solid")
@@ -297,31 +297,41 @@ class Interface:
                 activity_labels.append(tk.Label(text=activity[0]))
                 activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
                 start_rely += activity_height*activity[2]/int(schedule_height)
-                self.schedule_notification(activity[2], activity[0])
                 if gray_background:
                     activity_labels[-1].config(bg="gray51", fg="white", borderwidth=1, relief="solid")
                     gray_background = False
                 elif not gray_background:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
+        self.schedule_window.after(1000, lambda: self.schedule_notification(activity[0], activity[2]))
 
         self.schedule_window.mainloop()
     
-    def schedule_notification(self, activities_object_time, activities_object_activity):
-        if len(str(activities_object_time)) == 1:
-            activity_time = f"0{activities_object_time}, 00"
-        elif len(str(activities_object_time)) == 2:
-            activity_time = f"{activities_object_time}, 00"
-        notification_time = datetime.strptime(str(activity_time), "%-H:%M")
-        notification_time -= timedelta(minutes = 15)
-        current_date = datetime.now()
-        notification_datetime = datetime.combine(current_date.date(), notification_time.time())
-        if notification_datetime > current_date:
-            time_delta = notification_datetime - current_date
-            self.welcome_window.after(int(time_delta.total_seconds() * 1000), self.send_notification(activities_object_activity))
+    def schedule_notification(self, activities_object_activity, activities_object_time):
+        activity_time = self.wake_hours + activities_object_time
+        activity_time_str = str(activity_time)
+        if len(activity_time_str) == 1:
+            activity_time_hour = f"0{activities_object_time}:00"
+        elif len(activity_time_str) == 2:
+            activity_time_hour = f"{activities_object_time}:00"
+        notification_time = datetime.strptime(activity_time_hour, "%H:%M")
+        self.current_date_time_str = str(datetime.today().time())
+        self.current_date_time_str_len = self.current_date_time_str[:5]
+        self.current_date_date = datetime.strptime(str(datetime.today().date()), "%Y-%m-%d")
+        self.current_date_time = datetime.strptime(self.current_date_time_str_len, "%H:%M")
+        self.notification_datetime_now = datetime.combine(self.current_date_date.date(), self.current_date_time.time())
+        self.notification_datetime_noti = datetime.combine(self.current_date_date.date(), notification_time.time())
+        self.time_delta = self.notification_datetime_noti - self.notification_datetime_now
+        self.schedule_window.after(1000, lambda: self.check_schedule(activities_object_activity, activities_object_time))
+        
+    def check_schedule(self, activities_object_activity, activities_object_time):
+        if self.time_delta.total_seconds() <= 900 and self.time_delta.total_seconds() >= 892:
+            self.schedule_window.after(int(self.time_delta.total_seconds() * 1000), self.send_notification(activities_object_activity, activities_object_time))
+        self.schedule_window.after(1000, lambda: self.schedule_notification(activities_object_activity, activities_object_time))
 
-    def send_notification(self, activity):
-        self.toaster.show_toast(f"Reminder: {activity} scheduled in 15 minutes", duration = 10)
+    def send_notification(self, activities_object_activity, activities_object_time):
+        self.toaster.show_toast(f"Reminder: {activities_object_activity} scheduled in 15 minutes", duration = 10)
+        self.schedule_window.after(60000, lambda: self.schedule_notification(activities_object_activity, activities_object_time))
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
