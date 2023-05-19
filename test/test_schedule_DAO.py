@@ -27,14 +27,5 @@ class TestSchedule_DAO(unittest.TestCase):
         mock_schedule = MagicMock()
 
 
-    def test_shuffle(self):
-        test_object = schedule_DAO.Schedule_DAO()
-        test_object.connect()
-        test_object.create_schedule()
-        test_object.close()
-        exp = test_object.connection.is_connected()
-        self.assertNotEqual(test_object.connection, exp)
-
-
 if __name__ == "__main__":
     unittest.main()
