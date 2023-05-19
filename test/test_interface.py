@@ -330,8 +330,8 @@ class TestSchedule(unittest.TestCase):
                 schedule_obj.generate_new_schedule(event)
 
         # Add assertions to check the expected behavior
-            self.assertTrue(mock_window.destroy_called)
-            self.assertTrue(mock_schedule_handler.delete_schedule_called)
+        self.assertTrue(mock_window.destroy_called)
+        self.assertTrue(mock_schedule_handler.delete_schedule_called)
         # Add more assertions as needed
 
 if __name__ == "__main__":
