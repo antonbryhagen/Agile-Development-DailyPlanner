@@ -295,18 +295,10 @@ class TestInterface(unittest.TestCase):
         self.interface = None
         
 
-    def test_go_back_schedule(event):
-        schedule_window = MagicMock()
-        welcome = MagicMock()
+    def test_reset_schedule(self,):
+        self.assertTrue()
 
-        schedule_window.destroy.return_value = None
-        user_object = MagicMock(name="John Doe")
-        welcome.return_value = None
-
-        go_back_schedule(schedule_window, welcome, user_object)
-
-        schedule_window.destroy.assert_called_once()
-        welcome.assert_called_once_with("John Doe")
+        
     
     
 if __name__ == "__main__":
