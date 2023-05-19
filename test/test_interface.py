@@ -328,17 +328,38 @@ class TestInterface(unittest.TestCase):
         option_window.mainloop.assert_called_once()
         tk.Tk.assert_called_once()
 
-        # Add more assertions to check the expected calls on the mock objects
-        # For example:
-        tk.Label.assert_called_with(option_window, text='When to start the day:')
-        tk.Entry.assert_called_with(option_window, width=50)
-        tk.Button.assert_called_with(option_window, text='Confirm')
-        mock_button.bind.assert_called_with('<Button>', mock_entry.check_options)
+        # Add assertions to check the expected calls on the mock objects
+        expected_calls = [
+            call(option_window, text='When to start the day:'),
+            call(option_window, width=50),
+            call(option_window, text='When to end the day:'),
+            call(option_window, width=50),
+            call(option_window, text='How long is lunch'),
+            call(option_window, width=50),
+            call(option_window, text='Confirm'),
+            call(option_window, text='<Button>', command=mock_entry.check_options)
+        ]
+        tk.Label.assert_has_calls(expected_calls[:2])
+        tk.Entry.assert_has_calls(expected_calls[2:6])
+        tk.Button.assert_has_calls(expected_calls[6:])
 
 def schedule_options(welcome_window, tk, event):
     welcome_window.destroy()
     option_window = tk.Tk()
-    option_window.destroy()
+    start_time_label = tk.Label(option_window, text='When to start the day:')
+    start_time_label.pack()
+    start_time = tk.Entry(option_window, width=50)
+    start_time.pack()
+    end_time_label = tk.Label(option_window, text='When to end the day:')
+    end_time_label.pack()
+    end_time = tk.Entry(option_window, width=50)
+    end_time.pack()
+    lunch_time_label = tk.Label(option_window, text='How long is lunch')
+    lunch_time_label.pack()
+    lunch_time = tk.Entry(option_window, width=50)
+    lunch_time.pack()
+    confirm_button = tk.Button(option_window, text='Confirm', command=start_time.check_options)
+    confirm_button.pack()
     option_window.mainloop()
     
     
