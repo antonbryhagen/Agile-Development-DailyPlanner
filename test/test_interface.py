@@ -295,6 +295,67 @@ class TestInterface(unittest.TestCase):
         self.interface = None
 
 
+    def test_schedule_options(self):
+        # Create a mock event object
+        event = "mock_event"
+
+        # Create a mock welcome_window and option_window
+        welcome_window = MagicMock()
+        option_window = MagicMock()
+        
+        # Create mock objects for the other attributes
+        mock_label = MagicMock()
+        mock_entry = MagicMock()
+        mock_button = MagicMock()
+
+        # Mock the necessary methods and attributes
+        option_window.destroy = MagicMock()
+        option_window.mainloop = MagicMock()
+
+        # Mock the tkinter classes and methods
+        tk = MagicMock()
+        tk.Tk.return_value = option_window
+        tk.Label.return_value = mock_label
+        tk.Entry.return_value = mock_entry
+        tk.Button.return_value = mock_button
+
+        # Call the schedule_options method
+        schedule_options(welcome_window, tk, event)
+
+        # Add assertions to check the expected behavior
+        welcome_window.destroy.assert_called_once()
+        option_window.destroy.assert_called_once()
+        option_window.mainloop.assert_called_once()
+        tk.Tk.assert_called_once()
+
+        # Add more assertions to check the expected calls on the mock objects
+        # For example:
+        tk.Label.assert_called_with(text='When to start the day:')
+        tk.Entry.assert_called_with(width=50)
+        tk.Button.assert_called_with(text='Confirm')
+        mock_button.bind.assert_called_with('<Button>', mock_entry.check_options)
+
+
+    def schedule_options(welcome_window, tk, event):
+        welcome_window.destroy()
+        option_window = tk.Tk()
+        start_time_label = tk.Label(option_window, text='When to start the day:')
+        start_time_label.pack()
+        start_time = tk.Entry(option_window, width=50)
+        start_time.pack()
+        end_time_label = tk.Label(option_window, text='When to end the day:')
+        end_time_label.pack()
+        end_time = tk.Entry(option_window, width=50)
+        end_time.pack()
+        lunch_time_label = tk.Label(option_window, text='How long is lunch')
+        lunch_time_label.pack()
+        lunch_time = tk.Entry(option_window, width=50)
+        lunch_time.pack()
+        confirm_button = tk.Button(option_window, text='Confirm')
+        confirm_button.pack()
+        confirm_button.bind('<Button>', start_time.check_options)
+        option_window.mainloop()
+
 
 if __name__ == "__main__":
     unittest.main()
