@@ -1,6 +1,7 @@
 import tkinter as tk
 import win10toast
 import re
+from datetime import datetime
 from planner import user
 from planner import user_DAO
 from planner import Activities
@@ -275,6 +276,7 @@ class Interface:
         wake_hours = end_day_time - start_day_time
         self.user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
+        print(stored_schedule)
         if stored_schedule == []:
             self.user_schedule.sort_activities()
             self.schedule_handler.create_schedule(self.user_schedule.activities, self.user_object.username)
@@ -345,9 +347,19 @@ class Interface:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
         self.calculate_activity_times(start_day_time, end_day_time)
+        dt = datetime.now()
+        for activity in self.user_schedule.days[dt.strftime('%A')]:
+            activiy_dt_object = datetime.now().replace(hour=int(self.activity_times[dt.strftime('%A')][:2], 
+                                                                minutes=self.activity_times[dt.strftime('%A')][3:],
+                                                                second=0, 
+                                                                microsecond=0))
+            time_diff = activiy_dt_object - datetime.now()
+            seconds_til_activity = time_diff.total_seconds()
+            self.schedule_window.after(int(seconds_til_activity * 1000), self.display_notification, activity[0])
         self.schedule_window.mainloop()
     
     def calculate_activity_times(self, start_day_time, end_day_time):
+        """Calculate times used for notifications."""
         self.activity_times = {
             "Monday" : [],
             "Tuesday" : [],
@@ -358,12 +370,16 @@ class Interface:
             "Sunday" : []
             }
         for day_index in range(0,7):
-            time_since_day_start = 0
+            time_since_day_start = -1
             for activity in self.user_schedule.days[self.week_days[day_index]]:
                 time_hour = start_day_time + time_since_day_start
                 time_since_day_start += activity[2]
-                self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+":00")
+                self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+":45")
         
+    def display_notification(self, activity):
+        self.toaster = win10toast.ToastNotifier()
+        self.toaster.show_toast("Activity Reminder", f"The activity '{activity}' is starting in 15 minutes!", duration=10)
+
 
     def go_back_schedule(self, event):
         self.schedule_window.destroy()
