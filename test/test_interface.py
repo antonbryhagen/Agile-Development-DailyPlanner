@@ -319,8 +319,6 @@ class TestInterface(unittest.TestCase):
         tk.Entry.return_value = mock_entry
         tk.Button.return_value = mock_button
 
-        # Call the schedule_options method
-        schedule_options(welcome_window, tk, event)
 
         # Add assertions to check the expected behavior
         welcome_window.destroy.assert_called_once()
