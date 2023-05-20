@@ -1,0 +1,1686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>interface API documentation</title>
+<meta name="description" content="Handle GUI and interface logic" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>interface</code></h1>
+</header>
+<section id="section-intro">
+<p>Handle GUI and interface logic</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Handle GUI and interface logic&#34;&#34;&#34;
+
+import tkinter as tk
+from datetime import datetime
+from planner import user
+from planner import user_dao
+from planner import activities
+from planner import schedule_dao
+from planner import schedule
+#from tkinter import *
+
+
+class Interface:
+    &#34;&#34;&#34;Class for interface and GUI.&#34;&#34;&#34;
+    def __init__(self):
+        &#34;&#34;&#34;Init interface object.&#34;&#34;&#34;
+        self.user_dao_handler = user_dao.UserDAO()
+        self.schedule_handler = schedule_dao.ScheduleDAO()
+
+    def display_menu(self):
+        &#34;&#34;&#34;Display first menu.&#34;&#34;&#34;
+        self.window = tk.Tk()
+        self.window.geometry(&#34;250x250&#34;)
+        self.greeting = tk.Label(text=&#34;Hello&#34;)
+        self.greeting.pack()
+        self.button1 = tk.Button(text=&#34;Log in&#34;)
+        self.button2 = tk.Button(text=&#34;Register&#34;)
+        self.button1.pack()
+        self.button2.pack()
+        self.bind_buttons()
+
+    def log_in_menu(self, event):
+        &#34;&#34;&#34;Display login menu.&#34;&#34;&#34;
+        self.header = tk.Label(text=&#34;Log in&#34;)
+        self.header.pack()
+        self.back_button = tk.Button(text=&#39;Back&#39;)
+        self.back_button.pack()
+        self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+        self.input_menu()
+        self.log_in = tk.Button(text=&#34;Log In&#34;)
+        self.log_in.pack()
+        self.log_in.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;login&#34;)
+        )
+
+    def register_user_menu(self, event):
+        &#34;&#34;&#34;Display register menu.&#34;&#34;&#34;
+        self.header = tk.Label(text=&#34;Register new user&#34;)
+        self.header.pack()
+        self.back_button = tk.Button(text=&#39;Back&#39;)
+        self.back_button.pack()
+        self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+        self.input_menu()
+        self.label_name = tk.Label(text=&#34;Name:&#34;)
+        self.label_name.pack()
+        self.name = tk.Entry(width=50)
+        self.name.pack()
+        self.register = tk.Button(text=&#34;Register&#34;)
+        self.register.pack()
+        self.register.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;register&#34;)
+        )
+
+    def input_menu(self):
+        &#34;&#34;&#34;Display menu to log in.&#34;&#34;&#34;
+        self.greeting.destroy()
+        self.button1.destroy()
+        self.button2.destroy()
+        self.label_username = tk.Label(text=&#34;Username:&#34;)
+        self.label_username.pack()
+        self.username = tk.Entry(width=50)
+        self.username.pack()
+        self.label_password = tk.Label(text=&#34;Password:&#34;)
+        self.label_password.pack()
+        self.password = tk.Entry(width=50)
+        self.password.pack()
+
+    def get_register_data(self, event, action_type):
+        &#34;&#34;&#34;Get data from text fields to register new user.&#34;&#34;&#34;
+        self.user_username = self.username.get()
+        self.user_password = self.password.get()
+        if action_type == &#34;register&#34;:
+            self.user_name = self.name.get()
+            self.user_object = user.User(
+                self.user_username, self.user_name, self.user_password
+            )
+            if self.user_username == &#39;&#39; or self.user_password == &#39;&#39; or self.user_name == &#39;&#39;:
+                self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+                self.empty_field.pack()
+            else:
+                self.user_dao_handler.create_user(self.user_object)
+                self.destroy_window()
+
+        elif action_type == &#34;login&#34;:
+            if self.user_username == &#34;&#34; or self.user_password == &#34;&#34;:
+                self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+                self.invalid_login.pack()
+                self.window.after(5000, self.invalid_login.destroy)
+            else:
+                self.result = self.user_dao_handler.get_user_by_username(
+                    self.user_username, self.user_password
+            )
+
+                if self.result is not False:
+                    self.user_object = user.User(self.result[0], self.result[1], &#34;&#34;)
+                    try:
+                        if self.window.state() == &#39;normal&#39;:
+                            self.window.destroy()
+                    except Exception: # pylint:disable=broad-exception-caught
+                        print(&#34;Tested&#34;)
+                    self.welcome(self.user_object.name)
+                else:
+                    self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+                    self.invalid_login.pack()
+                    self.window.after(5000, self.invalid_login.destroy)
+
+
+
+    def return_to_main_page(self, event):
+        &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+        self.window.destroy()
+        self.display_menu()
+
+    def destroy_window(self):
+        &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+        self.window.destroy()
+        self.display_menu()
+
+    def welcome(self, name):
+        &#34;&#34;&#34;Display welcome menu after logged in.&#34;&#34;&#34;
+        self.welcome_window = tk.Tk()
+        self.welcome_window.geometry(&#34;250x250&#34;)
+        self.welcome_text = tk.Label(text=&#34;Welcome: &#34; + name)
+        self.welcome_text.pack()
+        self.button3 = tk.Button(text=&#34;Add activities&#34;)
+        self.button3.pack()
+        self.button4 = tk.Button(text=&#34;Remove activities&#34;)
+        self.button4.pack()
+        self.view_schedule_button = tk.Button(text=&#34;View schedule&#34;)
+        self.view_schedule_button.pack()
+        self.bind_buttons2()
+
+    def bind_buttons(self):
+        &#34;&#34;&#34;Bind buttons from first menu.&#34;&#34;&#34;
+        self.button1.bind(&#34;&lt;Button&gt;&#34;, self.log_in_menu)
+        self.button2.bind(&#34;&lt;Button&gt;&#34;, self.register_user_menu)
+        self.window.mainloop()
+
+    def bind_buttons2(self):
+        &#34;&#34;&#34;Bind buttons regarding activities.&#34;&#34;&#34;
+        self.button3.bind(&#34;&lt;Button&gt;&#34;, self.input_activity)
+        self.button4.bind(&#34;&lt;Button&gt;&#34;, self.input_activity_delete)
+        self.view_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.schedule_options)
+        self.window.mainloop()
+
+    def get_activity_data(self, event):
+        &#34;&#34;&#34;Get data from text fields for activity creation.&#34;&#34;&#34;
+        activities_activity = self.activity.get()
+        activities_time = self.time.get()
+        self.prio = self.clicked.get()
+        self.activities_object = activities.Activities(
+            activities_activity, self.prio, activities_time, self.user_object.username
+        )
+        if activities_activity == &#39;&#39; or activities_time == &#39;&#39; or not activities_time.isdigit():
+            self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+            self.empty_field.pack()
+        else:
+            self.user_dao_handler.create_activity(self.activities_object)
+            self.welcome_window.destroy()
+            self.welcome(self.user_object.name)
+
+    def input_activity(self, event):
+        &#34;&#34;&#34;Display menu for creating activity.&#34;&#34;&#34;
+        self.button3.destroy()
+        self.button4.destroy()
+        self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text=&#39;Back&#39;)
+        self.return_button.pack()
+        self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+        label_activity = tk.Label(text=&#34;Name of activity:&#34;)
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        label_time = tk.Label(text=&#34;Hours of work:&#34;)
+        label_time.pack()
+        self.time = tk.Entry(width=50)
+        self.time.pack()
+        label_prio = tk.Label(text=&#34;Priority:&#34;)
+        label_prio.pack()
+        self.clicked = tk.StringVar(label_prio)
+        option_list = [&#34;Very important&#34;, &#34;Important&#34;, &#34;Not so important&#34;]
+        self.clicked.set(option_list[0])
+        drop = tk.OptionMenu(label_prio, self.clicked, *option_list)
+        drop.pack()
+        self.button5 = tk.Button(label_prio, text=&#34;Confirm&#34;)
+        self.button5.pack()
+        self.button5.bind(&#34;&lt;Button&gt;&#34;, self.get_activity_data)
+        label_prio.mainloop()
+
+    def get_activity_data_delete(self, event):
+        &#34;&#34;&#34;Get selected activity for deletion and delete it.&#34;&#34;&#34;
+        activities_activity_delete = self.clicked.get()
+        partitioned_string_activity = activities_activity_delete.partition(&#34; &#34;)
+        activities_object = activities.Activities(
+            partitioned_string_activity[0], &#34;test&#34;, &#34;test1&#34;, &#34;test3&#34;
+        )
+        self.user_dao_handler.delete_activity(activities_object, self.user_object)
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def input_activity_delete(self, event):
+        &#34;&#34;&#34;Display menu for activity deletion.&#34;&#34;&#34;
+        self.button3.destroy()
+        self.button4.destroy()
+        self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text=&#39;Back&#39;)
+        self.return_button.pack()
+        self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+        label_activity = tk.Label(text=&#34;Choose an activity to delete:&#34;)
+        label_activity.pack()
+        dropdown = tk.Label()
+        dropdown.pack()
+        activity_tuple_list = self.user_dao_handler.get_activities(self.user_object)
+        activity_str_list = []
+
+        for activity in activity_tuple_list:
+            activity_string = (activity[0] + &#34; | &#34; + activity[1] + &#34; | &#34; +
+                               str(activity[2]) + &#34;hour(s)&#34;)
+            activity_str_list.append(activity_string)
+
+        self.clicked = tk.StringVar(dropdown)
+        self.clicked.set(&#34;Click to see your activities&#34;)
+        drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list) # pylint:disable=no-value-for-parameter
+        drop.pack()
+        self.button6 = tk.Button(text=&#34;Delete&#34;)
+        self.button6.pack()
+        self.button6.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_activity_data_delete(&#34;Delete&#34;)
+        )
+        label_activity.mainloop()
+
+
+    def schedule_options(self, event):
+        &#34;&#34;&#34;Display schedule options menu.&#34;&#34;&#34;
+        self.welcome_window.destroy()
+        self.option_window = tk.Tk()
+        self.start_time_label = tk.Label(text=&#39;When to start the day:&#39;)
+        self.start_time_label.pack()
+        self.start_time = tk.Entry(width=50)
+        self.start_time.pack()
+        self.end_time_label = tk.Label(text=&#39;When to end the day:&#39;)
+        self.end_time_label.pack()
+        self.end_time = tk.Entry(width=50)
+        self.end_time.pack()
+        self.lunch_time_label = tk.Label(text=&#39;How long is lunch&#39;)
+        self.lunch_time_label.pack()
+        self.lunch_time = tk.Entry(width=50)
+        self.lunch_time.pack()
+        self.confirm_button = tk.Button(text=&#39;Confirm&#39;)
+        self.bind_option_button()
+
+    def bind_option_button(self):
+        &#34;&#34;&#34;Bind option buttons.&#34;&#34;&#34;
+        self.confirm_button.pack()
+        self.confirm_button.bind(&#39;&lt;Button&gt;&#39;, self.check_options)
+        self.option_window.mainloop()
+
+    def check_options(self, event):
+        &#34;&#34;&#34;Get options data.&#34;&#34;&#34;
+        try:
+            self.start = self.start_time.get()
+            self.end = self.end_time.get()
+            self.lunch_hours = self.lunch_time.get()
+            if int(self.start) &gt; int(self.end) or int(self.lunch_hours) &lt; 0:
+                self.option_window.destroy()
+                self.welcome(self.user_object.name)
+            else:
+                self.option_window.destroy()
+                self.schedule()
+        except Exception: # pylint:disable=broad-exception-caught
+            self.option_window.destroy()
+            self.welcome(self.user_object.name)
+
+    def reset_schedule(self, event):
+        &#34;&#34;&#34;Reset schedule window.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.schedule()
+
+    def return_to_welcome(self, event):
+        &#34;&#34;&#34;Return to welcome window.&#34;&#34;&#34;
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def schedule(self):
+        &#34;&#34;&#34;Display schedule.&#34;&#34;&#34;
+        self.schedule_window = tk.Tk(className=&#34;Schedule&#34;)
+        schedule_width = &#34;1000&#34;
+        schedule_height = &#34;500&#34;
+        self.schedule_window.geometry(schedule_width+&#34;x&#34;+schedule_height)
+        back_button = tk.Button(text=&#34;Back&#34;)
+        back_button.place(relx=0.95, rely=0, anchor=&#39;ne&#39;)
+        back_button.bind(&#34;&lt;Button&gt;&#34;, self.go_back_schedule)
+        generate_schedule_button = tk.Button(text=&#34;Generate a new schedule&#34;)
+        generate_schedule_button.place(relx=0.9, rely=0, anchor=&#39;ne&#39;)
+        generate_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.generate_new_schedule)
+
+        start_day_time = int(self.start)
+        end_day_time = int(self.end)
+        wake_hours = end_day_time - start_day_time
+        self.user_schedule = schedule.Schedule(
+            self.user_dao_handler.get_activities(self.user_object),
+            wake_hours)
+
+        stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
+        if stored_schedule == []:
+            self.user_schedule.sort_activities()
+            self.schedule_handler.create_schedule(self.user_schedule.activities,
+                                                  self.user_object.username)
+        else:
+            # Reset user_schedule dictionaries before loading stored schedule
+            self.user_schedule.time_per_day = {
+            &#34;Monday&#34; : self.user_schedule.wake_hours,
+            &#34;Tuesday&#34; : self.user_schedule.wake_hours,
+            &#34;Wednesday&#34; : self.user_schedule.wake_hours,
+            &#34;Thursday&#34; : self.user_schedule.wake_hours,
+            &#34;Friday&#34; : self.user_schedule.wake_hours,
+            &#34;Saturday&#34; : self.user_schedule.wake_hours,
+            &#34;Sunday&#34; : self.user_schedule.wake_hours
+            }
+            self.user_schedule.days = {
+            &#34;Monday&#34; : [],
+            &#34;Tuesday&#34; : [],
+            &#34;Wednesday&#34; : [],
+            &#34;Thursday&#34; : [],
+            &#34;Friday&#34; : [],
+            &#34;Saturday&#34; : [],
+            &#34;Sunday&#34; : []
+            }
+            sorted(stored_schedule, key=lambda scheduled_activity: scheduled_activity[2])
+            temp_activties = []
+            for scheduled_activity in stored_schedule:
+                for act in self.user_schedule.activities:
+                    if scheduled_activity[1] == act[3]:
+                        temp_activties.append(act)
+
+
+            self.user_schedule.activities = temp_activties
+        self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
+        if not self.user_schedule.all_planned:
+            error_msg = (&#34;Some activities were not planned, &#34;
+                        &#34;since there is not enough time!&#34;)
+            not_all_planned_label = tk.Label(text=error_msg)
+            not_all_planned_label.pack()
+        self.week_days = [
+
+            &#34;Monday&#34;,
+            &#34;Tuesday&#34;,
+            &#34;Wednesday&#34;,
+            &#34;Thursday&#34;,
+            &#34;Friday&#34;,
+            &#34;Saturday&#34;,
+            &#34;Sunday&#34;
+        ]
+        week_labels = []
+        activity_labels = []
+        hour_labels = []
+        hours_head = tk.Label(text=&#34;Time&#34;, font=&#39;bold&#39;)
+        hours_head.place(relx=0, rely=0.05)
+        for hour in range(0, wake_hours+1):
+            hour_labels.append(tk.Label(text=start_day_time+hour))
+            hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)),
+                                  anchor=&#39;nw&#39;, width=120, height=40)
+            hour_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+        for label in hour_labels:
+            label.config(anchor=&#39;n&#39;)
+        for day_index in range(0, 7):
+            week_labels.append(tk.Label(text=self.week_days[day_index], font=&#39;bold&#39;))
+            week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor=&#39;nw&#39;)
+            gray_background = False
+            start_rely = 75/int(schedule_height) # 0.15 with height 500
+            activity_width = 120 # width of activity in schedule in px
+            activity_height = 40 # height of activity in schedule in px for one hour
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
+                activity_labels.append(tk.Label(text=activity[0]))
+                activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor=&#39;nw&#39;,
+                                          width=activity_width, height=activity_height*activity[2])
+                start_rely += activity_height*activity[2]/int(schedule_height)
+                if gray_background:
+                    activity_labels[-1].config(bg=&#34;gray51&#34;, fg=&#34;white&#34;,
+                                               borderwidth=1, relief=&#34;solid&#34;)
+                    gray_background = False
+                elif not gray_background:
+                    activity_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+                    gray_background = True
+        self.calculate_activity_times(start_day_time)
+        d_t = datetime.now()
+        for index, activity in enumerate(self.user_schedule.days[d_t.strftime(&#39;%A&#39;)]):
+            hours = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][:2]
+            minutes = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][3:]
+            activiy_dt_object = datetime.now().replace(hour=int(hours),
+                                                       minute=int(minutes),
+                                                       second=0,
+                                                       microsecond=0)
+            time_diff = activiy_dt_object - datetime.now()
+            seconds_til_activity = time_diff.total_seconds()
+            self.schedule_window.after(int(seconds_til_activity * 1000),
+                                       self.display_notification, activity[0])
+        self.loop_window()
+
+
+    def loop_window(self):
+        &#34;&#34;&#34;Loop schedule window.&#34;&#34;&#34;
+        self.schedule_window.mainloop()
+
+    def calculate_activity_times(self, start_day_time):
+        &#34;&#34;&#34;Calculate times used for notifications.&#34;&#34;&#34;
+        self.activity_times = {
+            &#34;Monday&#34; : [],
+            &#34;Tuesday&#34; : [],
+            &#34;Wednesday&#34; : [],
+            &#34;Thursday&#34; : [],
+            &#34;Friday&#34; : [],
+            &#34;Saturday&#34; : [],
+            &#34;Sunday&#34; : []
+            }
+        for day_index in range(0,7):
+            time_since_day_start = -1
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
+                time_hour = start_day_time + time_since_day_start
+                time_since_day_start += activity[2]
+                self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+&#34;:45&#34;)
+
+    def display_notification(self, activity):
+        &#34;&#34;&#34;Display short notification before activity start.&#34;&#34;&#34;
+        self.notification_window = tk.Tk(className=&#34;Reminder for &#34; + activity)
+        noti_width = &#34;200&#34;
+        noti_height = &#34;50&#34;
+        self.notification_window.geometry(noti_width+&#34;x&#34;+noti_height)
+        activity_label = tk.Label(self.notification_window, text=f&#34;{activity} is starting soon!&#34;)
+        activity_label.config(fg=&#39;red&#39;)
+        activity_label.pack()
+        self.notification_window.after(10000, self.notification_window.destroy)
+        self.notification_window.mainloop()
+
+
+    def go_back_schedule(self, event):
+        &#34;&#34;&#34;Go back from schedule window.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def generate_new_schedule(self, event):
+        &#34;&#34;&#34;Destroy schedule window and delete current schedule.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.schedule_handler.delete_schedule(self.user_object.username)
+        self.schedule()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="interface.Interface"><code class="flex name class">
+<span>class <span class="ident">Interface</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class for interface and GUI.</p>
+<p>Init interface object.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Interface:
+    &#34;&#34;&#34;Class for interface and GUI.&#34;&#34;&#34;
+    def __init__(self):
+        &#34;&#34;&#34;Init interface object.&#34;&#34;&#34;
+        self.user_dao_handler = user_dao.UserDAO()
+        self.schedule_handler = schedule_dao.ScheduleDAO()
+
+    def display_menu(self):
+        &#34;&#34;&#34;Display first menu.&#34;&#34;&#34;
+        self.window = tk.Tk()
+        self.window.geometry(&#34;250x250&#34;)
+        self.greeting = tk.Label(text=&#34;Hello&#34;)
+        self.greeting.pack()
+        self.button1 = tk.Button(text=&#34;Log in&#34;)
+        self.button2 = tk.Button(text=&#34;Register&#34;)
+        self.button1.pack()
+        self.button2.pack()
+        self.bind_buttons()
+
+    def log_in_menu(self, event):
+        &#34;&#34;&#34;Display login menu.&#34;&#34;&#34;
+        self.header = tk.Label(text=&#34;Log in&#34;)
+        self.header.pack()
+        self.back_button = tk.Button(text=&#39;Back&#39;)
+        self.back_button.pack()
+        self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+        self.input_menu()
+        self.log_in = tk.Button(text=&#34;Log In&#34;)
+        self.log_in.pack()
+        self.log_in.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;login&#34;)
+        )
+
+    def register_user_menu(self, event):
+        &#34;&#34;&#34;Display register menu.&#34;&#34;&#34;
+        self.header = tk.Label(text=&#34;Register new user&#34;)
+        self.header.pack()
+        self.back_button = tk.Button(text=&#39;Back&#39;)
+        self.back_button.pack()
+        self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+        self.input_menu()
+        self.label_name = tk.Label(text=&#34;Name:&#34;)
+        self.label_name.pack()
+        self.name = tk.Entry(width=50)
+        self.name.pack()
+        self.register = tk.Button(text=&#34;Register&#34;)
+        self.register.pack()
+        self.register.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;register&#34;)
+        )
+
+    def input_menu(self):
+        &#34;&#34;&#34;Display menu to log in.&#34;&#34;&#34;
+        self.greeting.destroy()
+        self.button1.destroy()
+        self.button2.destroy()
+        self.label_username = tk.Label(text=&#34;Username:&#34;)
+        self.label_username.pack()
+        self.username = tk.Entry(width=50)
+        self.username.pack()
+        self.label_password = tk.Label(text=&#34;Password:&#34;)
+        self.label_password.pack()
+        self.password = tk.Entry(width=50)
+        self.password.pack()
+
+    def get_register_data(self, event, action_type):
+        &#34;&#34;&#34;Get data from text fields to register new user.&#34;&#34;&#34;
+        self.user_username = self.username.get()
+        self.user_password = self.password.get()
+        if action_type == &#34;register&#34;:
+            self.user_name = self.name.get()
+            self.user_object = user.User(
+                self.user_username, self.user_name, self.user_password
+            )
+            if self.user_username == &#39;&#39; or self.user_password == &#39;&#39; or self.user_name == &#39;&#39;:
+                self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+                self.empty_field.pack()
+            else:
+                self.user_dao_handler.create_user(self.user_object)
+                self.destroy_window()
+
+        elif action_type == &#34;login&#34;:
+            if self.user_username == &#34;&#34; or self.user_password == &#34;&#34;:
+                self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+                self.invalid_login.pack()
+                self.window.after(5000, self.invalid_login.destroy)
+            else:
+                self.result = self.user_dao_handler.get_user_by_username(
+                    self.user_username, self.user_password
+            )
+
+                if self.result is not False:
+                    self.user_object = user.User(self.result[0], self.result[1], &#34;&#34;)
+                    try:
+                        if self.window.state() == &#39;normal&#39;:
+                            self.window.destroy()
+                    except Exception: # pylint:disable=broad-exception-caught
+                        print(&#34;Tested&#34;)
+                    self.welcome(self.user_object.name)
+                else:
+                    self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+                    self.invalid_login.pack()
+                    self.window.after(5000, self.invalid_login.destroy)
+
+
+
+    def return_to_main_page(self, event):
+        &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+        self.window.destroy()
+        self.display_menu()
+
+    def destroy_window(self):
+        &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+        self.window.destroy()
+        self.display_menu()
+
+    def welcome(self, name):
+        &#34;&#34;&#34;Display welcome menu after logged in.&#34;&#34;&#34;
+        self.welcome_window = tk.Tk()
+        self.welcome_window.geometry(&#34;250x250&#34;)
+        self.welcome_text = tk.Label(text=&#34;Welcome: &#34; + name)
+        self.welcome_text.pack()
+        self.button3 = tk.Button(text=&#34;Add activities&#34;)
+        self.button3.pack()
+        self.button4 = tk.Button(text=&#34;Remove activities&#34;)
+        self.button4.pack()
+        self.view_schedule_button = tk.Button(text=&#34;View schedule&#34;)
+        self.view_schedule_button.pack()
+        self.bind_buttons2()
+
+    def bind_buttons(self):
+        &#34;&#34;&#34;Bind buttons from first menu.&#34;&#34;&#34;
+        self.button1.bind(&#34;&lt;Button&gt;&#34;, self.log_in_menu)
+        self.button2.bind(&#34;&lt;Button&gt;&#34;, self.register_user_menu)
+        self.window.mainloop()
+
+    def bind_buttons2(self):
+        &#34;&#34;&#34;Bind buttons regarding activities.&#34;&#34;&#34;
+        self.button3.bind(&#34;&lt;Button&gt;&#34;, self.input_activity)
+        self.button4.bind(&#34;&lt;Button&gt;&#34;, self.input_activity_delete)
+        self.view_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.schedule_options)
+        self.window.mainloop()
+
+    def get_activity_data(self, event):
+        &#34;&#34;&#34;Get data from text fields for activity creation.&#34;&#34;&#34;
+        activities_activity = self.activity.get()
+        activities_time = self.time.get()
+        self.prio = self.clicked.get()
+        self.activities_object = activities.Activities(
+            activities_activity, self.prio, activities_time, self.user_object.username
+        )
+        if activities_activity == &#39;&#39; or activities_time == &#39;&#39; or not activities_time.isdigit():
+            self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+            self.empty_field.pack()
+        else:
+            self.user_dao_handler.create_activity(self.activities_object)
+            self.welcome_window.destroy()
+            self.welcome(self.user_object.name)
+
+    def input_activity(self, event):
+        &#34;&#34;&#34;Display menu for creating activity.&#34;&#34;&#34;
+        self.button3.destroy()
+        self.button4.destroy()
+        self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text=&#39;Back&#39;)
+        self.return_button.pack()
+        self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+        label_activity = tk.Label(text=&#34;Name of activity:&#34;)
+        label_activity.pack()
+        self.activity = tk.Entry(width=50)
+        self.activity.pack()
+        label_time = tk.Label(text=&#34;Hours of work:&#34;)
+        label_time.pack()
+        self.time = tk.Entry(width=50)
+        self.time.pack()
+        label_prio = tk.Label(text=&#34;Priority:&#34;)
+        label_prio.pack()
+        self.clicked = tk.StringVar(label_prio)
+        option_list = [&#34;Very important&#34;, &#34;Important&#34;, &#34;Not so important&#34;]
+        self.clicked.set(option_list[0])
+        drop = tk.OptionMenu(label_prio, self.clicked, *option_list)
+        drop.pack()
+        self.button5 = tk.Button(label_prio, text=&#34;Confirm&#34;)
+        self.button5.pack()
+        self.button5.bind(&#34;&lt;Button&gt;&#34;, self.get_activity_data)
+        label_prio.mainloop()
+
+    def get_activity_data_delete(self, event):
+        &#34;&#34;&#34;Get selected activity for deletion and delete it.&#34;&#34;&#34;
+        activities_activity_delete = self.clicked.get()
+        partitioned_string_activity = activities_activity_delete.partition(&#34; &#34;)
+        activities_object = activities.Activities(
+            partitioned_string_activity[0], &#34;test&#34;, &#34;test1&#34;, &#34;test3&#34;
+        )
+        self.user_dao_handler.delete_activity(activities_object, self.user_object)
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def input_activity_delete(self, event):
+        &#34;&#34;&#34;Display menu for activity deletion.&#34;&#34;&#34;
+        self.button3.destroy()
+        self.button4.destroy()
+        self.view_schedule_button.destroy()
+        self.return_button = tk.Button(text=&#39;Back&#39;)
+        self.return_button.pack()
+        self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+        label_activity = tk.Label(text=&#34;Choose an activity to delete:&#34;)
+        label_activity.pack()
+        dropdown = tk.Label()
+        dropdown.pack()
+        activity_tuple_list = self.user_dao_handler.get_activities(self.user_object)
+        activity_str_list = []
+
+        for activity in activity_tuple_list:
+            activity_string = (activity[0] + &#34; | &#34; + activity[1] + &#34; | &#34; +
+                               str(activity[2]) + &#34;hour(s)&#34;)
+            activity_str_list.append(activity_string)
+
+        self.clicked = tk.StringVar(dropdown)
+        self.clicked.set(&#34;Click to see your activities&#34;)
+        drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list) # pylint:disable=no-value-for-parameter
+        drop.pack()
+        self.button6 = tk.Button(text=&#34;Delete&#34;)
+        self.button6.pack()
+        self.button6.bind(
+            &#34;&lt;Button&gt;&#34;, lambda event: self.get_activity_data_delete(&#34;Delete&#34;)
+        )
+        label_activity.mainloop()
+
+
+    def schedule_options(self, event):
+        &#34;&#34;&#34;Display schedule options menu.&#34;&#34;&#34;
+        self.welcome_window.destroy()
+        self.option_window = tk.Tk()
+        self.start_time_label = tk.Label(text=&#39;When to start the day:&#39;)
+        self.start_time_label.pack()
+        self.start_time = tk.Entry(width=50)
+        self.start_time.pack()
+        self.end_time_label = tk.Label(text=&#39;When to end the day:&#39;)
+        self.end_time_label.pack()
+        self.end_time = tk.Entry(width=50)
+        self.end_time.pack()
+        self.lunch_time_label = tk.Label(text=&#39;How long is lunch&#39;)
+        self.lunch_time_label.pack()
+        self.lunch_time = tk.Entry(width=50)
+        self.lunch_time.pack()
+        self.confirm_button = tk.Button(text=&#39;Confirm&#39;)
+        self.bind_option_button()
+
+    def bind_option_button(self):
+        &#34;&#34;&#34;Bind option buttons.&#34;&#34;&#34;
+        self.confirm_button.pack()
+        self.confirm_button.bind(&#39;&lt;Button&gt;&#39;, self.check_options)
+        self.option_window.mainloop()
+
+    def check_options(self, event):
+        &#34;&#34;&#34;Get options data.&#34;&#34;&#34;
+        try:
+            self.start = self.start_time.get()
+            self.end = self.end_time.get()
+            self.lunch_hours = self.lunch_time.get()
+            if int(self.start) &gt; int(self.end) or int(self.lunch_hours) &lt; 0:
+                self.option_window.destroy()
+                self.welcome(self.user_object.name)
+            else:
+                self.option_window.destroy()
+                self.schedule()
+        except Exception: # pylint:disable=broad-exception-caught
+            self.option_window.destroy()
+            self.welcome(self.user_object.name)
+
+    def reset_schedule(self, event):
+        &#34;&#34;&#34;Reset schedule window.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.schedule()
+
+    def return_to_welcome(self, event):
+        &#34;&#34;&#34;Return to welcome window.&#34;&#34;&#34;
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def schedule(self):
+        &#34;&#34;&#34;Display schedule.&#34;&#34;&#34;
+        self.schedule_window = tk.Tk(className=&#34;Schedule&#34;)
+        schedule_width = &#34;1000&#34;
+        schedule_height = &#34;500&#34;
+        self.schedule_window.geometry(schedule_width+&#34;x&#34;+schedule_height)
+        back_button = tk.Button(text=&#34;Back&#34;)
+        back_button.place(relx=0.95, rely=0, anchor=&#39;ne&#39;)
+        back_button.bind(&#34;&lt;Button&gt;&#34;, self.go_back_schedule)
+        generate_schedule_button = tk.Button(text=&#34;Generate a new schedule&#34;)
+        generate_schedule_button.place(relx=0.9, rely=0, anchor=&#39;ne&#39;)
+        generate_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.generate_new_schedule)
+
+        start_day_time = int(self.start)
+        end_day_time = int(self.end)
+        wake_hours = end_day_time - start_day_time
+        self.user_schedule = schedule.Schedule(
+            self.user_dao_handler.get_activities(self.user_object),
+            wake_hours)
+
+        stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
+        if stored_schedule == []:
+            self.user_schedule.sort_activities()
+            self.schedule_handler.create_schedule(self.user_schedule.activities,
+                                                  self.user_object.username)
+        else:
+            # Reset user_schedule dictionaries before loading stored schedule
+            self.user_schedule.time_per_day = {
+            &#34;Monday&#34; : self.user_schedule.wake_hours,
+            &#34;Tuesday&#34; : self.user_schedule.wake_hours,
+            &#34;Wednesday&#34; : self.user_schedule.wake_hours,
+            &#34;Thursday&#34; : self.user_schedule.wake_hours,
+            &#34;Friday&#34; : self.user_schedule.wake_hours,
+            &#34;Saturday&#34; : self.user_schedule.wake_hours,
+            &#34;Sunday&#34; : self.user_schedule.wake_hours
+            }
+            self.user_schedule.days = {
+            &#34;Monday&#34; : [],
+            &#34;Tuesday&#34; : [],
+            &#34;Wednesday&#34; : [],
+            &#34;Thursday&#34; : [],
+            &#34;Friday&#34; : [],
+            &#34;Saturday&#34; : [],
+            &#34;Sunday&#34; : []
+            }
+            sorted(stored_schedule, key=lambda scheduled_activity: scheduled_activity[2])
+            temp_activties = []
+            for scheduled_activity in stored_schedule:
+                for act in self.user_schedule.activities:
+                    if scheduled_activity[1] == act[3]:
+                        temp_activties.append(act)
+
+
+            self.user_schedule.activities = temp_activties
+        self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
+        if not self.user_schedule.all_planned:
+            error_msg = (&#34;Some activities were not planned, &#34;
+                        &#34;since there is not enough time!&#34;)
+            not_all_planned_label = tk.Label(text=error_msg)
+            not_all_planned_label.pack()
+        self.week_days = [
+
+            &#34;Monday&#34;,
+            &#34;Tuesday&#34;,
+            &#34;Wednesday&#34;,
+            &#34;Thursday&#34;,
+            &#34;Friday&#34;,
+            &#34;Saturday&#34;,
+            &#34;Sunday&#34;
+        ]
+        week_labels = []
+        activity_labels = []
+        hour_labels = []
+        hours_head = tk.Label(text=&#34;Time&#34;, font=&#39;bold&#39;)
+        hours_head.place(relx=0, rely=0.05)
+        for hour in range(0, wake_hours+1):
+            hour_labels.append(tk.Label(text=start_day_time+hour))
+            hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)),
+                                  anchor=&#39;nw&#39;, width=120, height=40)
+            hour_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+        for label in hour_labels:
+            label.config(anchor=&#39;n&#39;)
+        for day_index in range(0, 7):
+            week_labels.append(tk.Label(text=self.week_days[day_index], font=&#39;bold&#39;))
+            week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor=&#39;nw&#39;)
+            gray_background = False
+            start_rely = 75/int(schedule_height) # 0.15 with height 500
+            activity_width = 120 # width of activity in schedule in px
+            activity_height = 40 # height of activity in schedule in px for one hour
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
+                activity_labels.append(tk.Label(text=activity[0]))
+                activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor=&#39;nw&#39;,
+                                          width=activity_width, height=activity_height*activity[2])
+                start_rely += activity_height*activity[2]/int(schedule_height)
+                if gray_background:
+                    activity_labels[-1].config(bg=&#34;gray51&#34;, fg=&#34;white&#34;,
+                                               borderwidth=1, relief=&#34;solid&#34;)
+                    gray_background = False
+                elif not gray_background:
+                    activity_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+                    gray_background = True
+        self.calculate_activity_times(start_day_time)
+        d_t = datetime.now()
+        for index, activity in enumerate(self.user_schedule.days[d_t.strftime(&#39;%A&#39;)]):
+            hours = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][:2]
+            minutes = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][3:]
+            activiy_dt_object = datetime.now().replace(hour=int(hours),
+                                                       minute=int(minutes),
+                                                       second=0,
+                                                       microsecond=0)
+            time_diff = activiy_dt_object - datetime.now()
+            seconds_til_activity = time_diff.total_seconds()
+            self.schedule_window.after(int(seconds_til_activity * 1000),
+                                       self.display_notification, activity[0])
+        self.loop_window()
+
+
+    def loop_window(self):
+        &#34;&#34;&#34;Loop schedule window.&#34;&#34;&#34;
+        self.schedule_window.mainloop()
+
+    def calculate_activity_times(self, start_day_time):
+        &#34;&#34;&#34;Calculate times used for notifications.&#34;&#34;&#34;
+        self.activity_times = {
+            &#34;Monday&#34; : [],
+            &#34;Tuesday&#34; : [],
+            &#34;Wednesday&#34; : [],
+            &#34;Thursday&#34; : [],
+            &#34;Friday&#34; : [],
+            &#34;Saturday&#34; : [],
+            &#34;Sunday&#34; : []
+            }
+        for day_index in range(0,7):
+            time_since_day_start = -1
+            for activity in self.user_schedule.days[self.week_days[day_index]]:
+                time_hour = start_day_time + time_since_day_start
+                time_since_day_start += activity[2]
+                self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+&#34;:45&#34;)
+
+    def display_notification(self, activity):
+        &#34;&#34;&#34;Display short notification before activity start.&#34;&#34;&#34;
+        self.notification_window = tk.Tk(className=&#34;Reminder for &#34; + activity)
+        noti_width = &#34;200&#34;
+        noti_height = &#34;50&#34;
+        self.notification_window.geometry(noti_width+&#34;x&#34;+noti_height)
+        activity_label = tk.Label(self.notification_window, text=f&#34;{activity} is starting soon!&#34;)
+        activity_label.config(fg=&#39;red&#39;)
+        activity_label.pack()
+        self.notification_window.after(10000, self.notification_window.destroy)
+        self.notification_window.mainloop()
+
+
+    def go_back_schedule(self, event):
+        &#34;&#34;&#34;Go back from schedule window.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.welcome(self.user_object.name)
+
+    def generate_new_schedule(self, event):
+        &#34;&#34;&#34;Destroy schedule window and delete current schedule.&#34;&#34;&#34;
+        self.schedule_window.destroy()
+        self.schedule_handler.delete_schedule(self.user_object.username)
+        self.schedule()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="interface.Interface.bind_buttons"><code class="name flex">
+<span>def <span class="ident">bind_buttons</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bind buttons from first menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bind_buttons(self):
+    &#34;&#34;&#34;Bind buttons from first menu.&#34;&#34;&#34;
+    self.button1.bind(&#34;&lt;Button&gt;&#34;, self.log_in_menu)
+    self.button2.bind(&#34;&lt;Button&gt;&#34;, self.register_user_menu)
+    self.window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.bind_buttons2"><code class="name flex">
+<span>def <span class="ident">bind_buttons2</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bind buttons regarding activities.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bind_buttons2(self):
+    &#34;&#34;&#34;Bind buttons regarding activities.&#34;&#34;&#34;
+    self.button3.bind(&#34;&lt;Button&gt;&#34;, self.input_activity)
+    self.button4.bind(&#34;&lt;Button&gt;&#34;, self.input_activity_delete)
+    self.view_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.schedule_options)
+    self.window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.bind_option_button"><code class="name flex">
+<span>def <span class="ident">bind_option_button</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bind option buttons.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bind_option_button(self):
+    &#34;&#34;&#34;Bind option buttons.&#34;&#34;&#34;
+    self.confirm_button.pack()
+    self.confirm_button.bind(&#39;&lt;Button&gt;&#39;, self.check_options)
+    self.option_window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.calculate_activity_times"><code class="name flex">
+<span>def <span class="ident">calculate_activity_times</span></span>(<span>self, start_day_time)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate times used for notifications.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_activity_times(self, start_day_time):
+    &#34;&#34;&#34;Calculate times used for notifications.&#34;&#34;&#34;
+    self.activity_times = {
+        &#34;Monday&#34; : [],
+        &#34;Tuesday&#34; : [],
+        &#34;Wednesday&#34; : [],
+        &#34;Thursday&#34; : [],
+        &#34;Friday&#34; : [],
+        &#34;Saturday&#34; : [],
+        &#34;Sunday&#34; : []
+        }
+    for day_index in range(0,7):
+        time_since_day_start = -1
+        for activity in self.user_schedule.days[self.week_days[day_index]]:
+            time_hour = start_day_time + time_since_day_start
+            time_since_day_start += activity[2]
+            self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+&#34;:45&#34;)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.check_options"><code class="name flex">
+<span>def <span class="ident">check_options</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get options data.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_options(self, event):
+    &#34;&#34;&#34;Get options data.&#34;&#34;&#34;
+    try:
+        self.start = self.start_time.get()
+        self.end = self.end_time.get()
+        self.lunch_hours = self.lunch_time.get()
+        if int(self.start) &gt; int(self.end) or int(self.lunch_hours) &lt; 0:
+            self.option_window.destroy()
+            self.welcome(self.user_object.name)
+        else:
+            self.option_window.destroy()
+            self.schedule()
+    except Exception: # pylint:disable=broad-exception-caught
+        self.option_window.destroy()
+        self.welcome(self.user_object.name)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.destroy_window"><code class="name flex">
+<span>def <span class="ident">destroy_window</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Destroy opened window and display menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def destroy_window(self):
+    &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+    self.window.destroy()
+    self.display_menu()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.display_menu"><code class="name flex">
+<span>def <span class="ident">display_menu</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display first menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def display_menu(self):
+    &#34;&#34;&#34;Display first menu.&#34;&#34;&#34;
+    self.window = tk.Tk()
+    self.window.geometry(&#34;250x250&#34;)
+    self.greeting = tk.Label(text=&#34;Hello&#34;)
+    self.greeting.pack()
+    self.button1 = tk.Button(text=&#34;Log in&#34;)
+    self.button2 = tk.Button(text=&#34;Register&#34;)
+    self.button1.pack()
+    self.button2.pack()
+    self.bind_buttons()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.display_notification"><code class="name flex">
+<span>def <span class="ident">display_notification</span></span>(<span>self, activity)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display short notification before activity start.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def display_notification(self, activity):
+    &#34;&#34;&#34;Display short notification before activity start.&#34;&#34;&#34;
+    self.notification_window = tk.Tk(className=&#34;Reminder for &#34; + activity)
+    noti_width = &#34;200&#34;
+    noti_height = &#34;50&#34;
+    self.notification_window.geometry(noti_width+&#34;x&#34;+noti_height)
+    activity_label = tk.Label(self.notification_window, text=f&#34;{activity} is starting soon!&#34;)
+    activity_label.config(fg=&#39;red&#39;)
+    activity_label.pack()
+    self.notification_window.after(10000, self.notification_window.destroy)
+    self.notification_window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.generate_new_schedule"><code class="name flex">
+<span>def <span class="ident">generate_new_schedule</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Destroy schedule window and delete current schedule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_new_schedule(self, event):
+    &#34;&#34;&#34;Destroy schedule window and delete current schedule.&#34;&#34;&#34;
+    self.schedule_window.destroy()
+    self.schedule_handler.delete_schedule(self.user_object.username)
+    self.schedule()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.get_activity_data"><code class="name flex">
+<span>def <span class="ident">get_activity_data</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get data from text fields for activity creation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_activity_data(self, event):
+    &#34;&#34;&#34;Get data from text fields for activity creation.&#34;&#34;&#34;
+    activities_activity = self.activity.get()
+    activities_time = self.time.get()
+    self.prio = self.clicked.get()
+    self.activities_object = activities.Activities(
+        activities_activity, self.prio, activities_time, self.user_object.username
+    )
+    if activities_activity == &#39;&#39; or activities_time == &#39;&#39; or not activities_time.isdigit():
+        self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+        self.empty_field.pack()
+    else:
+        self.user_dao_handler.create_activity(self.activities_object)
+        self.welcome_window.destroy()
+        self.welcome(self.user_object.name)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.get_activity_data_delete"><code class="name flex">
+<span>def <span class="ident">get_activity_data_delete</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get selected activity for deletion and delete it.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_activity_data_delete(self, event):
+    &#34;&#34;&#34;Get selected activity for deletion and delete it.&#34;&#34;&#34;
+    activities_activity_delete = self.clicked.get()
+    partitioned_string_activity = activities_activity_delete.partition(&#34; &#34;)
+    activities_object = activities.Activities(
+        partitioned_string_activity[0], &#34;test&#34;, &#34;test1&#34;, &#34;test3&#34;
+    )
+    self.user_dao_handler.delete_activity(activities_object, self.user_object)
+    self.welcome_window.destroy()
+    self.welcome(self.user_object.name)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.get_register_data"><code class="name flex">
+<span>def <span class="ident">get_register_data</span></span>(<span>self, event, action_type)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get data from text fields to register new user.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_register_data(self, event, action_type):
+    &#34;&#34;&#34;Get data from text fields to register new user.&#34;&#34;&#34;
+    self.user_username = self.username.get()
+    self.user_password = self.password.get()
+    if action_type == &#34;register&#34;:
+        self.user_name = self.name.get()
+        self.user_object = user.User(
+            self.user_username, self.user_name, self.user_password
+        )
+        if self.user_username == &#39;&#39; or self.user_password == &#39;&#39; or self.user_name == &#39;&#39;:
+            self.empty_field = tk.Label(text=&#34;One or more field(s) are left empty&#34;)
+            self.empty_field.pack()
+        else:
+            self.user_dao_handler.create_user(self.user_object)
+            self.destroy_window()
+
+    elif action_type == &#34;login&#34;:
+        if self.user_username == &#34;&#34; or self.user_password == &#34;&#34;:
+            self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+            self.invalid_login.pack()
+            self.window.after(5000, self.invalid_login.destroy)
+        else:
+            self.result = self.user_dao_handler.get_user_by_username(
+                self.user_username, self.user_password
+        )
+
+            if self.result is not False:
+                self.user_object = user.User(self.result[0], self.result[1], &#34;&#34;)
+                try:
+                    if self.window.state() == &#39;normal&#39;:
+                        self.window.destroy()
+                except Exception: # pylint:disable=broad-exception-caught
+                    print(&#34;Tested&#34;)
+                self.welcome(self.user_object.name)
+            else:
+                self.invalid_login = tk.Label(text=&#34;Invalid login information&#34;)
+                self.invalid_login.pack()
+                self.window.after(5000, self.invalid_login.destroy)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.go_back_schedule"><code class="name flex">
+<span>def <span class="ident">go_back_schedule</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Go back from schedule window.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def go_back_schedule(self, event):
+    &#34;&#34;&#34;Go back from schedule window.&#34;&#34;&#34;
+    self.schedule_window.destroy()
+    self.welcome(self.user_object.name)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.input_activity"><code class="name flex">
+<span>def <span class="ident">input_activity</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display menu for creating activity.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_activity(self, event):
+    &#34;&#34;&#34;Display menu for creating activity.&#34;&#34;&#34;
+    self.button3.destroy()
+    self.button4.destroy()
+    self.view_schedule_button.destroy()
+    self.return_button = tk.Button(text=&#39;Back&#39;)
+    self.return_button.pack()
+    self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+    label_activity = tk.Label(text=&#34;Name of activity:&#34;)
+    label_activity.pack()
+    self.activity = tk.Entry(width=50)
+    self.activity.pack()
+    label_time = tk.Label(text=&#34;Hours of work:&#34;)
+    label_time.pack()
+    self.time = tk.Entry(width=50)
+    self.time.pack()
+    label_prio = tk.Label(text=&#34;Priority:&#34;)
+    label_prio.pack()
+    self.clicked = tk.StringVar(label_prio)
+    option_list = [&#34;Very important&#34;, &#34;Important&#34;, &#34;Not so important&#34;]
+    self.clicked.set(option_list[0])
+    drop = tk.OptionMenu(label_prio, self.clicked, *option_list)
+    drop.pack()
+    self.button5 = tk.Button(label_prio, text=&#34;Confirm&#34;)
+    self.button5.pack()
+    self.button5.bind(&#34;&lt;Button&gt;&#34;, self.get_activity_data)
+    label_prio.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.input_activity_delete"><code class="name flex">
+<span>def <span class="ident">input_activity_delete</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display menu for activity deletion.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_activity_delete(self, event):
+    &#34;&#34;&#34;Display menu for activity deletion.&#34;&#34;&#34;
+    self.button3.destroy()
+    self.button4.destroy()
+    self.view_schedule_button.destroy()
+    self.return_button = tk.Button(text=&#39;Back&#39;)
+    self.return_button.pack()
+    self.return_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_welcome)
+    label_activity = tk.Label(text=&#34;Choose an activity to delete:&#34;)
+    label_activity.pack()
+    dropdown = tk.Label()
+    dropdown.pack()
+    activity_tuple_list = self.user_dao_handler.get_activities(self.user_object)
+    activity_str_list = []
+
+    for activity in activity_tuple_list:
+        activity_string = (activity[0] + &#34; | &#34; + activity[1] + &#34; | &#34; +
+                           str(activity[2]) + &#34;hour(s)&#34;)
+        activity_str_list.append(activity_string)
+
+    self.clicked = tk.StringVar(dropdown)
+    self.clicked.set(&#34;Click to see your activities&#34;)
+    drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list) # pylint:disable=no-value-for-parameter
+    drop.pack()
+    self.button6 = tk.Button(text=&#34;Delete&#34;)
+    self.button6.pack()
+    self.button6.bind(
+        &#34;&lt;Button&gt;&#34;, lambda event: self.get_activity_data_delete(&#34;Delete&#34;)
+    )
+    label_activity.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.input_menu"><code class="name flex">
+<span>def <span class="ident">input_menu</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display menu to log in.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_menu(self):
+    &#34;&#34;&#34;Display menu to log in.&#34;&#34;&#34;
+    self.greeting.destroy()
+    self.button1.destroy()
+    self.button2.destroy()
+    self.label_username = tk.Label(text=&#34;Username:&#34;)
+    self.label_username.pack()
+    self.username = tk.Entry(width=50)
+    self.username.pack()
+    self.label_password = tk.Label(text=&#34;Password:&#34;)
+    self.label_password.pack()
+    self.password = tk.Entry(width=50)
+    self.password.pack()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.log_in_menu"><code class="name flex">
+<span>def <span class="ident">log_in_menu</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display login menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def log_in_menu(self, event):
+    &#34;&#34;&#34;Display login menu.&#34;&#34;&#34;
+    self.header = tk.Label(text=&#34;Log in&#34;)
+    self.header.pack()
+    self.back_button = tk.Button(text=&#39;Back&#39;)
+    self.back_button.pack()
+    self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+    self.input_menu()
+    self.log_in = tk.Button(text=&#34;Log In&#34;)
+    self.log_in.pack()
+    self.log_in.bind(
+        &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;login&#34;)
+    )</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.loop_window"><code class="name flex">
+<span>def <span class="ident">loop_window</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Loop schedule window.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def loop_window(self):
+    &#34;&#34;&#34;Loop schedule window.&#34;&#34;&#34;
+    self.schedule_window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.register_user_menu"><code class="name flex">
+<span>def <span class="ident">register_user_menu</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display register menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def register_user_menu(self, event):
+    &#34;&#34;&#34;Display register menu.&#34;&#34;&#34;
+    self.header = tk.Label(text=&#34;Register new user&#34;)
+    self.header.pack()
+    self.back_button = tk.Button(text=&#39;Back&#39;)
+    self.back_button.pack()
+    self.back_button.bind(&#34;&lt;Button&gt;&#34;, self.return_to_main_page)
+    self.input_menu()
+    self.label_name = tk.Label(text=&#34;Name:&#34;)
+    self.label_name.pack()
+    self.name = tk.Entry(width=50)
+    self.name.pack()
+    self.register = tk.Button(text=&#34;Register&#34;)
+    self.register.pack()
+    self.register.bind(
+        &#34;&lt;Button&gt;&#34;, lambda event: self.get_register_data(event, &#34;register&#34;)
+    )</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.reset_schedule"><code class="name flex">
+<span>def <span class="ident">reset_schedule</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reset schedule window.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_schedule(self, event):
+    &#34;&#34;&#34;Reset schedule window.&#34;&#34;&#34;
+    self.schedule_window.destroy()
+    self.schedule()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.return_to_main_page"><code class="name flex">
+<span>def <span class="ident">return_to_main_page</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Destroy opened window and display menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def return_to_main_page(self, event):
+    &#34;&#34;&#34;Destroy opened window and display menu.&#34;&#34;&#34;
+    self.window.destroy()
+    self.display_menu()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.return_to_welcome"><code class="name flex">
+<span>def <span class="ident">return_to_welcome</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return to welcome window.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def return_to_welcome(self, event):
+    &#34;&#34;&#34;Return to welcome window.&#34;&#34;&#34;
+    self.welcome_window.destroy()
+    self.welcome(self.user_object.name)</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.schedule"><code class="name flex">
+<span>def <span class="ident">schedule</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display schedule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def schedule(self):
+    &#34;&#34;&#34;Display schedule.&#34;&#34;&#34;
+    self.schedule_window = tk.Tk(className=&#34;Schedule&#34;)
+    schedule_width = &#34;1000&#34;
+    schedule_height = &#34;500&#34;
+    self.schedule_window.geometry(schedule_width+&#34;x&#34;+schedule_height)
+    back_button = tk.Button(text=&#34;Back&#34;)
+    back_button.place(relx=0.95, rely=0, anchor=&#39;ne&#39;)
+    back_button.bind(&#34;&lt;Button&gt;&#34;, self.go_back_schedule)
+    generate_schedule_button = tk.Button(text=&#34;Generate a new schedule&#34;)
+    generate_schedule_button.place(relx=0.9, rely=0, anchor=&#39;ne&#39;)
+    generate_schedule_button.bind(&#34;&lt;Button&gt;&#34;, self.generate_new_schedule)
+
+    start_day_time = int(self.start)
+    end_day_time = int(self.end)
+    wake_hours = end_day_time - start_day_time
+    self.user_schedule = schedule.Schedule(
+        self.user_dao_handler.get_activities(self.user_object),
+        wake_hours)
+
+    stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
+    if stored_schedule == []:
+        self.user_schedule.sort_activities()
+        self.schedule_handler.create_schedule(self.user_schedule.activities,
+                                              self.user_object.username)
+    else:
+        # Reset user_schedule dictionaries before loading stored schedule
+        self.user_schedule.time_per_day = {
+        &#34;Monday&#34; : self.user_schedule.wake_hours,
+        &#34;Tuesday&#34; : self.user_schedule.wake_hours,
+        &#34;Wednesday&#34; : self.user_schedule.wake_hours,
+        &#34;Thursday&#34; : self.user_schedule.wake_hours,
+        &#34;Friday&#34; : self.user_schedule.wake_hours,
+        &#34;Saturday&#34; : self.user_schedule.wake_hours,
+        &#34;Sunday&#34; : self.user_schedule.wake_hours
+        }
+        self.user_schedule.days = {
+        &#34;Monday&#34; : [],
+        &#34;Tuesday&#34; : [],
+        &#34;Wednesday&#34; : [],
+        &#34;Thursday&#34; : [],
+        &#34;Friday&#34; : [],
+        &#34;Saturday&#34; : [],
+        &#34;Sunday&#34; : []
+        }
+        sorted(stored_schedule, key=lambda scheduled_activity: scheduled_activity[2])
+        temp_activties = []
+        for scheduled_activity in stored_schedule:
+            for act in self.user_schedule.activities:
+                if scheduled_activity[1] == act[3]:
+                    temp_activties.append(act)
+
+
+        self.user_schedule.activities = temp_activties
+    self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
+    if not self.user_schedule.all_planned:
+        error_msg = (&#34;Some activities were not planned, &#34;
+                    &#34;since there is not enough time!&#34;)
+        not_all_planned_label = tk.Label(text=error_msg)
+        not_all_planned_label.pack()
+    self.week_days = [
+
+        &#34;Monday&#34;,
+        &#34;Tuesday&#34;,
+        &#34;Wednesday&#34;,
+        &#34;Thursday&#34;,
+        &#34;Friday&#34;,
+        &#34;Saturday&#34;,
+        &#34;Sunday&#34;
+    ]
+    week_labels = []
+    activity_labels = []
+    hour_labels = []
+    hours_head = tk.Label(text=&#34;Time&#34;, font=&#39;bold&#39;)
+    hours_head.place(relx=0, rely=0.05)
+    for hour in range(0, wake_hours+1):
+        hour_labels.append(tk.Label(text=start_day_time+hour))
+        hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)),
+                              anchor=&#39;nw&#39;, width=120, height=40)
+        hour_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+    for label in hour_labels:
+        label.config(anchor=&#39;n&#39;)
+    for day_index in range(0, 7):
+        week_labels.append(tk.Label(text=self.week_days[day_index], font=&#39;bold&#39;))
+        week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor=&#39;nw&#39;)
+        gray_background = False
+        start_rely = 75/int(schedule_height) # 0.15 with height 500
+        activity_width = 120 # width of activity in schedule in px
+        activity_height = 40 # height of activity in schedule in px for one hour
+        for activity in self.user_schedule.days[self.week_days[day_index]]:
+            activity_labels.append(tk.Label(text=activity[0]))
+            activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor=&#39;nw&#39;,
+                                      width=activity_width, height=activity_height*activity[2])
+            start_rely += activity_height*activity[2]/int(schedule_height)
+            if gray_background:
+                activity_labels[-1].config(bg=&#34;gray51&#34;, fg=&#34;white&#34;,
+                                           borderwidth=1, relief=&#34;solid&#34;)
+                gray_background = False
+            elif not gray_background:
+                activity_labels[-1].config(borderwidth=1, relief=&#34;solid&#34;)
+                gray_background = True
+    self.calculate_activity_times(start_day_time)
+    d_t = datetime.now()
+    for index, activity in enumerate(self.user_schedule.days[d_t.strftime(&#39;%A&#39;)]):
+        hours = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][:2]
+        minutes = self.activity_times[d_t.strftime(&#39;%A&#39;)][index][3:]
+        activiy_dt_object = datetime.now().replace(hour=int(hours),
+                                                   minute=int(minutes),
+                                                   second=0,
+                                                   microsecond=0)
+        time_diff = activiy_dt_object - datetime.now()
+        seconds_til_activity = time_diff.total_seconds()
+        self.schedule_window.after(int(seconds_til_activity * 1000),
+                                   self.display_notification, activity[0])
+    self.loop_window()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.schedule_options"><code class="name flex">
+<span>def <span class="ident">schedule_options</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display schedule options menu.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def schedule_options(self, event):
+    &#34;&#34;&#34;Display schedule options menu.&#34;&#34;&#34;
+    self.welcome_window.destroy()
+    self.option_window = tk.Tk()
+    self.start_time_label = tk.Label(text=&#39;When to start the day:&#39;)
+    self.start_time_label.pack()
+    self.start_time = tk.Entry(width=50)
+    self.start_time.pack()
+    self.end_time_label = tk.Label(text=&#39;When to end the day:&#39;)
+    self.end_time_label.pack()
+    self.end_time = tk.Entry(width=50)
+    self.end_time.pack()
+    self.lunch_time_label = tk.Label(text=&#39;How long is lunch&#39;)
+    self.lunch_time_label.pack()
+    self.lunch_time = tk.Entry(width=50)
+    self.lunch_time.pack()
+    self.confirm_button = tk.Button(text=&#39;Confirm&#39;)
+    self.bind_option_button()</code></pre>
+</details>
+</dd>
+<dt id="interface.Interface.welcome"><code class="name flex">
+<span>def <span class="ident">welcome</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display welcome menu after logged in.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def welcome(self, name):
+    &#34;&#34;&#34;Display welcome menu after logged in.&#34;&#34;&#34;
+    self.welcome_window = tk.Tk()
+    self.welcome_window.geometry(&#34;250x250&#34;)
+    self.welcome_text = tk.Label(text=&#34;Welcome: &#34; + name)
+    self.welcome_text.pack()
+    self.button3 = tk.Button(text=&#34;Add activities&#34;)
+    self.button3.pack()
+    self.button4 = tk.Button(text=&#34;Remove activities&#34;)
+    self.button4.pack()
+    self.view_schedule_button = tk.Button(text=&#34;View schedule&#34;)
+    self.view_schedule_button.pack()
+    self.bind_buttons2()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="interface.Interface" href="#interface.Interface">Interface</a></code></h4>
+<ul class="">
+<li><code><a title="interface.Interface.bind_buttons" href="#interface.Interface.bind_buttons">bind_buttons</a></code></li>
+<li><code><a title="interface.Interface.bind_buttons2" href="#interface.Interface.bind_buttons2">bind_buttons2</a></code></li>
+<li><code><a title="interface.Interface.bind_option_button" href="#interface.Interface.bind_option_button">bind_option_button</a></code></li>
+<li><code><a title="interface.Interface.calculate_activity_times" href="#interface.Interface.calculate_activity_times">calculate_activity_times</a></code></li>
+<li><code><a title="interface.Interface.check_options" href="#interface.Interface.check_options">check_options</a></code></li>
+<li><code><a title="interface.Interface.destroy_window" href="#interface.Interface.destroy_window">destroy_window</a></code></li>
+<li><code><a title="interface.Interface.display_menu" href="#interface.Interface.display_menu">display_menu</a></code></li>
+<li><code><a title="interface.Interface.display_notification" href="#interface.Interface.display_notification">display_notification</a></code></li>
+<li><code><a title="interface.Interface.generate_new_schedule" href="#interface.Interface.generate_new_schedule">generate_new_schedule</a></code></li>
+<li><code><a title="interface.Interface.get_activity_data" href="#interface.Interface.get_activity_data">get_activity_data</a></code></li>
+<li><code><a title="interface.Interface.get_activity_data_delete" href="#interface.Interface.get_activity_data_delete">get_activity_data_delete</a></code></li>
+<li><code><a title="interface.Interface.get_register_data" href="#interface.Interface.get_register_data">get_register_data</a></code></li>
+<li><code><a title="interface.Interface.go_back_schedule" href="#interface.Interface.go_back_schedule">go_back_schedule</a></code></li>
+<li><code><a title="interface.Interface.input_activity" href="#interface.Interface.input_activity">input_activity</a></code></li>
+<li><code><a title="interface.Interface.input_activity_delete" href="#interface.Interface.input_activity_delete">input_activity_delete</a></code></li>
+<li><code><a title="interface.Interface.input_menu" href="#interface.Interface.input_menu">input_menu</a></code></li>
+<li><code><a title="interface.Interface.log_in_menu" href="#interface.Interface.log_in_menu">log_in_menu</a></code></li>
+<li><code><a title="interface.Interface.loop_window" href="#interface.Interface.loop_window">loop_window</a></code></li>
+<li><code><a title="interface.Interface.register_user_menu" href="#interface.Interface.register_user_menu">register_user_menu</a></code></li>
+<li><code><a title="interface.Interface.reset_schedule" href="#interface.Interface.reset_schedule">reset_schedule</a></code></li>
+<li><code><a title="interface.Interface.return_to_main_page" href="#interface.Interface.return_to_main_page">return_to_main_page</a></code></li>
+<li><code><a title="interface.Interface.return_to_welcome" href="#interface.Interface.return_to_welcome">return_to_welcome</a></code></li>
+<li><code><a title="interface.Interface.schedule" href="#interface.Interface.schedule">schedule</a></code></li>
+<li><code><a title="interface.Interface.schedule_options" href="#interface.Interface.schedule_options">schedule_options</a></code></li>
+<li><code><a title="interface.Interface.welcome" href="#interface.Interface.welcome">welcome</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>__init__ API documentation</title>
-<meta name="description" content="Planning and scheduling application" />
+<title>activities API documentation</title>
+<meta name="description" content="Handle activities." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,18 +19,25 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>__init__</code></h1>
+<h1 class="title">Module <code>activities</code></h1>
 </header>
 <section id="section-intro">
-<p>Planning and scheduling application</p>
+<p>Handle activities.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+<pre><code class="python">&#34;&#34;&#34;Handle activities.&#34;&#34;&#34;
 
-&#34;&#34;&#34;Planning and scheduling application&#34;&#34;&#34;</code></pre>
+class Activities:
+    &#34;&#34;&#34;Create object of Activities&#34;&#34;&#34;
+
+    def __init__(self, activity, prio, time, username):
+        &#34;&#34;&#34;Create activity object.&#34;&#34;&#34;
+        self.activity = activity
+        self.time = time
+        self.username = username
+        self.prio = prio</code></pre>
 </details>
 </section>
 <section>
@@ -40,6 +47,31 @@
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="activities.Activities"><code class="flex name class">
+<span>class <span class="ident">Activities</span></span>
+<span>(</span><span>activity, prio, time, username)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create object of Activities</p>
+<p>Create activity object.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Activities:
+    &#34;&#34;&#34;Create object of Activities&#34;&#34;&#34;
+
+    def __init__(self, activity, prio, time, username):
+        &#34;&#34;&#34;Create activity object.&#34;&#34;&#34;
+        self.activity = activity
+        self.time = time
+        self.username = username
+        self.prio = prio</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -48,6 +80,13 @@
 <ul></ul>
 </div>
 <ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="activities.Activities" href="#activities.Activities">Activities</a></code></h4>
+</li>
+</ul>
+</li>
 </ul>
 </nav>
 </main>
