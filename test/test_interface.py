@@ -128,6 +128,15 @@ class TestInterface(unittest.TestCase):
         self.assertEqual(self.interface.user_password, "TestPassword")
         mock_DAO_handler.create_user.assert_called_once()
 
+    @patch('planner.interface.Interface.display_menu')
+    def test_return_to_main_page(self, mock_menu):
+        mock_event = MagicMock()
+        mock_window = MagicMock()
+        test_object = interface.Interface()
+        test_object.window = mock_window()
+        test_object.return_to_main_page(mock_event)
+        mock_menu.assert_called_once()
+
     @patch("planner.interface.Interface.welcome")
     def test_get_register_data_login(self, mock_welcome):
         mock_username = MagicMock()
@@ -290,6 +299,121 @@ class TestInterface(unittest.TestCase):
         test_object.user_DAO_handler = mock_DAO_handler
         test_object.input_activity_delete(mock_event)
         mock_button.assert_called_with(text='Delete')
+
+    @patch('tkinter.Label')
+    @patch('tkinter.Button')
+    @patch('tkinter.Entry')
+    @patch('planner.interface.Interface.bind_option_button')
+    def test_schedule_options(self, mock_bind, mock_entry, mock_button, mock_label):
+        mock_welcome_window = MagicMock()
+        mock_event = MagicMock()
+        test_object = interface.Interface()
+        test_object.welcome_window = mock_welcome_window
+        test_object.schedule_options(mock_event)
+        mock_bind.assert_called_once()
+        mock_entry.assert_called_with(width=50)
+        mock_button.assert_called_with(text='Confirm')
+        mock_label.assert_called_with(text='How long is lunch')
+    
+    @patch('planner.interface.tk')
+    def test_bind_options_button(self, mock_tk):
+        mock_button = MagicMock()
+        mock_button.bind.return_value = 'return'
+        mock_window = MagicMock()
+        test_object = interface.Interface()
+        test_object.confirm_button = mock_button
+        test_object.option_window = mock_window
+        test_object.bind_option_button()
+        self.assertEqual(test_object.confirm_button.bind.return_value, 'return')
+    
+    @patch('planner.interface.Interface.schedule')
+    def test_check_options(self, mock_schedule):
+        mock_start = MagicMock()
+        mock_start.get.return_value = 8
+        mock_end = MagicMock()
+        mock_end.get.return_value = 16
+        mock_lunch = MagicMock()
+        mock_lunch.get.return_value = 1
+        mock_window = MagicMock()
+        mock_event = MagicMock()
+        test_object = interface.Interface()
+        test_object.start_time = mock_start
+        test_object.end_time = mock_end
+        test_object.lunch_time = mock_lunch
+        test_object.option_window = mock_window
+        test_object.check_options(mock_event)
+        self.assertEqual(test_object.start, 8)
+        self.assertEqual(test_object.end, 16)
+        self.assertEqual(test_object.lunch_hours, 1)
+
+    @patch('planner.interface.Interface.schedule')
+    def test_reset_schedule(self, mock_schedule):
+        mock_window = MagicMock()
+        mock_event = MagicMock()
+        test_object = interface.Interface()
+        test_object.schedule_window = mock_window
+        test_object.reset_schedule(mock_event)
+        mock_schedule.assert_called_once()
+    
+    @patch('planner.interface.Interface.welcome')
+    def test_return_to_welcome(self, mock_welcome):
+        mock_window = MagicMock()
+        mock_event = MagicMock()
+        mock_user = MagicMock()
+        test_object = interface.Interface()
+        test_object.welcome_window = mock_window
+        test_object.user_object = mock_user
+        test_object.return_to_welcome(mock_event)
+        mock_welcome.assert_called_once()
+    
+    @patch('planner.interface.Interface.loop_window')
+    def test_schedule(self, mock_loop):
+        mock_user = MagicMock()
+        mock_user_handler = MagicMock()
+        mock_user_handler.get_activities.return_value = [('test', 'Very important', 1, ''), ('test2', 'Important', 1, '')]
+        mock_schedule_handler = MagicMock()
+        mock_schedule_handler.get_schedule.return_value = [(1, '', 1)]
+        test_object = interface.Interface()
+        test_object.user_DAO_handler = mock_user_handler
+        test_object.schedule_handler = mock_schedule_handler
+        test_object.user_object = mock_user
+        test_object.start = 8
+        test_object.end = 16
+        test_object.lunch_hours = 12
+        test_object.schedule()
+        mock_loop.assert_called_once()
+    
+    def test_loop_window(self):
+        mock_window = MagicMock()
+        mock_window.mainloop.return_value = 'loop'
+        test_object = interface.Interface()
+        test_object.schedule_window = mock_window
+        test_object.loop_window()
+        self.assertEqual(test_object.schedule_window.mainloop.return_value, 'loop')
+    
+    @patch('planner.interface.Interface.welcome')
+    def test_go_back_schedule(self, mock_welcome):
+        mock_event = MagicMock()
+        mock_user = MagicMock()
+        mock_schedule_window = MagicMock()
+        test_object = interface.Interface()
+        test_object.schedule_window = mock_schedule_window
+        test_object.user_object = mock_user
+        test_object.go_back_schedule(mock_event)
+        mock_welcome.assert_called_once()
+    
+    @patch('planner.interface.Interface.schedule')
+    def test_generate_new_schedule(self, mock_schedule):
+        mock_event = MagicMock()
+        mock_schedule_window = MagicMock()
+        mock_schedule_handler = MagicMock()
+        mock_user_object = MagicMock()
+        test_object = interface.Interface()
+        test_object.schedule_window = mock_schedule_window
+        test_object.schedule_handler = mock_schedule_handler
+        test_object.user_object = mock_user_object
+        test_object.generate_new_schedule(mock_event)
+
 
     def tearDown(self):
         self.interface = None

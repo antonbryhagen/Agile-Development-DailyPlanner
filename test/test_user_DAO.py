@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from planner.user_DAO import user_DAO
 from planner.user import User
-from planner.Activities import Activities
+from planner.activities import Activities
 
 
 class Test_user_DAO(unittest.TestCase):
