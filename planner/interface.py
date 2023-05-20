@@ -330,7 +330,7 @@ class Interface:
 
             self.user_schedule.activities = temp_activties
         self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
-        if not user_schedule.all_planned:
+        if not self.user_schedule.all_planned:
             not_all_planned_label = tk.Label(text="Some activities were not planned, since there is not enough time!")
             not_all_planned_label.pack()
         self.week_days = [
