@@ -1,21 +1,24 @@
+"""Handle GUI and interface logic"""
+
 import tkinter as tk
-import re
 from datetime import datetime
 from planner import user
 from planner import user_DAO
 from planner import activities
 from planner import schedule_DAO
 from planner import schedule
-from tkinter import *
-from datetime import datetime, timedelta
+#from tkinter import *
 
 
 class Interface:
+    """Class for interface and GUI."""
     def __init__(self):
+        """Init interface object."""
         self.user_DAO_handler = user_DAO.user_DAO()
         self.schedule_handler = schedule_DAO.Schedule_DAO()
 
     def display_menu(self):
+        """Display first menu."""
         self.window = tk.Tk()
         self.window.geometry("250x250")
         self.greeting = tk.Label(text="Hello")
@@ -27,6 +30,7 @@ class Interface:
         self.bind_buttons()
 
     def log_in_menu(self, event):
+        """Display login menu."""
         self.header = tk.Label(text="Log in")
         self.header.pack()
         self.back_button = tk.Button(text='Back')
@@ -40,6 +44,7 @@ class Interface:
         )
 
     def register_user_menu(self, event):
+        """Display register menu."""
         self.header = tk.Label(text="Register new user")
         self.header.pack()
         self.back_button = tk.Button(text='Back')
@@ -57,6 +62,7 @@ class Interface:
         )
 
     def input_menu(self):
+        """Display menu to log in."""
         self.greeting.destroy()
         self.button1.destroy()
         self.button2.destroy()
@@ -70,6 +76,7 @@ class Interface:
         self.password.pack()
 
     def get_register_data(self, event, action_type):
+        """Get data from text fields to register new user."""
         self.user_username = self.username.get()
         self.user_password = self.password.get()
         if action_type == "register":
@@ -93,13 +100,13 @@ class Interface:
                 self.result = self.user_DAO_handler.get_user_by_username(
                     self.user_username, self.user_password
             )
-                
-                if self.result != False:
+
+                if self.result is not False:
                     self.user_object = user.User(self.result[0], self.result[1], "")
                     try:
                         if self.window.state() == 'normal':
                             self.window.destroy()
-                    except:
+                    except Exception:
                         print("Tested")
                     self.welcome(self.user_object.name)
                 else:
@@ -108,17 +115,19 @@ class Interface:
                     self.window.after(5000, self.invalid_login.destroy)
 
 
-    
+
     def return_to_main_page(self, event):
+        """Destroy opened window and display menu."""
         self.window.destroy()
         self.display_menu()
 
     def destroy_window(self):
+        """Destroy opened window and display menu."""
         self.window.destroy()
         self.display_menu()
 
     def welcome(self, name):
-        
+        """Display welcome menu after logged in."""
         self.welcome_window = tk.Tk()
         self.welcome_window.geometry("250x250")
         self.welcome_text = tk.Label(text="Welcome: " + name)
@@ -132,29 +141,20 @@ class Interface:
         self.bind_buttons2()
 
     def bind_buttons(self):
+        """Bind buttons from first menu."""
         self.button1.bind("<Button>", self.log_in_menu)
         self.button2.bind("<Button>", self.register_user_menu)
         self.window.mainloop()
 
     def bind_buttons2(self):
+        """Bind buttons regarding activities."""
         self.button3.bind("<Button>", self.input_activity)
         self.button4.bind("<Button>", self.input_activity_delete)
         self.view_schedule_button.bind("<Button>", self.schedule_options)
         self.window.mainloop()
 
-    # def add_activities_menu(self):
-    # header = tk.Label(text="Add activities")
-    # header.pack()
-    # label_activity = tk.Label(text='Activity:')
-    # label_activity.pack()
-    # self.activity = tk.Entry(width=50)
-    # self.activity.pack()
-    # self.add_activity = tk.Button(text="Add activity")
-    # self.add_activity.pack()
-    # self.add_activity.bind("<Button>", self.get_activity_data)
-    # self.window.mainloop()
-
     def get_activity_data(self, event):
+        """Get data from text fields for activity creation."""
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.PRIO = self.clicked.get()
@@ -170,6 +170,7 @@ class Interface:
             self.welcome(self.user_object.name)
 
     def input_activity(self, event):
+        """Display menu for creating activity."""
         self.button3.destroy()
         self.button4.destroy()
         self.view_schedule_button.destroy()
@@ -186,10 +187,10 @@ class Interface:
         self.time.pack()
         label_prio = tk.Label(text="Priority:")
         label_prio.pack()
-        self.clicked = StringVar(label_prio)
+        self.clicked = tk.StringVar(label_prio)
         optionList = ["Very important", "Important", "Not so important"]
         self.clicked.set(optionList[0])
-        drop = OptionMenu(label_prio, self.clicked, *optionList)
+        drop = tk.OptionMenu(label_prio, self.clicked, *optionList)
         drop.pack()
         self.button5 = tk.Button(label_prio, text="Confirm")
         self.button5.pack()
@@ -197,6 +198,7 @@ class Interface:
         label_prio.mainloop()
 
     def get_activity_data_delete(self, event):
+        """Get selected activity for deletion and delete it."""
         activities_activity_delete = self.clicked.get()
         partitioned_string_activity = activities_activity_delete.partition(" ")
         activities_object = activities.Activities(
@@ -207,6 +209,7 @@ class Interface:
         self.welcome(self.user_object.name)
 
     def input_activity_delete(self, event):
+        """Display menu for activity deletion."""
         self.button3.destroy()
         self.button4.destroy()
         self.view_schedule_button.destroy()
@@ -219,14 +222,15 @@ class Interface:
         dropdown.pack()
         activity_tuple_list = self.user_DAO_handler.get_activities(self.user_object)
         activity_str_list = []
-        
+
         for activity in activity_tuple_list:
-            activity_string = activity[0] + " | " + activity[1] + " | " + str(activity[2]) + "hour(s)"
+            activity_string = (activity[0] + " | " + activity[1] + " | " +
+                               str(activity[2]) + "hour(s)")
             activity_str_list.append(activity_string)
 
-        self.clicked = StringVar(dropdown)
+        self.clicked = tk.StringVar(dropdown)
         self.clicked.set("Click to see your activities")
-        drop = OptionMenu(dropdown, self.clicked, *activity_str_list)
+        drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list)
         drop.pack()
         self.button6 = tk.Button(text="Delete")
         self.button6.pack()
@@ -234,9 +238,10 @@ class Interface:
             "<Button>", lambda event: self.get_activity_data_delete("Delete")
         )
         label_activity.mainloop()
-    
+
 
     def schedule_options(self, event):
+        """Display schedule options menu."""
         self.welcome_window.destroy()
         self.option_window = tk.Tk()
         self.start_time_label = tk.Label(text='When to start the day:')
@@ -260,6 +265,7 @@ class Interface:
         self.option_window.mainloop()
 
     def check_options(self, event):
+        """Get options data."""
         try:
             self.start = self.start_time.get()
             self.end = self.end_time.get()
@@ -270,19 +276,22 @@ class Interface:
             else:
                 self.option_window.destroy()
                 self.schedule()
-        except:
+        except Exception:
             self.option_window.destroy()
             self.welcome(self.user_object.name)
-    
+
     def reset_schedule(self, event):
+        """Reset schedule window."""
         self.schedule_window.destroy()
         self.schedule()
-    
+
     def return_to_welcome(self, event):
+        """Return to welcome window."""
         self.welcome_window.destroy()
         self.welcome(self.user_object.name)
-    
+
     def schedule(self):
+        """Display schedule."""
         self.schedule_window = tk.Tk(className="Schedule")
         schedule_width = "1000"
         schedule_height = "500"
@@ -297,12 +306,15 @@ class Interface:
         start_day_time = int(self.start)
         end_day_time = int(self.end)
         wake_hours = end_day_time - start_day_time
-        self.user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
-        
+        self.user_schedule = schedule.Schedule(
+            self.user_DAO_handler.get_activities(self.user_object),
+            wake_hours)
+
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
         if stored_schedule == []:
             self.user_schedule.sort_activities()
-            self.schedule_handler.create_schedule(self.user_schedule.activities, self.user_object.username)
+            self.schedule_handler.create_schedule(self.user_schedule.activities,
+                                                  self.user_object.username)
         else:
             # Reset user_schedule dictionaries before loading stored schedule
             self.user_schedule.time_per_day = {
@@ -329,12 +341,14 @@ class Interface:
                 for act in self.user_schedule.activities:
                     if scheduled_activity[1] == act[3]:
                         temp_activties.append(act)
-                        
+
 
             self.user_schedule.activities = temp_activties
         self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
         if not self.user_schedule.all_planned:
-            not_all_planned_label = tk.Label(text="Some activities were not planned, since there is not enough time!")
+            error_msg = ("Some activities were not planned, "
+                        "since there is not enough time!")
+            not_all_planned_label = tk.Label(text=error_msg)
             not_all_planned_label.pack()
         self.week_days = [
 
@@ -353,23 +367,26 @@ class Interface:
         hours_head.place(relx=0, rely=0.05)
         for hour in range(0, wake_hours+1):
             hour_labels.append(tk.Label(text=start_day_time+hour))
-            hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)), anchor='nw', width=120, height=40)
+            hour_labels[-1].place(relx=0.0, rely=0.15+(hour*40/int(schedule_height)),
+                                  anchor='nw', width=120, height=40)
             hour_labels[-1].config(borderwidth=1, relief="solid")
         for label in hour_labels:
             label.config(anchor='n')
-        for day_index in range(0, 7): 
+        for day_index in range(0, 7):
             week_labels.append(tk.Label(text=self.week_days[day_index], font='bold'))
             week_labels[day_index].place(relx=0.12*(1+day_index), rely=0.05, anchor='nw')
             gray_background = False
-            start_rely = 75/int(schedule_height) # 0.15 with height 500, good starting point in y direction
+            start_rely = 75/int(schedule_height) # 0.15 with height 500
             activity_width = 120 # width of activity in schedule in px
             activity_height = 40 # height of activity in schedule in px for one hour
             for activity in self.user_schedule.days[self.week_days[day_index]]:
                 activity_labels.append(tk.Label(text=activity[0]))
-                activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw', width=activity_width, height=activity_height*activity[2])
+                activity_labels[-1].place(relx=0.12*(1+day_index), rely=start_rely, anchor='nw',
+                                          width=activity_width, height=activity_height*activity[2])
                 start_rely += activity_height*activity[2]/int(schedule_height)
                 if gray_background:
-                    activity_labels[-1].config(bg="gray51", fg="white", borderwidth=1, relief="solid")
+                    activity_labels[-1].config(bg="gray51", fg="white",
+                                               borderwidth=1, relief="solid")
                     gray_background = False
                 elif not gray_background:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
@@ -379,15 +396,16 @@ class Interface:
         for index, activity in enumerate(self.user_schedule.days[dt.strftime('%A')]):
             hours = self.activity_times[dt.strftime('%A')][index][:2]
             minutes = self.activity_times[dt.strftime('%A')][index][3:]
-            activiy_dt_object = datetime.now().replace(hour=int(hours), 
+            activiy_dt_object = datetime.now().replace(hour=int(hours),
                                                        minute=int(minutes),
-                                                       second=0, 
+                                                       second=0,
                                                        microsecond=0)
             time_diff = activiy_dt_object - datetime.now()
             seconds_til_activity = time_diff.total_seconds()
-            self.schedule_window.after(int(seconds_til_activity * 1000), self.display_notification, activity[0])
-
+            self.schedule_window.after(int(seconds_til_activity * 1000),
+                                       self.display_notification, activity[0])
         self.loop_window()
+
 
     def loop_window(self):
       self.schedule_window.mainloop()
@@ -410,8 +428,9 @@ class Interface:
                 time_hour = start_day_time + time_since_day_start
                 time_since_day_start += activity[2]
                 self.activity_times[self.week_days[day_index]].append(str(time_hour).zfill(2)+":45")
-        
+
     def display_notification(self, activity):
+        """Display short notification before activity start."""
         self.notification_window = tk.Tk(className="Reminder for " + activity)
         noti_width = "200"
         noti_height = "50"
@@ -424,10 +443,12 @@ class Interface:
 
 
     def go_back_schedule(self, event):
+        """Go back from schedule window."""
         self.schedule_window.destroy()
         self.welcome(self.user_object.name)
-    
+
     def generate_new_schedule(self, event):
+        """Destroy schedule window and delete current schedule."""
         self.schedule_window.destroy()
         self.schedule_handler.delete_schedule(self.user_object.username)
         self.schedule()

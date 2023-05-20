@@ -1,6 +1,9 @@
+"""Handle schedules."""
+
 import random
 
 class Schedule:
+    """Schedule class to sort activities."""
     def __init__(self, activities, wake_hours):
         """Create instance attributes for schedule."""
         self.activities = activities
@@ -24,11 +27,11 @@ class Schedule:
             "Saturday" : self.wake_hours,
             "Sunday" : self.wake_hours
         }
-    
+
     def sort_activities(self):
         """Sort the activties depending on priority and shuffle the order within each priority."""
         sorted_activities = []
-        
+
         importance_levels = {
             "Very important": [],
             "Important": [],
@@ -36,16 +39,18 @@ class Schedule:
         }
         for activity in self.activities:
             importance_levels[activity[1]].append(activity)
-        
+
         random.shuffle(importance_levels["Very important"])
         random.shuffle(importance_levels["Important"])
         random.shuffle(importance_levels["Not so important"])
-        
-        sorted_activities = importance_levels["Very important"] + importance_levels["Important"] + importance_levels["Not so important"]
+
+        sorted_activities = (importance_levels["Very important"] +
+                             importance_levels["Important"] +
+                             importance_levels["Not so important"])
         self.activities = sorted_activities
 
 
-    def generate_schedule(self, start_time, lunchtime): 
+    def generate_schedule(self, start_time, lunchtime):
         """Generate the schedule from sorted activties."""
         self.all_planned = True
         self.planned_days = {
@@ -64,14 +69,16 @@ class Schedule:
                         self.days[day].append(activity)
                         self.time_per_day[day] -= activity[2]
                         planned = True
-                        if self.planned_days[day] == False and start_time + self.wake_hours - self.time_per_day[day] > 12:
+                        if (self.planned_days[day] is False and
+                            start_time + self.wake_hours - self.time_per_day[day] > 12):
                             self.time_per_day[day] -= lunchtime
-                            self.days[day].append(('Lunch','Very important',lunchtime,'',)) 
+                            self.days[day].append(('Lunch','Very important',lunchtime,'',))
                             self.planned_days[day] = True
         planned_activites = 0
         activites = len(self.activities)
         for day in self.days:
             planned_activites += len(self.days[day])
-        if planned_activites < activites:
+        print(planned_activites)
+        print(activites)
+        if planned_activites-1 < activites:
             self.all_planned = False
-

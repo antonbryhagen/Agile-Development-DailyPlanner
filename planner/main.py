@@ -11,8 +11,8 @@ from planner import interface
 
 def main():
     """Execute the main program."""
-    ui = interface.Interface()
-    ui.display_menu()
+    u_i = interface.Interface()
+    u_i.display_menu()
 
 
 if __name__ == "__main__":
