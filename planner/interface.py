@@ -3,9 +3,9 @@
 import tkinter as tk
 from datetime import datetime
 from planner import user
-from planner import user_DAO
+from planner import user_dao
 from planner import activities
-from planner import schedule_DAO
+from planner import schedule_dao
 from planner import schedule
 #from tkinter import *
 
@@ -14,8 +14,8 @@ class Interface:
     """Class for interface and GUI."""
     def __init__(self):
         """Init interface object."""
-        self.user_DAO_handler = user_DAO.user_DAO()
-        self.schedule_handler = schedule_DAO.Schedule_DAO()
+        self.user_dao_handler = user_dao.UserDAO()
+        self.schedule_handler = schedule_dao.ScheduleDAO()
 
     def display_menu(self):
         """Display first menu."""
@@ -88,7 +88,7 @@ class Interface:
                 self.empty_field = tk.Label(text="One or more field(s) are left empty")
                 self.empty_field.pack()
             else:
-                self.user_DAO_handler.create_user(self.user_object)
+                self.user_dao_handler.create_user(self.user_object)
                 self.destroy_window()
 
         elif action_type == "login":
@@ -97,7 +97,7 @@ class Interface:
                 self.invalid_login.pack()
                 self.window.after(5000, self.invalid_login.destroy)
             else:
-                self.result = self.user_DAO_handler.get_user_by_username(
+                self.result = self.user_dao_handler.get_user_by_username(
                     self.user_username, self.user_password
             )
 
@@ -106,7 +106,7 @@ class Interface:
                     try:
                         if self.window.state() == 'normal':
                             self.window.destroy()
-                    except Exception:
+                    except Exception: # pylint:disable=broad-exception-caught
                         print("Tested")
                     self.welcome(self.user_object.name)
                 else:
@@ -157,15 +157,15 @@ class Interface:
         """Get data from text fields for activity creation."""
         activities_activity = self.activity.get()
         activities_time = self.time.get()
-        self.PRIO = self.clicked.get()
+        self.prio = self.clicked.get()
         self.activities_object = activities.Activities(
-            activities_activity, self.PRIO, activities_time, self.user_object.username
+            activities_activity, self.prio, activities_time, self.user_object.username
         )
         if activities_activity == '' or activities_time == '' or not activities_time.isdigit():
             self.empty_field = tk.Label(text="One or more field(s) are left empty")
             self.empty_field.pack()
         else:
-            self.user_DAO_handler.create_activity(self.activities_object)
+            self.user_dao_handler.create_activity(self.activities_object)
             self.welcome_window.destroy()
             self.welcome(self.user_object.name)
 
@@ -188,9 +188,9 @@ class Interface:
         label_prio = tk.Label(text="Priority:")
         label_prio.pack()
         self.clicked = tk.StringVar(label_prio)
-        optionList = ["Very important", "Important", "Not so important"]
-        self.clicked.set(optionList[0])
-        drop = tk.OptionMenu(label_prio, self.clicked, *optionList)
+        option_list = ["Very important", "Important", "Not so important"]
+        self.clicked.set(option_list[0])
+        drop = tk.OptionMenu(label_prio, self.clicked, *option_list)
         drop.pack()
         self.button5 = tk.Button(label_prio, text="Confirm")
         self.button5.pack()
@@ -204,7 +204,7 @@ class Interface:
         activities_object = activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
-        self.user_DAO_handler.delete_activity(activities_object, self.user_object)
+        self.user_dao_handler.delete_activity(activities_object, self.user_object)
         self.welcome_window.destroy()
         self.welcome(self.user_object.name)
 
@@ -220,7 +220,7 @@ class Interface:
         label_activity.pack()
         dropdown = tk.Label()
         dropdown.pack()
-        activity_tuple_list = self.user_DAO_handler.get_activities(self.user_object)
+        activity_tuple_list = self.user_dao_handler.get_activities(self.user_object)
         activity_str_list = []
 
         for activity in activity_tuple_list:
@@ -230,7 +230,7 @@ class Interface:
 
         self.clicked = tk.StringVar(dropdown)
         self.clicked.set("Click to see your activities")
-        drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list)
+        drop = tk.OptionMenu(dropdown, self.clicked, *activity_str_list) # pylint:disable=no-value-for-parameter
         drop.pack()
         self.button6 = tk.Button(text="Delete")
         self.button6.pack()
@@ -258,8 +258,9 @@ class Interface:
         self.lunch_time.pack()
         self.confirm_button = tk.Button(text='Confirm')
         self.bind_option_button()
-    
+
     def bind_option_button(self):
+        """Bind option buttons."""
         self.confirm_button.pack()
         self.confirm_button.bind('<Button>', self.check_options)
         self.option_window.mainloop()
@@ -276,7 +277,7 @@ class Interface:
             else:
                 self.option_window.destroy()
                 self.schedule()
-        except Exception:
+        except Exception: # pylint:disable=broad-exception-caught
             self.option_window.destroy()
             self.welcome(self.user_object.name)
 
@@ -307,7 +308,7 @@ class Interface:
         end_day_time = int(self.end)
         wake_hours = end_day_time - start_day_time
         self.user_schedule = schedule.Schedule(
-            self.user_DAO_handler.get_activities(self.user_object),
+            self.user_dao_handler.get_activities(self.user_object),
             wake_hours)
 
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
@@ -392,10 +393,10 @@ class Interface:
                     activity_labels[-1].config(borderwidth=1, relief="solid")
                     gray_background = True
         self.calculate_activity_times(start_day_time)
-        dt = datetime.now()
-        for index, activity in enumerate(self.user_schedule.days[dt.strftime('%A')]):
-            hours = self.activity_times[dt.strftime('%A')][index][:2]
-            minutes = self.activity_times[dt.strftime('%A')][index][3:]
+        d_t = datetime.now()
+        for index, activity in enumerate(self.user_schedule.days[d_t.strftime('%A')]):
+            hours = self.activity_times[d_t.strftime('%A')][index][:2]
+            minutes = self.activity_times[d_t.strftime('%A')][index][3:]
             activiy_dt_object = datetime.now().replace(hour=int(hours),
                                                        minute=int(minutes),
                                                        second=0,
@@ -408,8 +409,8 @@ class Interface:
 
 
     def loop_window(self):
-      self.schedule_window.mainloop()
-    
+        """Loop schedule window."""
+        self.schedule_window.mainloop()
 
     def calculate_activity_times(self, start_day_time):
         """Calculate times used for notifications."""

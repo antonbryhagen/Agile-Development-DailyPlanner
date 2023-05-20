@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch, Mock, MagicMock
 
-from planner import user_DAO
+from planner import user_dao
 from planner import user
 from planner import activities
 
@@ -18,7 +18,7 @@ class TestMain(unittest.TestCase):
         # TODO Check if the following user exists, if it does, delete it
         # before creating a new 
         
-        self.user_DAO_handler = user_DAO.user_DAO()
+        self.user_DAO_handler = user_dao.UserDAO()
         
         self.user_object = user.User('test', 'test', 'test')
         

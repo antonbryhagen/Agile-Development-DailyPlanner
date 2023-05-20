@@ -3,7 +3,7 @@
 import os
 import mysql.connector
 
-class Schedule_DAO:
+class ScheduleDAO:
     """Class for accessing schedule in db"""
     def __init__(self):
         """Create instance attributes for database connection."""

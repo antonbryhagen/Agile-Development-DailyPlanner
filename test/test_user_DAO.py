@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from planner.user_DAO import user_DAO
+from planner.user_dao import UserDAO
 from planner.user import User
 from planner.activities import Activities
 
@@ -10,7 +10,7 @@ class Test_user_DAO(unittest.TestCase):
 
     def test_init(self):
         """Init user_DAO test."""
-        test_user_DAO = user_DAO()
+        test_user_DAO = UserDAO()
         host = test_user_DAO.host
         database = test_user_DAO.database
         connection = test_user_DAO.connection
@@ -20,7 +20,7 @@ class Test_user_DAO(unittest.TestCase):
 
     def test_connect(self):
         """Testing if connected to database."""
-        connector = user_DAO()
+        connector = UserDAO()
         connector.connect()
         res = connector.connection
         exp = None
@@ -28,7 +28,7 @@ class Test_user_DAO(unittest.TestCase):
 
     def test_close(self):
         """Testing if disconnected from database."""
-        connector = user_DAO()
+        connector = UserDAO()
         connector.connect()
         connector.close()
         res = connector.connection
@@ -37,7 +37,7 @@ class Test_user_DAO(unittest.TestCase):
 
     def test_create_user(self):
         """Testing create_user method."""
-        test_user_DAO = user_DAO()
+        test_user_DAO = UserDAO()
         test_user = User("Test", "Test", "123")
         try:
             res = test_user_DAO.get_user_by_username("Test", "123")
@@ -58,7 +58,7 @@ class Test_user_DAO(unittest.TestCase):
 
     def test_get_user_by_username(self):
         """Testing get_user_by_username method."""
-        test_user_DAO = user_DAO()
+        test_user_DAO = UserDAO()
         try:
             user = test_user_DAO.get_user_by_username("Test", "123")
         except Exception:
@@ -73,7 +73,7 @@ class Test_user_DAO(unittest.TestCase):
         """Test create_activity method."""
         mock_cursor = MagicMock()
         mock_cursor.execute.return_value = "execute"
-        self.test_user_DAO = user_DAO()
+        self.test_user_DAO = UserDAO()
         self.test_user_DAO.cursor = mock_cursor
         test_activity = Activities("TestActivity", "Important", "2", "Test")
         self.test_user_DAO.create_activity(test_activity)
@@ -81,9 +81,9 @@ class Test_user_DAO(unittest.TestCase):
         self.assertEqual(mock_cursor.execute(), "execute")
         mock_cursor.execute.assert_called_once()
     
-    @patch('planner.user_DAO.user_DAO.connect')
+    @patch('planner.user_dao.UserDAO.connect')
     def test_get_activities(self, mock_connect):
-        test_object = user_DAO()
+        test_object = UserDAO()
         mock_user = MagicMock()
         mock_user.username.return_value = 'test'
         mock_connection = MagicMock()
@@ -97,7 +97,7 @@ class Test_user_DAO(unittest.TestCase):
         "Test delete_activity method."
         mock_cursor = MagicMock()
         mock_cursor.execute.return_value = "execute"
-        self.test_user_DAO = user_DAO()
+        self.test_user_DAO = UserDAO()
         self.test_user_DAO.cursor = mock_cursor
         mock_user = User('test', 'test', 'test')
         test_activity = Activities("TestActivity", "Important", "2", "Test")

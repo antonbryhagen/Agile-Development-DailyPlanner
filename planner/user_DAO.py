@@ -5,7 +5,7 @@ import mysql.connector
 import bcrypt
 
 
-class user_DAO:
+class UserDAO:
     """Class for accessing user database."""
 
     def __init__(self):
@@ -68,9 +68,9 @@ class user_DAO:
         create_activity_query = ("INSERT INTO activities "
                                  "(Activity, PRIO, Time, username) VALUES(%s, %s, %s, %s)")
         self.create_activity_values = (
-            activity.Activity,
-            activity.PRIO,
-            activity.Time,
+            activity.activity,
+            activity.prio,
+            activity.time,
             activity.username,
         )
         self.cursor.execute(create_activity_query, self.create_activity_values)
@@ -94,7 +94,7 @@ class user_DAO:
         """Delete activity in database using activity object."""
         self.connect()
         self.cursor = self.connection.cursor()
-        self.activity = activity.Activity
+        self.activity = activity.activity
         self.current_username = user_object.username
         self.list = []
         self.list.append(self.activity)

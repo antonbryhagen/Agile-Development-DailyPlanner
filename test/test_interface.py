@@ -117,7 +117,7 @@ class TestInterface(unittest.TestCase):
         self.interface.username = mock_username
         self.interface.password = mock_password
         self.interface.name = mock_name
-        self.interface.user_DAO_handler = mock_DAO_handler
+        self.interface.user_dao_handler = mock_DAO_handler
         mock_destroy_window.return_value = mock_destroy_win
 
         e = ""
@@ -149,7 +149,7 @@ class TestInterface(unittest.TestCase):
         mock_DAO_handler.get_user_by_username.return_value = ["TestUser", "Test"]
         self.interface.username = mock_username
         self.interface.password = mock_password
-        self.interface.user_DAO_handler = mock_DAO_handler
+        self.interface.user_dao_handler = mock_DAO_handler
         self.interface.user_object = mock_user_object
         mock_welcome.return_value = mock_welc
 
@@ -229,7 +229,7 @@ class TestInterface(unittest.TestCase):
         test_object.clicked = mock_clicked
         test_object.user_object = mock_user
         test_object.activities_object = mock_activities_object
-        test_object.user_DAO_handler = mock_user_DAO_handler
+        test_object.user_dao_handler = mock_user_DAO_handler
         test_object.welcome_window = mock_welcome_window
 
         test_object.get_activity_data(event)
@@ -273,7 +273,7 @@ class TestInterface(unittest.TestCase):
         mock_user = MagicMock()
         mock_name = 'name'
         test_object = interface.Interface()
-        test_object.user_DAO_handler = mock_dao_handler
+        test_object.user_dao_handler = mock_dao_handler
         test_object.welcome_window = mock_window
         test_object.user_object = mock_user
         test_object.user_object.name = mock_name
@@ -296,7 +296,7 @@ class TestInterface(unittest.TestCase):
         test_object.button4 = mock_buttons
         test_object.view_schedule_button = mock_schedule_button
         test_object.user_object = mock_user
-        test_object.user_DAO_handler = mock_DAO_handler
+        test_object.user_dao_handler = mock_DAO_handler
         test_object.input_activity_delete(mock_event)
         mock_button.assert_called_with(text='Delete')
 
@@ -374,7 +374,7 @@ class TestInterface(unittest.TestCase):
         mock_schedule_handler = MagicMock()
         mock_schedule_handler.get_schedule.return_value = [(1, '', 1)]
         test_object = interface.Interface()
-        test_object.user_DAO_handler = mock_user_handler
+        test_object.user_dao_handler = mock_user_handler
         test_object.schedule_handler = mock_schedule_handler
         test_object.user_object = mock_user
         test_object.start = 8

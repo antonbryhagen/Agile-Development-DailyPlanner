@@ -78,7 +78,5 @@ class Schedule:
         activites = len(self.activities)
         for day in self.days:
             planned_activites += len(self.days[day])
-        print(planned_activites)
-        print(activites)
         if planned_activites-1 < activites:
             self.all_planned = False

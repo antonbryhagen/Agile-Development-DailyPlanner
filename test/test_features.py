@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch, Mock
 
-from planner import user_DAO
+from planner import user_dao
 from planner import user
 from planner import activities
 
@@ -21,7 +21,7 @@ class TestMain(unittest.TestCase):
         self.user_name = "FeatureUser"
         self.user_password = "FeaturePass"
         
-        self.user_DAO_handler = user_DAO.user_DAO()
+        self.user_DAO_handler = user_dao.UserDAO()
         
         self.user_object = user.User(
             self.user_username, self.user_name, self.user_password
