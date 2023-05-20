@@ -7,6 +7,7 @@ from planner import Activities
 from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
+from datetime import datetime, timedelta
 
 
 class Interface:
@@ -76,26 +77,41 @@ class Interface:
             self.user_object = user.User(
                 self.user_username, self.user_name, self.user_password
             )
-            self.user_DAO_handler.create_user(self.user_object)
-            self.destroy_window()
+            if self.user_username == '' or self.user_password == '' or self.user_name == '':
+                self.empty_field = tk.Label(text="One or more field(s) are left empty")
+                self.empty_field.pack()
+            else:
+                self.user_DAO_handler.create_user(self.user_object)
+                self.destroy_window()
 
         elif action_type == "login":
-            result = self.user_DAO_handler.get_user_by_username(
-                self.user_username, self.user_password
+            if self.user_username == "" or self.user_password == "":
+                self.invalid_login = tk.Label(text="Invalid login information")
+                self.invalid_login.pack()
+                self.window.after(5000, self.invalid_login.destroy)
+            else:
+                self.result = self.user_DAO_handler.get_user_by_username(
+                    self.user_username, self.user_password
             )
-            if result != False:
-                self.user_object = user.User(result[0], result[1], "")
-                try:
-                    if self.window.state() == 'normal':
-                        self.window.destroy()
-                except:
-                    print("Tested")
-                self.welcome(self.user_object.name)
+                
+                if self.result != False:
+                    self.user_object = user.User(self.result[0], self.result[1], "")
+                    try:
+                        if self.window.state() == 'normal':
+                            self.window.destroy()
+                    except:
+                        print("Tested")
+                    self.welcome(self.user_object.name)
+                else:
+                    self.invalid_login = tk.Label(text="Invalid login information")
+                    self.invalid_login.pack()
+                    self.window.after(5000, self.invalid_login.destroy)
+
+
     
     def return_to_main_page(self, event):
         self.window.destroy()
         self.display_menu()
-
 
     def destroy_window(self):
         self.window.destroy()
@@ -145,9 +161,13 @@ class Interface:
         self.activities_object = Activities.Activities(
             activities_activity, self.PRIO, activities_time, self.user_object.username
         )
-        self.user_DAO_handler.create_activity(self.activities_object)
-        self.welcome_window.destroy()
-        self.welcome(self.user_object.name)
+        if activities_activity == '' or activities_time == '' or not activities_time.isdigit():
+            self.empty_field = tk.Label(text="One or more field(s) are left empty")
+            self.empty_field.pack()
+        else:
+            self.user_DAO_handler.create_activity(self.activities_object)
+            self.welcome_window.destroy()
+            self.welcome(self.user_object.name)
 
     def input_activity(self, event):
         self.button3.destroy()
@@ -178,7 +198,7 @@ class Interface:
 
     def get_activity_data_delete(self, event):
         activities_activity_delete = self.clicked.get()
-        partitioned_string_activity = activities_activity_delete.partition(" ")
+        partitioned_string_activity = activities_activity_delete.partition(" |")
         activities_object = Activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
@@ -270,10 +290,12 @@ class Interface:
         generate_schedule_button = tk.Button(text="Generate a new schedule")
         generate_schedule_button.place(relx=0.9, rely=0, anchor='ne')
         generate_schedule_button.bind("<Button>", self.generate_new_schedule)
+
         start_day_time = int(self.start)
         end_day_time = int(self.end)
         wake_hours = end_day_time - start_day_time
         self.user_schedule = schedule.Schedule(self.user_DAO_handler.get_activities(self.user_object), wake_hours)
+        
         stored_schedule = self.schedule_handler.get_schedule(self.user_object.username)
         if stored_schedule == []:
             self.user_schedule.sort_activities()
@@ -305,9 +327,14 @@ class Interface:
                     if scheduled_activity[1] == act[3]:
                         temp_activties.append(act)
                         
+
             self.user_schedule.activities = temp_activties
         self.user_schedule.generate_schedule(int(self.start), int(self.lunch_hours))
+        if not user_schedule.all_planned:
+            not_all_planned_label = tk.Label(text="Some activities were not planned, since there is not enough time!")
+            not_all_planned_label.pack()
         self.week_days = [
+
             "Monday",
             "Tuesday",
             "Wednesday",
@@ -358,6 +385,7 @@ class Interface:
             self.schedule_window.after(int(seconds_til_activity * 1000), self.display_notification, activity[0])
         self.schedule_window.mainloop()
     
+
     def calculate_activity_times(self, start_day_time):
         """Calculate times used for notifications."""
         self.activity_times = {

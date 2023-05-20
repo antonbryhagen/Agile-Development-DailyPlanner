@@ -47,6 +47,7 @@ class Schedule:
 
     def generate_schedule(self, start_time, lunchtime): 
         """Generate the schedule from sorted activties."""
+        self.all_planned = True
         self.planned_days = {
             "Monday" : False,
             "Tuesday" : False,
@@ -72,6 +73,5 @@ class Schedule:
         for day in self.days:
             planned_activites += len(self.days[day])
         if planned_activites < activites:
-            print("Some activities were not planned since there is not enough time for them.")
+            self.all_planned = False
 
-    
