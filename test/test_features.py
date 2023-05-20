@@ -34,9 +34,9 @@ class TestMain(unittest.TestCase):
             cursor.execute(delete_user_query, delete_user_values)
             self.user_DAO_handler.close()
             cursor.close()
-       except:
+        except:
             pass
-       finally:
+        finally:
             self.user_DAO_handler.create_user(self.user_object)
         
         
