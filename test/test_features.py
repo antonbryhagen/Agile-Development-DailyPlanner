@@ -26,8 +26,19 @@ class TestMain(unittest.TestCase):
         self.user_object = user.User(
             self.user_username, self.user_name, self.user_password
         )
+        try:
+            self.user_DAO_handler.connect()
+            cursor = self.user_DAO_handler.connection.cursor()
+            delete_user_query = "DELETE FROM users WHERE username = %s"
+            delete_user_values = ("TestFeatureUser",)
+            cursor.execute(delete_user_query, delete_user_values)
+            self.user_DAO_handler.close()
+            cursor.close()
+       except:
+            pass
+       finally:
+            self.user_DAO_handler.create_user(self.user_object)
         
-        self.user_DAO_handler.create_user(self.user_object)
         
         # Test log in using above user as if using login form
         
