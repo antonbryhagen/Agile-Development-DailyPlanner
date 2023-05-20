@@ -17,3 +17,6 @@ This release includes the following features:
 
 3. Schedule generation:
    - Generate a personalized schedule based on the activities you have added to your planner. The schedule helps you plan your day efficiently and stay organized.
+
+4. Notifications:
+   - Get pop up notifications before your scheduled activity starts
