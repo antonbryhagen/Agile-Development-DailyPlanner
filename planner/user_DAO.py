@@ -48,7 +48,10 @@ class user_DAO:
         get_user_query = "SELECT * FROM users WHERE username = %s"
         cursor.execute(get_user_query, (username,))
         user_data = cursor.fetchone()
-        hashed_password = user_data[2]
+        if user_data != None:
+            hashed_password = user_data[2]
+        else:
+            return False
         if bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8")):
             print("Valid login information")
             return [user_data[0], user_data[1]]
