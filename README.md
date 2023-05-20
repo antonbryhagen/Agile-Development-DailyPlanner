@@ -1,13 +1,24 @@
 DailyPlanner
 ==========================
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 DailyPlanner is an automatic scheduling application. Using user created activties the application creates a schedule based on the users
 needs. 
 
-[[_TOC_]]
-
+- [DailyPlanner](#dailyplanner)
+  * [Get going](#get-going)
+    + [Check version of Python](#check-version-of-python)
+    + [Python virtual environment](#python-virtual-environment)
+    + [Install the dependencies](#install-the-dependencies)
+    + [Run the code](#run-the-code)
+    + [Run the validator](#run-the-validator)
+- [Run unttests without coverage](#run-unttests-without-coverage)
+- [Run unittests with coverage](#run-unittests-with-coverage)
+- [Run the linters and the unittests with coverage](#run-the-linters-and-the-unittests-with-coverage)
+- [Run a testfile](#run-a-testfile)
+- [Run a test method, in a class, in a testfile](#run-a-test-method--in-a-class--in-a-testfile)
+- [Remove files generated for tests or caching](#remove-files-generated-for-tests-or-caching)
+- [Do also remove all you have installed](#do-also-remove-all-you-have-installed)
 
 
 Get going
@@ -99,24 +110,18 @@ All code is stored below the directory `planner/`.
 
 
 
-### Run the validators
+### Run the validator
 
-You can run the static code validators like this. They check the sourcecode and exclude the testcode.
+You can run the static code validator like this. It check the sourcecode and exclude the testcode.
 
 ```
-# Run each at a time
-make flake8
 make pylint
 
-# Run all on the same time
-make lint
-```
 
 You might need to update the Makefile if you change the name of the source directory currently named `planner/`.
 
 Read more on:
 
-* [flake8](https://flake8.pycqa.org/en/latest/)
 * [pylint](https://pylint.org/)
 
 
@@ -180,28 +185,6 @@ make clean
 # Do also remove all you have installed
 make clean-all
 ```
-
-
-
-Optional targets
---------------------------
-
-These targets might be helpful when running your project.
-
-
-
-### Codestyle with black
-
-You can unify the codestyle using black. Running black will change your source code to have a codestyle according to black codestyle.
-
-```
-# Same same, different names
-make black
-make codestyle
-```
-
-Read more on [black](https://pypi.org/project/black/).
-
 
 
 More targets
