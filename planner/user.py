@@ -1,3 +1,5 @@
+"""Handle users."""
+
 import bcrypt
 
 

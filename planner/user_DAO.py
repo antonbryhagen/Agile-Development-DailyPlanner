@@ -1,5 +1,7 @@
-import mysql.connector
+"""Handle db access for users and activities."""
+
 import os
+import mysql.connector
 import bcrypt
 
 
@@ -48,7 +50,7 @@ class user_DAO:
         get_user_query = "SELECT * FROM users WHERE username = %s"
         cursor.execute(get_user_query, (username,))
         user_data = cursor.fetchone()
-        if user_data != None:
+        if user_data is not None:
             hashed_password = user_data[2]
         else:
             return False
@@ -63,7 +65,8 @@ class user_DAO:
         """Create new activity in database using activity object."""
         self.connect()
         self.cursor = self.connection.cursor()
-        create_activity_query = "INSERT INTO activities (Activity, PRIO, Time, username) VALUES(%s, %s, %s, %s)"
+        create_activity_query = ("INSERT INTO activities "
+                                 "(Activity, PRIO, Time, username) VALUES(%s, %s, %s, %s)")
         self.create_activity_values = (
             activity.Activity,
             activity.PRIO,
@@ -73,12 +76,13 @@ class user_DAO:
         self.cursor.execute(create_activity_query, self.create_activity_values)
         self.close()
         self.cursor.close()
-    
+
     def get_activities(self, user):
         """Get all activities stored for a specific user."""
         self.connect()
         cursor = self.connection.cursor()
-        get_activities_query = "SELECT Activity, PRIO, Time, idActivity FROM activities where username = %s"
+        get_activities_query = ("SELECT Activity, PRIO, Time, idActivity "
+                                "FROM activities where username = %s")
         get_activities_values = (user.username,)
         cursor.execute(get_activities_query, get_activities_values)
         actvities_data = cursor.fetchall()
@@ -95,7 +99,8 @@ class user_DAO:
         self.list = []
         self.list.append(self.activity)
         self.list.append(self.current_username)
-        delete_activity_query = "DELETE FROM activities WHERE Activity = %s AND username = %s LIMIT 1;"
+        delete_activity_query = ("DELETE FROM activities "
+                                 "WHERE Activity = %s AND username = %s LIMIT 1;")
         delete_activity_values = self.list
         self.cursor.execute(delete_activity_query, delete_activity_values)
         self.close()

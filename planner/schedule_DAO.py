@@ -1,7 +1,10 @@
-import mysql.connector
+"""Database access for schedule."""
+
 import os
+import mysql.connector
 
 class Schedule_DAO:
+    """Class for accessing schedule in db"""
     def __init__(self):
         """Create instance attributes for database connection."""
         self.host = "localhost"
@@ -24,7 +27,7 @@ class Schedule_DAO:
         if self.connection is not None and self.connection.is_connected():
             self.connection.commit()
             self.connection.close()
-    
+
     def create_schedule(self, schedule_list, username):
         """Create new schedule in database using schedule object."""
         #username idActivity
@@ -38,7 +41,7 @@ class Schedule_DAO:
             cursor.execute(create_schedule_query, create_schedule_values)
         self.close()
         cursor.close()
-    
+
     def delete_schedule(self, username):
         """Delete schedule for specified user."""
         self.connect()
@@ -50,7 +53,7 @@ class Schedule_DAO:
         cursor.execute(delete_schedule_query, delete_schedule_values)
         self.close()
         cursor.close()
-    
+
     def get_schedule(self, username):
         """Return list of activites sorted as schedule."""
         self.connect()
