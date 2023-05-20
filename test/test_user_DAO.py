@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from planner.user_DAO import user_DAO
 from planner.user import User
-from planner.Activities import Activities
+from planner.activities import Activities
 
 
 class Test_user_DAO(unittest.TestCase):
@@ -80,6 +80,18 @@ class Test_user_DAO(unittest.TestCase):
         self.assertEqual(("TestActivity", "Important", "2", "Test",), self.test_user_DAO.create_activity_values)
         self.assertEqual(mock_cursor.execute(), "execute")
         mock_cursor.execute.assert_called_once()
+    
+    @patch('planner.user_DAO.user_DAO.connect')
+    def test_get_activities(self, mock_connect):
+        test_object = user_DAO()
+        mock_user = MagicMock()
+        mock_user.username.return_value = 'test'
+        mock_connection = MagicMock()
+        mock_cursor = MagicMock()
+        test_object.connection = mock_connection
+        test_object.connection.cursor = mock_cursor
+        test_object.get_activities(mock_user)
+
     
     def test_delete_activity(self):
         "Test delete_activity method."

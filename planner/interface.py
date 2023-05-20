@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 from planner import user
 from planner import user_DAO
-from planner import Activities
+from planner import activities
 from planner import schedule_DAO
 from planner import schedule
 from tkinter import *
@@ -158,7 +158,7 @@ class Interface:
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.PRIO = self.clicked.get()
-        self.activities_object = Activities.Activities(
+        self.activities_object = activities.Activities(
             activities_activity, self.PRIO, activities_time, self.user_object.username
         )
         if activities_activity == '' or activities_time == '' or not activities_time.isdigit():
@@ -198,8 +198,8 @@ class Interface:
 
     def get_activity_data_delete(self, event):
         activities_activity_delete = self.clicked.get()
-        partitioned_string_activity = activities_activity_delete.partition(" |")
-        activities_object = Activities.Activities(
+        partitioned_string_activity = activities_activity_delete.partition(" ")
+        activities_object = activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
         self.user_DAO_handler.delete_activity(activities_object, self.user_object)
@@ -252,10 +252,13 @@ class Interface:
         self.lunch_time = tk.Entry(width=50)
         self.lunch_time.pack()
         self.confirm_button = tk.Button(text='Confirm')
+        self.bind_option_button()
+    
+    def bind_option_button(self):
         self.confirm_button.pack()
         self.confirm_button.bind('<Button>', self.check_options)
         self.option_window.mainloop()
-    
+
     def check_options(self, event):
         try:
             self.start = self.start_time.get()
@@ -383,7 +386,11 @@ class Interface:
             time_diff = activiy_dt_object - datetime.now()
             seconds_til_activity = time_diff.total_seconds()
             self.schedule_window.after(int(seconds_til_activity * 1000), self.display_notification, activity[0])
-        self.schedule_window.mainloop()
+
+        self.loop_window()
+
+    def loop_window(self):
+      self.schedule_window.mainloop()
     
 
     def calculate_activity_times(self, start_day_time):

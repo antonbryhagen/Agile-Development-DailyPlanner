@@ -34,5 +34,6 @@ class TestSchedule(unittest.TestCase):
         self.assertNotEqual(test_object.time_per_day['Monday'], 10)
 
 
+
 if __name__ == "__main__":
     unittest.main()
