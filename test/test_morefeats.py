@@ -4,7 +4,7 @@ from unittest.mock import patch, Mock, MagicMock
 
 from planner import user_DAO
 from planner import user
-from planner import Activities
+from planner import activities
 
 
 
@@ -22,7 +22,7 @@ class TestMain(unittest.TestCase):
         
         self.user_object = user.User('test', 'test', 'test')
         
-        self.activities_object = Activities.Activities(
+        self.activities_object = activities.Activities(
             'test', 'Very Important', '10', 'test'
         )
         self.user_DAO_handler.create_activity(self.activities_object)

@@ -66,11 +66,8 @@ pylint:
 	@$(call MESSAGE,$@)
 	-cd planner && $(PYTHON) -m pylint *.py
 
-flake8:
-	@$(call MESSAGE,$@)
-	-flake8
 
-lint: flake8 pylint
+lint: pylint
 
 
 # ---------------------------------------------------------

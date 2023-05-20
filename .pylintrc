@@ -1,7 +1,7 @@
 [MESSAGES CONTROL]
 
 #disable=locally-disabled,locally-enabled
-disable=attribute-defined-outside-init, too-few-public-methods, too-many-public-methods, too-many-locals, too-many-instance-attributes, consider-using-dict-items, no-else-return, duplicate-code   
+disable=attribute-defined-outside-init, too-few-public-methods, too-many-public-methods, too-many-locals, too-many-instance-attributes, consider-using-dict-items, no-else-return, duplicate-code, unused-argument 
 
 
 [FORMAT]

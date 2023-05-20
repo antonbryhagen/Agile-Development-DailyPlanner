@@ -1,6 +1,6 @@
 """Testing Activities."""
 import unittest
-from planner.Activities import Activities
+from planner.activities import Activities
 
 
 class TestActivities(unittest.TestCase):

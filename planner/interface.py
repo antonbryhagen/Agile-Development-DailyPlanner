@@ -4,7 +4,7 @@ import tkinter as tk
 from datetime import datetime
 from planner import user
 from planner import user_DAO
-from planner import Activities
+from planner import activities
 from planner import schedule_DAO
 from planner import schedule
 #from tkinter import *
@@ -158,7 +158,7 @@ class Interface:
         activities_activity = self.activity.get()
         activities_time = self.time.get()
         self.PRIO = self.clicked.get()
-        self.activities_object = Activities.Activities(
+        self.activities_object = activities.Activities(
             activities_activity, self.PRIO, activities_time, self.user_object.username
         )
         if activities_activity == '' or activities_time == '' or not activities_time.isdigit():
@@ -201,7 +201,7 @@ class Interface:
         """Get selected activity for deletion and delete it."""
         activities_activity_delete = self.clicked.get()
         partitioned_string_activity = activities_activity_delete.partition(" |")
-        activities_object = Activities.Activities(
+        activities_object = activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
         self.user_DAO_handler.delete_activity(activities_object, self.user_object)
