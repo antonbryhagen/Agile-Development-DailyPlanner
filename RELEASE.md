@@ -2,7 +2,7 @@ Release history
 ========================
 
 
-v1.0.0 (TBD)
+v1.0.0 (20230520)
 ------------------------
 
 * Release of DailyPlanner
