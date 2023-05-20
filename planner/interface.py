@@ -200,7 +200,7 @@ class Interface:
     def get_activity_data_delete(self, event):
         """Get selected activity for deletion and delete it."""
         activities_activity_delete = self.clicked.get()
-        partitioned_string_activity = activities_activity_delete.partition(" |")
+        partitioned_string_activity = activities_activity_delete.partition(" ")
         activities_object = activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
@@ -257,6 +257,9 @@ class Interface:
         self.lunch_time = tk.Entry(width=50)
         self.lunch_time.pack()
         self.confirm_button = tk.Button(text='Confirm')
+        self.bind_option_button()
+    
+    def bind_option_button(self):
         self.confirm_button.pack()
         self.confirm_button.bind('<Button>', self.check_options)
         self.option_window.mainloop()
@@ -401,8 +404,12 @@ class Interface:
             seconds_til_activity = time_diff.total_seconds()
             self.schedule_window.after(int(seconds_til_activity * 1000),
                                        self.display_notification, activity[0])
-        self.schedule_window.mainloop()
+        self.loop_window()
 
+
+    def loop_window(self):
+      self.schedule_window.mainloop()
+    
 
     def calculate_activity_times(self, start_day_time):
         """Calculate times used for notifications."""

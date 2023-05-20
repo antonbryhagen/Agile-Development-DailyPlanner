@@ -1,6 +1,6 @@
 """Testing Activities."""
 import unittest
-from planner.activities import Activities
+from planner import activities
 
 
 class TestActivities(unittest.TestCase):
@@ -8,8 +8,8 @@ class TestActivities(unittest.TestCase):
 
     def test_init(self):
         """Init user test."""
-        res = Activities("Test activity", "Important", "1", "TestUser")
-        exp = Activities
+        res = activities.Activities("Test activity", "Important", "1", "TestUser")
+        exp = activities.Activities
         self.assertIsInstance(res, exp)
     
 
