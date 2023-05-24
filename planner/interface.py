@@ -200,7 +200,7 @@ class Interface:
     def get_activity_data_delete(self, event):
         """Get selected activity for deletion and delete it."""
         activities_activity_delete = self.clicked.get()
-        partitioned_string_activity = activities_activity_delete.partition(" ")
+        partitioned_string_activity = activities_activity_delete.partition(" | ")
         activities_object = activities.Activities(
             partitioned_string_activity[0], "test", "test1", "test3"
         )
